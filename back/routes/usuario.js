@@ -5,6 +5,7 @@ const upload = require("../config/multerConfig");
 const {
   userController,
   usuarioEnVoluntariadoController,
+  productController,
 } = require("../controllers");
 
 const {
@@ -13,7 +14,10 @@ const {
   isUser,
 } = require("../middleware/authMiddleware");
 
-userRouter.get("/", verifyToken, isAdmin, userController.getUsersByCriteria);
+
+userRouter.get('/', productController.getAllProducts);
+userRouter.get('/:id', verifyToken, isAdmin, productController.getProduct);
+
 
 userRouter.get("/me/profile", verifyToken, isUser, userController.getMyUser);
 userRouter.put("/me/update", verifyToken, isUser, userController.updateMyUser);
@@ -58,6 +62,5 @@ userRouter.delete(
   usuarioEnVoluntariadoController.deleteJoinById
 );
 
-userRouter.delete("/:id", verifyToken, isAdmin, userController.deleteUser);
 
 module.exports = userRouter;
