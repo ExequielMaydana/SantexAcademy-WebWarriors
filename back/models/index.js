@@ -1,13 +1,23 @@
 const Organizacion = require('./Organizacion');
 const Producto = require('./Producto');
-const OrdenRetiroProductos = require('./OrdenRetiroProductos');
+const OrdenDeCanje = require('./OrdenDeCanje');
 const Roles = require('./Roles');
+const Testimonios = require('./Testimonios');
 const Usuario = require('./Usuario');
 const UsuarioEnVoluntariado = require('./UsuarioEnVoluntariado');
 const Voluntariado = require('./Voluntariado');
 
 // Relaciones
 
+Usuario.hasOne(Testimonios, {
+  foreignKey: 'userId',
+  as: 'testimonio',
+});
+
+Testimonios.belongsTo(Usuario, {
+  foreignKey: 'userId',
+  as: 'usuario',
+});
 
 Usuario.belongsToMany(Voluntariado, {
   as: 'voluntariados',
@@ -30,12 +40,12 @@ Organizacion.hasMany(Voluntariado, {
   as: 'voluntariados',
   foreignKey: 'organizationId',
 });
-OrdenRetiroProductos.belongsTo(Producto, {
+OrdenDeCanje.belongsTo(Producto, {
   as: 'producto',
   foreignKey: 'productId',
 });
-Producto.hasMany(OrdenRetiroProductos, {
-  as: 'OrdenRetiroProductos',
+Producto.hasMany(OrdenDeCanje, {
+  as: 'OrdenDeCanje',
   foreignKey: 'productId',
 });
 Usuario.belongsTo(Roles, { as: 'role', foreignKey: 'rolesId' });
@@ -48,21 +58,21 @@ UsuarioEnVoluntariado.belongsTo(Usuario, {
 });
 
 Producto.belongsToMany(Usuario, {
-  through: OrdenRetiroProductos,
+  through: OrdenDeCanje,
   as: 'usuarios',
   foreignKey: 'productId',
 });
 Usuario.belongsToMany(Producto, {
-  through: OrdenRetiroProductos,
+  through: OrdenDeCanje,
   as: 'productos',
   foreignKey: 'userId',
 });
 
-Usuario.hasMany(OrdenRetiroProductos, {
+Usuario.hasMany(OrdenDeCanje, {
   as: 'ordenes',
   foreignKey: 'userId',
 });
-OrdenRetiroProductos.belongsTo(Usuario, {
+OrdenDeCanje.belongsTo(Usuario, {
   as: 'usuario',
   foreignKey: 'userId',
 });
@@ -84,8 +94,9 @@ Voluntariado.hasMany(UsuarioEnVoluntariado, {
 module.exports = {
   Organizacion,
   Producto,
-  OrdenRetiroProductos,
+  OrdenDeCanje,
   Roles,
+  Testimonios,
   Usuario,
   UsuarioEnVoluntariado,
   Voluntariado,

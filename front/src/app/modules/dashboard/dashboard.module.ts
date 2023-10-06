@@ -4,11 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-
-import { MatTabsModule } from '@angular/material/tabs';
-
+// import { MatTabsModule } from '@angular/material/tabs';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { CommonModule } from '@angular/common';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 import { DashboardVolunteerComponent } from './pages/dashboard-volunteer/dashboard-volunteer.component';
@@ -19,13 +16,13 @@ import { VolunteerHistoryComponent } from './components/dashboardVolunteer/volun
 
 import { HeaderDashboardOrgComponent } from './components/dashboardOrganization/header-dashboard-org/header-dashboard-org.component';
 import { VolunteersTableComponent } from './components/dashboardOrganization/volunteers-table/volunteers-table.component';
-import { TabsComponent } from './components/dashboardOrganization/tabs/tabs.component';
 
 import { ModalQuestionComponent } from './components/modal-question/modal-question.component';
 import { ModalStatusComponent } from './components/modal-status/modal-status.component';
 import { TabsDashboardOrganizationComponent } from './components/dashboardOrganization/tabs-dashboard-organization/tabs-dashboard-organization.component';
-import { NewVolunteeringFormComponent } from './components/dashboardOrganization/new-volunteering-form/new-volunteering-form.component';
 import { CompletedVolunteeringComponent } from './components/dashboardOrganization/completed-volunteering/completed-volunteering.component';
+import { NewVolunteeringComponent } from './components/dashboardOrganization/new-volunteering/new-volunteering.component';
+import { ModalQuestionVolunteeringsComponent } from './components/modal-question-volunteerings/modal-question-volunteerings.component';
 
 @NgModule({
   declarations: [
@@ -37,12 +34,12 @@ import { CompletedVolunteeringComponent } from './components/dashboardOrganizati
     VolunteerHistoryComponent,
     HeaderDashboardOrgComponent,
     VolunteersTableComponent,
-    TabsComponent,
     ModalQuestionComponent,
     ModalStatusComponent,
     TabsDashboardOrganizationComponent,
-    NewVolunteeringFormComponent,
     CompletedVolunteeringComponent,
+    NewVolunteeringComponent,
+    ModalQuestionVolunteeringsComponent,
   ],
   imports: [
     CommonModule,
@@ -51,7 +48,6 @@ import { CompletedVolunteeringComponent } from './components/dashboardOrganizati
     MatIconModule,
     MatMenuModule,
     MatButtonModule,
-    MatTabsModule,
     ReactiveFormsModule,
   ],
 })

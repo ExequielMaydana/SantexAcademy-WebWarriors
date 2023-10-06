@@ -6,17 +6,17 @@ const {
   userController,
   usuarioEnVoluntariadoController,
   productController,
+  canjeController
 } = require("../controllers");
 
 const {
   verifyToken,
-  isAdmin,
   isUser,
 } = require("../middleware/authMiddleware");
 
 
-userRouter.get('/', productController.getAllProducts);
-userRouter.get('/:id', verifyToken, isAdmin, productController.getProduct);
+userRouter.get('/products', productController.getAllProducts);
+userRouter.get('/products/:id', verifyToken, isUser, productController.getProduct);
 
 
 userRouter.get("/me/profile", verifyToken, isUser, userController.getMyUser);
@@ -41,6 +41,10 @@ userRouter.post(
   usuarioEnVoluntariadoController.join
 );
 
+userRouter.post("/testimonials/create", verifyToken, isUser, userController.createTestimonialsById);
+
+userRouter.get("/testimonials", userController.getAllTestimonials);
+
 userRouter.get(
   "/postulate",
   verifyToken,
@@ -61,6 +65,8 @@ userRouter.delete(
   isUser,
   usuarioEnVoluntariadoController.deleteJoinById
 );
+
+userRouter.post("/exchange", verifyToken, isUser , canjeController.createOrder)
 
 
 module.exports = userRouter;

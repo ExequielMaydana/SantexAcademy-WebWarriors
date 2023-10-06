@@ -5,6 +5,30 @@ const fs = require("fs-extra");
 const cloudinary = require("../config/cloudinary");
 
 
+const createTestimonialsById = async (req, res) => {
+  const userId = req.userId;
+  const testimonial = req.body;
+  try {
+    const testimonials = await userService.createTestimonialsById(userId, testimonial) ;
+    res.status(201).json(testimonials);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ action: "createTestimonialsById", error: err.message });
+  }
+};
+
+const getAllTestimonials = async (req, res) => {
+  try {
+    const testimonials = await userService.getAllTestimonials();
+    res.status(200).json(testimonials);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ action: "getTestimonials", error: err.message });
+  }
+
+}
 
 const loginUser = async (req, res) => {
   try {
@@ -108,8 +132,8 @@ const updateMyUser = async (req, res) => {
 
 const deleteMyUser = async (req, res) => {
   try {
-    const user = await userService.deleteUserById(req.userId);
-    res.json(user);
+    await userService.deleteUserById(req.userId);
+    res.status(204).end();
   } catch (err) {
     res.status(500).json({ action: "deleteUserById", error: err.message });
   }
@@ -146,6 +170,8 @@ const updatePhotoMyProfile = async (req, res, next) => {
 };
 
 module.exports = {
+  createTestimonialsById,
+  getAllTestimonials,
   loginUser,
   createUser,
   getUsersByCriteria,

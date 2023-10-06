@@ -1,8 +1,6 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../config/db-config");
-
-
-//TODO!! ESTABLECER RELACION MANY TO ONE CON LA NUEVA TABLA ORDEN DE RETIRO
+const softDelete = require('sequelize-soft-delete');
 
 
 const Usuario = sequelize.define(
@@ -58,9 +56,9 @@ const Usuario = sequelize.define(
   },
   {
     sequelize,
-    paranoid: true,
     tableName: "usuario",
-    timestamps: false,
+    timestamps: true, 
+    paranoid: true,
     indexes: [
       {
         name: "PRIMARY",
@@ -79,8 +77,15 @@ const Usuario = sequelize.define(
         using: "BTREE",
         fields: [{ name: "rolesId" }],
       },
+      {
+        name: "idx_usuario_testimonio",
+        using: "BTREE",
+        fields: [{ name: "id" }, { name: "createdAt" }],
+    },
     ],
-  }
-);
+  },
+
+);  
+
 
 module.exports = Usuario;
