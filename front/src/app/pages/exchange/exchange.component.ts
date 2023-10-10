@@ -1,40 +1,149 @@
-import { Component, HostListener } from '@angular/core';
-
+import { Component, HostListener, OnInit } from '@angular/core';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-exchange',
   templateUrl: './exchange.component.html',
-  styleUrls: ['./exchange.component.css']
+  styleUrls: ['./exchange.component.css'],
 })
-export class ExchangeComponent {
+export class ExchangeComponent implements OnInit {
+  constructor(private productsServices: ProductsService) {}
   productos = [
-    { nombre: 'Vaso Termico', puntos: 10, imagen: '../../../../../assets/products/vaso-termico.png' },
-    { nombre: 'Mochila', puntos: 10, imagen: '../../../../../assets/products/mochila.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
-    { nombre: 'Producto 3', puntos: 10, imagen: '../../../../../assets/imgs/patron1.png' },
+    {
+      nombre: 'Vaso Termico',
+      puntos: 10,
+      imagen: '../../../../../assets/products/vaso-termico.png',
+    },
+    {
+      nombre: 'Mochila',
+      puntos: 10,
+      imagen: '../../../../../assets/products/mochila.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
+    {
+      nombre: 'Producto 3',
+      puntos: 10,
+      imagen: '../../../../../assets/imgs/patron1.png',
+    },
   ];
 
   productosPorPaginaLargeScreen = 10;
@@ -46,8 +155,16 @@ export class ExchangeComponent {
   // Variable para almacenar el tamaño de pantalla actual
   screenSize: string = '';
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.detectScreenSize();
+    this.productsServices.getAllProducts().subscribe({
+      next: (res) => {
+        console.log('exchange en el component', res);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   @HostListener('window:resize', ['$event'])
@@ -96,11 +213,4 @@ export class ExchangeComponent {
     const totalPaginas = Math.ceil(totalTarjetas / cantidadPorPagina);
     return Array.from({ length: totalPaginas }, (_, index) => index + 1);
   }
-
-
-
-
-
-
-
 }

@@ -1,0 +1,172 @@
+<app-modal-status
+  *ngIf="onModalStatus"
+  [message]="messageModal"
+  [status]="statusModal"
+>
+</app-modal-status>
+<form
+  [formGroup]="dataConfirmPurchase"
+  class="w-4/5 flex flex-col p-4 m-auto md:w-3/5 lg:w-2/4"
+>
+  <div class="flex flex-col gap-2">
+    <label for="full_name" class="lg:text-xl">Nombre completo</label>
+    <input
+      type="text"
+      id="full_name"
+      name="full_name"
+      formControlName="full_name"
+      class="pl-2 border border-DarkGray rounded-lg py-2"
+    />
+    <div class="w-full items-center justify-end">
+      <p
+        *ngIf="
+          dataConfirmPurchase.get('full_name')?.invalid &&
+          (dataConfirmPurchase.get('full_name')?.dirty ||
+            dataConfirmPurchase.get('full_name')?.touched)
+        "
+        class="flex-initial text-end text-deepPink"
+      >
+        Debe proporcionar un nombre.
+      </p>
+    </div>
+  </div>
+  <div class="flex flex-col gap-2">
+    <label for="email">Email</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      formControlName="email"
+      class="pl-2 border border-DarkGray rounded-lg py-2"
+    />
+    <div class="w-full items-center justify-end">
+      <p
+        *ngIf="
+          dataConfirmPurchase.get('email')?.invalid &&
+          (dataConfirmPurchase.get('email')?.dirty ||
+            dataConfirmPurchase.get('email')?.touched)
+        "
+        class="flex-initial text-end text-deepPink"
+      >
+        Debe proporcionar un email válido.
+      </p>
+    </div>
+  </div>
+  <div class="flex flex-col gap-2">
+    <label for="phone">Telefono</label>
+    <input
+      type="text"
+      id="phone"
+      name="phone"
+      formControlName="phone"
+      class="pl-2 border border-DarkGray rounded-lg py-2"
+    />
+    <div class="w-full items-center justify-end">
+      <p
+        *ngIf="
+          dataConfirmPurchase.get('phone')?.invalid &&
+          (dataConfirmPurchase.get('phone')?.dirty ||
+            dataConfirmPurchase.get('phone')?.touched)
+        "
+        class="flex-initial text-end text-deepPink"
+      >
+        Debe proporcionar un teléfono válido para Argentina.
+      </p>
+    </div>
+  </div>
+  <div class="flex flex-col gap-2">
+    <label for="address">Dirección</label>
+    <input
+      type="text"
+      id="address"
+      name="address"
+      formControlName="address"
+      class="pl-2 border border-DarkGray rounded-lg py-2"
+    />
+    <div class="w-full items-center justify-end">
+      <p
+        *ngIf="
+          dataConfirmPurchase.get('address')?.invalid &&
+          (dataConfirmPurchase.get('address')?.dirty ||
+            dataConfirmPurchase.get('address')?.touched)
+        "
+        class="flex-initial text-end text-deepPink"
+      >
+        Debe proporcionar su dirección.
+      </p>
+    </div>
+  </div>
+  <div class="flex flex-col gap-2">
+    <label for="location">Localidad</label>
+    <input
+      type="text"
+      id="location"
+      name="location"
+      formControlName="location"
+      class="pl-2 border border-DarkGray rounded-lg py-2"
+    />
+    <div class="w-full items-center justify-end">
+      <p
+        *ngIf="
+          dataConfirmPurchase.get('location')?.invalid &&
+          (dataConfirmPurchase.get('location')?.dirty ||
+            dataConfirmPurchase.get('location')?.touched)
+        "
+        class="flex-initial text-end text-deepPink"
+      >
+        Debe proporcionar su Localidad.
+      </p>
+    </div>
+  </div>
+  <div class="flex flex-col gap-2">
+    <label for="province">Provincia</label>
+    <input
+      type="text"
+      id="province"
+      name="province"
+      formControlName="province"
+      class="pl-2 border border-DarkGray rounded-lg py-2"
+    />
+    <div class="w-full items-center justify-end">
+      <p
+        *ngIf="
+          dataConfirmPurchase.get('province')?.invalid &&
+          (dataConfirmPurchase.get('province')?.dirty ||
+            dataConfirmPurchase.get('province')?.touched)
+        "
+        class="flex-initial text-end text-deepPink"
+      >
+        Debe proporcionar su Provincia.
+      </p>
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <label for="zip_code">Código postal</label>
+    <input
+      type="number"
+      id="zip_code"
+      name="zip_code"
+      formControlName="zip_code"
+      class="pl-2 border border-DarkGray rounded-lg py-2"
+    />
+    <div class="w-full items-center justify-end">
+      <p
+        *ngIf="
+          dataConfirmPurchase.get('zip_code')?.invalid &&
+          (dataConfirmPurchase.get('zip_code')?.dirty ||
+            dataConfirmPurchase.get('zip_code')?.touched)
+        "
+        class="flex-initial text-end text-deepPink"
+      >
+        Debe proporcionar su código postal.
+      </p>
+    </div>
+  </div>
+  <button
+    (click)="confirmPurchase()"
+    class="mt-4 px-4 py-2 bg-black text-white uppercase rounded-lg shadow-md"
+  >
+    Finalizar Compra
+  </button>
+</form>

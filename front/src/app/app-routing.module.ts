@@ -10,6 +10,7 @@ import { VolunterIdComponent } from './pages/volunter-id/volunter-id.component';
 import { ExchangeComponent } from './pages/exchange/exchange.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { ConfirmOrderComponent } from './pages/confirm-order/confirm-order.component';
 
 const routes: Routes = [
   { path: '', title: 'VolunTime - Inicio', component: HomePageComponent },
@@ -20,18 +21,18 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    title: 'VolunTime - Panel',
+    title: 'Panel',
     component: DashboardPageComponent,
     canActivate: [authGuard],
   },
   {
     path: 'voluntariados',
-    title: 'VolunTime - Voluntariados',
+    title: 'Voluntariados',
     component: VolunteersComponent,
   },
   {
     path: 'voluntariado/:id',
-    title: 'VolunTime - Voluntariado',
+    title: 'Voluntariado',
     component: VolunterIdComponent,
   },
 
@@ -47,13 +48,19 @@ const routes: Routes = [
   },
   {
     path: 'nosotros',
-    title: 'VolunTime - Quienes Somos',
+    title: 'Quienes Somos',
     component: AboutUsComponent,
   },
   {
     path: 'contacto',
-    title: 'VolunTime - Contacto',
+    title: 'Contacto',
     component: ContactComponent,
+  },
+
+  {
+    path: 'confirmar-orden',
+    title: 'Finalizar Compra',
+    component: ConfirmOrderComponent,
   },
 
   {

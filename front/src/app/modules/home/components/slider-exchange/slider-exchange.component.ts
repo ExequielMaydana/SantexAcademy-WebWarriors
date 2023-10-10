@@ -1,32 +1,64 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ProductsService } from '../../services/products.service';
+import { products } from '../../models/products.model';
+import { CartService } from '../../services/cart.service';
+import { Store } from '@ngrx/store';
+import { selectToken } from 'src/app/core/auth.selectors';
 
 @Component({
   selector: 'app-slider-exchange',
   templateUrl: './slider-exchange.component.html',
-  styleUrls: ['./slider-exchange.component.css']
+  styleUrls: ['./slider-exchange.component.css'],
 })
-export class SliderExchangeComponent {
+export class SliderExchangeComponent implements OnInit {
   isModalOpen = false;
+  dataProducts: products[] = [];
+  onModalStatus: boolean = false;
+  statusModal: string = '';
+  messageModal: string = '';
+  constructor(
+    private productsServices: ProductsService,
+    private cartServices: CartService,
+    private store: Store
+  ) {}
 
-  products = [
-    { name: 'Vaso Térmico', points: '10', imagePath: '../../assets/products/vaso-termico.png' },
-    { name: 'Mochila', points: '10', imagePath: '../../assets/products/mochila.png' },
-    { name: 'Producto 3', points: '10', imagePath: '../../../../../assets/imgs/patron1.png' },
-    { name: 'Producto 4', points: '10', imagePath: '../../../../../assets/imgs/patron1.png' },
-    { name: 'Producto 5', points: '10', imagePath: '../../../../../assets/imgs/patron1.png' },
-    { name: 'Producto 6', points: '10', imagePath: '../../../../../assets/imgs/patron1.png' },
-    { name: 'Producto 7', points: '10', imagePath: '../../../../../assets/imgs/patron1.png' },
-    { name: 'Producto 8', points: '10', imagePath: '../../../../../assets/imgs/patron1.png' },
-    { name: 'Producto 9', points: '10', imagePath: '../../../../../assets/imgs/patron1.png' },
-    { name: 'Producto 10', points: '10', imagePath: '../../../../../assets/imgs/patron1.png' },
-    // Agrega más productos aquí
-  ];
+  ngOnInit(): void {
+    this.productsServices.getAllProducts().subscribe({
+      next: (res) => {
+        this.dataProducts = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 
   openModal(): void {
-    this.isModalOpen = true;
+    this.store.select(selectToken).subscribe((token) => {
+      if (token) {
+        this.isModalOpen = true;
+      }
+    });
   }
 
   closeModal(): void {
     this.isModalOpen = false;
+  }
+
+  addToCart(product: products) {
+    this.store.select(selectToken).subscribe((token) => {
+      if (!token) {
+        this.isModalOpen = true;
+      } else {
+        this.cartServices.addToCart(product);
+        this.onModalStatus = true;
+        this.statusModal = 'success';
+        this.messageModal =
+          '¡Excelente elección! Has agregado el producto al carrito con éxito. Tu selección se encuentra ahora en tu carrito de compras, listo para ser procesado.';
+        setTimeout(() => {
+          this.onModalStatus = false;
+        }, 2000);
+      }
+    });
   }
 }

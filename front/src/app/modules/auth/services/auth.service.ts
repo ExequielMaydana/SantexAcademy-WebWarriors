@@ -2,13 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/app/environments/environment.prod';
 import { Observable } from 'rxjs';
-import { coordinatorData } from '../models/dataForms.model';
+import {
+  responsevolunterRegister,
+  dataVolunteerRegister,
+  volunterDataLogin,
+} from '../models/volunteer.model';
 
 import {
   CoordinatorDataLogin,
-  volunterData,
-  volunterDataLogin,
-} from '../models/dataForms.model';
+  coordinatorData,
+} from '../models/coordinator.model';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -18,9 +22,11 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  registerVolunteer(userData: volunterData | FormData): Observable<any> {
+  registerVolunteer(
+    userData: dataVolunteerRegister | FormData
+  ): Observable<responsevolunterRegister> {
     const url = `${this.apiUrl}/auth/users/register`;
-    return this.http.post(url, userData);
+    return this.http.post<responsevolunterRegister>(url, userData);
   }
 
   registerCoordinator(userData: coordinatorData | FormData): Observable<any> {

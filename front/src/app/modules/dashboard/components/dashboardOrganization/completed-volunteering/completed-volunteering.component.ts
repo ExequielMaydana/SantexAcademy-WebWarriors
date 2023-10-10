@@ -25,7 +25,6 @@ export class CompletedVolunteeringComponent implements OnInit {
         this.orgServices.getVolunteeringsCompleted(token).subscribe({
           next: (res) => {
             this.volunteeringsCompleted = res;
-            console.log(res);
           },
           error: (err) => {
             console.log(err);

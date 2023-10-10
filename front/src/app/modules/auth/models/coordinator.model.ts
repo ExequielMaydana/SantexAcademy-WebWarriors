@@ -1,11 +1,3 @@
-export interface volunterData {
-  fullName: string;
-  phone: string;
-  email: string;
-  password: string;
-  file: any;
-}
-
 export interface coordinatorData {
   name: string;
   description: string;
@@ -16,12 +8,7 @@ export interface coordinatorData {
   location: string;
   opportunityType: string;
   category: string;
-  file: any;
-}
-
-export interface volunterDataLogin {
-  email: string;
-  password: string;
+  file?: any;
 }
 
 export interface CoordinatorDataLogin {

@@ -69,19 +69,27 @@ export class FormCoordinatorsRegisterComponent {
         next: (response) => {
           this.onModal = true;
           this.statusSession = 'success';
+          this.messageModal =
+            ' ¡Bienvenidos a nuestra plataforma de voluntariado! Nos complace darles la bienvenida a VolunTime, la plataforma que conecta a organizaciones comprometidas con oportunidades de voluntariado significativas. Estamos emocionados de tenerlos a bordo y esperamos colaborar juntos para hacer una diferencia en nuestras comunidades y en el mundo.';
           this.routeBtnContinue = 'auth/login';
           this.textBtn = 'Iniciar Sesión';
         },
-        error: (error) => {
+        error: (error: any) => {
           if (error.error.emailFound) {
-            console.error('Error in coordinator registration:', error);
             this.onModal = true;
-            this.statusSession = 'failed-emailFound';
+            this.statusSession = 'failed';
             this.messageModal =
               'Ya existe una cuenta con ese email, por favor, inicie sesión';
             this.routeBtnContinue = 'auth/login';
             this.textBtn = 'Iniciar Sesión';
-          } else {
+          } else if (error.status === 500) {
+            this.onModal = true;
+            this.statusSession = 'failed';
+            this.messageModal = error.error.error;
+            this.routeBtnContinue = 'auth/coordinator-register';
+            this.textBtn = 'Reintentar';
+          }
+          {
             this.errors = error.error.errors;
             this.onModal = true;
             this.statusSession = 'failed';

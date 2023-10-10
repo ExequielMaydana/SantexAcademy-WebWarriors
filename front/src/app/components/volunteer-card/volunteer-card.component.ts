@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { selectUserType } from 'src/app/core/auth.selectors';
 
 @Component({
   selector: 'app-volunteer-card',
@@ -17,10 +19,21 @@ export class VolunteerCardComponent implements OnInit {
   afterApplication: boolean = false;
   statusModalApplication: string = '';
   messageModalApplication: string = '';
+  userType: string = '';
 
-  constructor(private datePipe: DatePipe, private router: Router) {}
+  constructor(
+    private datePipe: DatePipe,
+    private router: Router,
+    private store: Store
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.store.select(selectUserType).subscribe((userType) => {
+      if (userType) {
+        this.userType = userType;
+      }
+    });
+  }
 
   formatCreatedAtDate(dateString: string): string {
     const createdAtDate = new Date(dateString);

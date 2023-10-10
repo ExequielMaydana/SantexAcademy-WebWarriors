@@ -39,11 +39,20 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { FormContactComponent } from './components/form-contact/form-contact.component';
 import { ModalStatusComponent } from './components/modal-status/modal-status.component';
+import { CartComponent } from './shared/components/cart/cart.component';
+import { cartReducer } from './core/cart.reducer';
+import { ConfirmOrderComponent } from './pages/confirm-order/confirm-order.component';
+import { TableConfirmOrderComponent } from './components/table-confirm-order/table-confirm-order.component';
+import { FormConfirmOrderComponent } from './components/form-confirm-order/form-confirm-order.component';
+import { ModalStatusPurchaseComponent } from './components/modal-status-purchase/modal-status-purchase.component';
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
-  return localStorageSync({ keys: ['auth'], rehydrate: true })(reducer);
+  return localStorageSync({
+    keys: ['auth', 'cart'],
+    rehydrate: true,
+  })(reducer);
 }
 
 @NgModule({
@@ -64,6 +73,11 @@ export function localStorageSyncReducer(
     ContactComponent,
     FormContactComponent,
     ModalStatusComponent,
+    CartComponent,
+    ConfirmOrderComponent,
+    TableConfirmOrderComponent,
+    FormConfirmOrderComponent,
+    ModalStatusPurchaseComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,7 +96,7 @@ export function localStorageSyncReducer(
     MatDividerModule,
     MatTabsModule,
     StoreModule.forRoot(
-      { auth: authReducer },
+      { auth: authReducer, cart: cartReducer },
       {
         metaReducers: [localStorageSyncReducer],
       }

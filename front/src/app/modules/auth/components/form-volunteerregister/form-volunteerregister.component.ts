@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { responsevolunterRegister } from '../../models/volunteer.model';
 @Component({
   selector: 'app-form-volunteerregister',
   templateUrl: './form-volunteerregister.component.html',
@@ -57,8 +57,9 @@ export class FormVolunteerregisterComponent {
           }
         }
       });
+
       this.authService.registerVolunteer(formData).subscribe({
-        next: (response) => {
+        next: (response: responsevolunterRegister) => {
           this.onModal = true;
           this.statusSession = 'success';
           this.messageModal =
@@ -66,14 +67,20 @@ export class FormVolunteerregisterComponent {
           this.routeBtnContinue = 'auth/login';
           this.textBtnModal = 'Iniciar Sesión';
         },
-        error: (error) => {
-          if (error.error.emailFound) {
+        error: (error: any) => {
+          if (error.status === 400 && error.error.emailFound) {
             this.onModal = true;
             this.statusSession = 'failed';
             this.messageModal =
               'Ya existe una cuenta registrada con ese email, por favor inicie sesión.';
             this.routeBtnContinue = 'auth/login';
             this.textBtnModal = 'Iniciar Sesión';
+          } else if (error.status === 500) {
+            this.onModal = true;
+            this.statusSession = 'failed';
+            this.messageModal = error.error.error;
+            this.routeBtnContinue = 'auth/volunteer-register';
+            this.textBtnModal = 'Reintentar';
           } else {
             this.errors = error.error.errors;
             this.onModal = true;

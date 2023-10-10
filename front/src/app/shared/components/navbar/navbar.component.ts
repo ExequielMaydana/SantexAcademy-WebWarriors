@@ -4,6 +4,7 @@ import { OrgServicesService } from '../../../services/org-services.service';
 import { Store } from '@ngrx/store';
 import { selectToken, selectUserType } from '../../../core/auth.selectors';
 import { resetToken, resetUserType } from '../../../core/auth.actions';
+import { CartService } from 'src/app/modules/home/services/cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,15 +19,22 @@ export class NavbarComponent {
   isToken: boolean = false;
   isOpenprofileMenu: boolean = false;
   dataUser: any = {};
+  openCart: boolean = false;
+  cartItemCount: number = 0;
   constructor(
     private usersServices: UsersService,
     private orgServices: OrgServicesService,
-    private store: Store
+    private store: Store,
+    private cartService: CartService
   ) {
     const isOpenValue = localStorage.getItem('isOpen');
     if (isOpenValue !== null) {
       this.isOpen = JSON.parse(isOpenValue);
     }
+
+    this.cartService.cartItems$.subscribe((cartItems) => {
+      this.cartItemCount = cartItems.length;
+    });
   }
 
   handleMenu() {
@@ -91,5 +99,9 @@ export class NavbarComponent {
 
   openProfileMenu() {
     this.isOpenprofileMenu = !this.isOpenprofileMenu;
+  }
+
+  openCartProducts() {
+    this.openCart = !this.openCart;
   }
 }
