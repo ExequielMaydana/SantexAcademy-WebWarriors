@@ -57,6 +57,7 @@
     class="flex items-center justify-center gap-12 sm:flex-col sm:w-[20%] sm:border-l sm:border-l-lightGray sm:gap-4 lg:text-lg"
   >
     <button
+      *ngIf="userType !== 'org'"
       (click)="
         handleApplication(
           data.organizationId,
@@ -68,9 +69,19 @@
     >
       Aplicar
     </button>
+    <button *ngIf="userType == 'org'">
+      <a routerLink="/dashboard">Ver en mis voluntariados</a>
+    </button>
+
     <div
+      *ngIf="userType !== 'org'"
       class="h-[2em] w-[1px] bg-lightGray rounded-lg sm:w-[80%] sm:h-[1px]"
     ></div>
-    <button (click)="viewVolunteering(data.idVolunteering)">Ver más</button>
+    <button
+      (click)="viewVolunteering(data.idVolunteering)"
+      *ngIf="userType !== 'org'"
+    >
+      Ver más
+    </button>
   </div>
 </article>

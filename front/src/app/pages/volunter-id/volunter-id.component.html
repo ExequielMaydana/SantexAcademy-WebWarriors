@@ -1,6 +1,12 @@
 <section
   class="w-full flex flex-col mt-[96px] m:mt-[115px] lg:mt-[0px]"
 >
+  <app-modal-after-application
+    *ngIf="onModalAfterApplication"
+    [status]="statusModalAfterApplication"
+    [message]="messageModalAfterApplication"
+    (continueViewing)="closeModalAfterApplication()"
+  ></app-modal-after-application>
   <article class="w-full flex flex-col gap-4 md:flex-row">
     <figure class="w-full h-[200px] md:h-auto">
       <img
@@ -30,7 +36,7 @@
             {{ volunteering.description }}
           </p>
         </li>
-        <li class="flex flex-col">
+        <li class="flex flex-col lg:text-center">
           <span class="text-center text-DarkGray text-sm md:text-base"
             >Descripción del Voluntariado</span
           >
@@ -41,9 +47,13 @@
           <p class="md:text-lg">
             <b>Compromiso:</b> {{ volunteering.workTime }}
           </p>
+          <p class="md:text-lg">
+            <b>Vacantes a cubrir:</b> {{ volunteering.vacancies }}
+          </p>
         </li>
         <li class="w-full flex items-center justify-center">
           <button
+            (click)="generateApplication()"
             class="py-1 w-2/5 uppercase border border-DarkGray bg-white text-black rounded-lg shadow-lg font-bold lg:hover:bg-black lg:hover:text-white md:w-4/5"
           >
             Aplicar

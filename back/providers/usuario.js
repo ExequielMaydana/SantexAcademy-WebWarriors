@@ -1,6 +1,4 @@
 const { Usuario, Testimonios } = require("../models");
-const { sequelize } = require("../config/db-config");
-const { Op } = require("sequelize");
 const { comparePassword, hashPassword } = require("../config/crypt");
 
 const createTestimonialById = async (id, testimonial) => {
@@ -66,62 +64,27 @@ const loginUser = async (email, password) => {
 };
 
 const createUser = async (usuario) => {
-  const { image, password, ...restOfData } = usuario;
+  const { image, password, rolesId, ...restOfData } = usuario;
 
-  let transaction;
   try {
-    transaction = await sequelize.transaction();
-
-    let existingUser = await Usuario.findOne({
-      where: {
-        [Op.or]: [
-          { fullName: restOfData.fullName },
-          { email: restOfData.email },
-        ],
-      },
-      paranoid: false,
-    });
-
-    if (existingUser) {
-      if (existingUser.deletedAt) {
-        // Restaurar el registro eliminado lógicamente y actualizarlo
-        await existingUser.restore();
-      }
-      await existingUser.update(
-        {
-          image,
-          password: hashPassword(password),
-          rolesId: restOfData.rolesId ? restOfData.rolesId : 1,
-          ...restOfData,
-        },
-        { transaction }
-      );
-    } else {
-      // Crear el nuevo registro de usuario
-      existingUser = await Usuario.create(
-        {
-          image,
-          password: hashPassword(password),
-          rolesId: restOfData.rolesId ? restOfData.rolesId : 1,
-          ...restOfData,
-        },
-        { transaction }
-      );
+    let rolUser = 0;
+    if (!rolesId) {
+      rolUser = 1;
     }
-
-    await transaction.commit();
-
+    const newUser = await Usuario.create({
+      image,
+      password: hashPassword(password),
+      rolesId: rolUser,
+      ...restOfData,
+    });
     return {
-      id: existingUser.id,
-      fullName: existingUser.fullName,
-      email: existingUser.email,
+      id: newUser.id,
+      fullName: newUser.fullName,
+      email: newUser.email,
     };
   } catch (err) {
-    if (transaction) {
-      await transaction.rollback();
-    }
-    console.error("The user could not be created due to an error.", err);
-    throw err;
+    console.log(err);
+    return;
   }
 };
 

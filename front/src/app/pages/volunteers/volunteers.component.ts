@@ -2,10 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { VolunteeringService } from 'src/app/services/volunteering.service';
 import { volunteering } from '../../models/volunteering.model';
 import { organization } from 'src/app/models/organization.model';
-export interface FilterEvent {
-  key: keyof volunteering;
-  value: string;
-}
 
 @Component({
   selector: 'app-volunteers',

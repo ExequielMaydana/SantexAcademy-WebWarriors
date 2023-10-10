@@ -22,7 +22,6 @@ export class VolunteerHistoryComponent implements OnInit {
         this.volServices.getMePostulations(token).subscribe({
           next: (res) => {
             this.meVolunteerings = res;
-            console.log(res);
           },
           error: (err) => {
             console.log(err);
@@ -36,7 +35,6 @@ export class VolunteerHistoryComponent implements OnInit {
     const data = { status: status };
     this.volServices.updateStatusPostulation(data, idPostulation).subscribe({
       next: (res) => {
-        console.log(res);
         window.location.reload();
       },
       error: (err) => {

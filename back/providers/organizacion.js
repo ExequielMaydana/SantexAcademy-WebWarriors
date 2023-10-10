@@ -53,39 +53,45 @@ const updatePassword = async (orgId, password) => {
   }
 };
 
-
 const createOrganization = async (data) => {
-  const { image, password,...restOfData } = data;
+  const { image, password, ...restOfData } = data;
   try {
-    let existingOrg = await Organizacion.findOne({
-      where: {
-            [Op.or]: [
-              { name: restOfData.name },
-              { email: restOfData.email },
-              { cuit: restOfData.cuit },
-        ],
-      },
-      paranoid:false,
+    // let existingOrg = await Organizacion.findOne({
+    //   where: {
+    //         [Op.or]: [
+    //           { name: restOfData.name },
+    //           { email: restOfData.email },
+    //           { cuit: restOfData.cuit },
+    //     ],
+    //   },
+    //   paranoid:false,
+    // });
+
+    // if (existingOrg) {
+    //   if (existingOrg.deletedAt === null) {
+    //      Restaurar el registro eliminado lógicamente y actualizarlo
+    //     await existingOrg.restore();
+    //   }
+    //   await existingOrg.update({
+    //     image,
+    //     password: hashPassword(password),
+    //     ...restOfData,
+    //   });
+
+    // } else {
+    //   existingOrg = await Organizacion.create({
+    //     image,
+    //     password: hashPassword(password),
+    //     ...restOfData,
+    //   });
+    // }
+
+    const newOrg = Organizacion.create({
+      image,
+      password: hashPassword(password),
+      ...restOfData,
     });
-
-    if (existingOrg) {
-      if (existingOrg.deletedAt) {
-        // Restaurar el registro eliminado lógicamente y actualizarlo
-        await existingOrg.restore();
-      }
-      await existingOrg.update({
-        image,
-        password: hashPassword(password),
-        ...restOfData,
-      });
-    } else {
-      existingOrg = await Organizacion.create({
-        image,
-        password: hashPassword(password), 
-        ...restOfData,
-      });
-    }
-
+    return newOrg;
   } catch (err) {
     console.error(
       "The organization could not be created due to an error.",

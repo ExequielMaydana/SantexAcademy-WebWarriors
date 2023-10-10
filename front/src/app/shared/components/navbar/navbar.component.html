@@ -17,19 +17,35 @@
   ></a>
 
   <i
-    [ngClass]="!isOpen ? 'hidden' : 'visible absolute top-8 right-4'"
+    [ngClass]="!isOpen ? 'hidden' : 'visible absolute top-8 right-16'"
     class="bx bx-menu text-3xl cursor-pointer m:text-4xl lg:hidden"
     (click)="handleMenu()"
   ></i>
   <i
-    [ngClass]="isOpen ? 'hidden' : 'visible absolute top-8 right-4'"
+    [ngClass]="isOpen ? 'hidden' : 'visible absolute top-8 right-16'"
     class="bx bx-x text-3xl cursor-pointer m:text-4xl lg:hidden"
     (click)="handleMenu()"
   ></i>
 
+  <div
+    class="absolute top-[2em] right-4 cursor-pointer lg:top-[2.3em]"
+    (click)="openCartProducts()"
+  >
+    <div class="relative">
+      <i class="bx bx-cart text-2xl m:text-3xl"></i>
+      <div
+        class="absolute top-0 right-[-.2em] bg-lightGray px-1 rounded-full text-xs"
+      >
+        <span>{{ cartItemCount }}</span>
+      </div>
+    </div>
+  </div>
+
+  <app-cart *ngIf="openCart" (closeCart)="openCartProducts()"></app-cart>
+
   <nav [ngClass]="isOpen ? 'navbar' : 'navbar navbar-closed'">
     <ul
-      class="w-full flex flex-col items-center justify-center gap-4 m:text-lg lg:flex-row lg:justify-end lg:gap-8 lg:items-start lg:pt-4 lg:absolute"
+      class="w-full flex flex-col items-center justify-center gap-4 m:text-lg lg:flex-row lg:justify-end lg:gap-8 lg:items-start lg:pt-4 lg:absolute lg:mr-24"
     >
       <li
         *ngIf="isToken"
