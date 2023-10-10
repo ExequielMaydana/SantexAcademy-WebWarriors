@@ -16,11 +16,18 @@ const Usuario = sequelize.define(
     },
     phone: {
       type: DataTypes.STRING,
+      unique: {
+        name: "phone_UNIQUE",
+        msg: "El número de teléfono ya está en uso.",
+      },
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: "email_UNIQUE",
+      unique: {
+        name: "email_UNIQUE",
+        msg: "El email ya está en uso.",
+      },
     },
     password: {
       type: DataTypes.STRING,
