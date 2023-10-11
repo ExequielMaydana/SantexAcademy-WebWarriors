@@ -43,6 +43,9 @@
       <h2 class="font-semibold text-2xl">¡Bienvenido!</h2>
       <p>Registrate en tu cuenta VolunTime</p>
     </header>
+
+    <div *ngIf="!loading;">
+
     <form
       [formGroup]="registerVolunteer"
       class="w-full flex flex-col px-4 gap-4 max-w-[600px]"
@@ -218,5 +221,13 @@
         </p>
       </div>
     </form>
+  </div>
+
+  <div class="flex justify-center items-center" *ngIf="loading">
+    <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500"></div>
+  </div>
+
+
+
   </article>
 </section>
