@@ -13,6 +13,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { ConfirmOrderComponent } from './pages/confirm-order/confirm-order.component';
 import { StepsToVolunteerComponent } from './pages/steps-to-volunteer/steps-to-volunteer.component';
 import { BenefitsComponent } from './pages/benefits/benefits.component';
+import { TeamComponent } from './pages/team/team.component';
 
 const routes: Routes = [
   { path: '', title: 'VolunTime - Inicio', component: HomePageComponent },
@@ -67,6 +68,11 @@ const routes: Routes = [
     path: 'benefits',
     title: 'VolunTime - Steps',
     component: BenefitsComponent,
+  },
+  {
+    path: 'team',
+    title: 'VolunTime - Team',
+    component: TeamComponent,
   },
 
   {
