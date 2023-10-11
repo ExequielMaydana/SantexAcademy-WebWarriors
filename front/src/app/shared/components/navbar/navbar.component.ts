@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Component, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { OrgServicesService } from '../../../services/org-services.service';
 import { Store } from '@ngrx/store';
@@ -39,81 +38,48 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  //========== CODIGO EXE=========
+  @HostListener('document:click', ['$event'])
+  closeDropdownsOnClick(event: Event) {
+    if (this.isOpen) {
+      const targetElement = event.target as HTMLElement;
+
+      // Verifica si el clic no ocurrió dentro de los elementos del menú
+      if (
+        !targetElement.closest('.navbar') &&
+        !targetElement.closest('.optionDesk') &&
+        !targetElement.closest('.iconRow')
+      ) {
+        this.closeDropdowns();
+      }
+    }
+  }
 
   handleMenu() {
     this.isOpen = !this.isOpen;
+    if (this.isOpen) {
+      this.closeDropdowns();
+    }
     localStorage.setItem('isOpen', JSON.stringify(this.isOpen));
   }
 
   openOpOne() {
-    if (!this.openOptionOne) {
-      this.openOptionOne = true;
+    this.openOptionOne = !this.openOptionOne;
+    if (this.openOptionOne) {
       this.openOptionTwo = false;
-    } else {
-      this.openOptionOne = false;
     }
   }
+
   openOpTwo() {
-    if (!this.openOptionTwo) {
-      this.openOptionTwo = true;
+    this.openOptionTwo = !this.openOptionTwo;
+    if (this.openOptionTwo) {
       this.openOptionOne = false;
-    } else {
-      this.openOptionTwo = false;
     }
   }
-  // ========================================================
 
-
-
-  // =============NUEVO CÓDIGO  (se cierra el dropdown cuando selecciono un item del submenú o cuando se hace click en cualquier parte de la página)===============
-
-  // @HostListener('document:click', ['$event'])
-  // closeDropdownsOnClick(event: Event) {
-  //   if (this.isOpen) {
-  //     const targetElement = event.target as HTMLElement;
-
-  //     // Verifica si el clic no ocurrió dentro de los elementos del menú
-  //     if (
-  //       !targetElement.closest('.navbar') &&
-  //       !targetElement.closest('.optionDesk') &&
-  //       !targetElement.closest('.iconRow')
-  //     ) {
-  //       this.closeDropdowns();
-  //     }
-  //   }
-  // }
-
-  // handleMenu() {
-  //   this.isOpen = !this.isOpen;
-  //   if (this.isOpen) {
-  //     this.closeDropdowns();
-  //   }
-  //   localStorage.setItem('isOpen', JSON.stringify(this.isOpen));
-  // }
-
-  // openOpOne() {
-  //   this.openOptionOne = !this.openOptionOne;
-  //   if (this.openOptionOne) {
-  //     this.openOptionTwo = false;
-  //   }
-  // }
-
-  // openOpTwo() {
-  //   this.openOptionTwo = !this.openOptionTwo;
-  //   if (this.openOptionTwo) {
-  //     this.openOptionOne = false;
-  //   }
-  // }
-
-  // closeDropdowns() {
-  //   this.openOptionOne = false;
-  //   this.openOptionTwo = false;
-  // }
-
-  // ======================FINAL NUEVO CÓDIGO=============================================
-
-
+  closeDropdowns() {
+    this.openOptionOne = false;
+    this.openOptionTwo = false;
+  }
 
   ngOnInit() {
     this.store.select(selectToken).subscribe((token) => {
