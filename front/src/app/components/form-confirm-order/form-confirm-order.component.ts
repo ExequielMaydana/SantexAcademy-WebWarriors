@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CartService } from 'src/app/services/cart.service';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-form-confirm-order',
@@ -13,7 +14,11 @@ export class FormConfirmOrderComponent {
   statusModal: string = '';
   messageModal: string = '';
   textBtnModal: string = '';
-  constructor(private fb: FormBuilder, private cartServices: CartService) {
+  constructor(
+    private fb: FormBuilder,
+    private cartServices: CartService,
+    private productService: ProductsService
+  ) {
     this.dataConfirmPurchase = this.fb.group({
       full_name: ['', [Validators.required]],
       email: ['', [Validators.required]],
@@ -31,7 +36,7 @@ export class FormConfirmOrderComponent {
       const dataUser = this.dataConfirmPurchase.value;
       if (products && dataUser) {
         console.log({ products, dataUser });
-        this.cartServices.clearCart();
+        // this.cartServices.clearCart();
         this.onModalStatus = true;
         this.statusModal = 'success';
         this.messageModal =
