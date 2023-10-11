@@ -73,7 +73,8 @@ const updateStatusById = async (req, res) => {
 const accreditationReward = async (req, res) => {
   try {
     const idOrg = req.orgId;
-    await usuarioEnVoluntariadoService.accreditationReward(idOrg);
+    const { action } = req.body
+    await usuarioEnVoluntariadoService.accreditationReward(idOrg, action);
     res.status(200).send({ message: "Recompensas acreditadas con éxito." });
   } catch (error) {
     res
