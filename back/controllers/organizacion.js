@@ -51,7 +51,9 @@ const createOrganization = async (req, res) => {
       imageUrl = uploadResult.secure_url;
       publicId = uploadResult.public_id;
     }
-
+    if (req.file) {
+      await fs.unlink(req.file.path);
+    }
     const newOrganization = await orgService.createOrganization({
       image: { imageUrl, publicId },
       ...restOfData,
@@ -61,10 +63,6 @@ const createOrganization = async (req, res) => {
       message: "The organization was successfully created",
       newOrganization,
     });
-
-    if (req.file) {
-      await fs.unlink(req.file.path);
-    }
   } catch (err) {
     res.status(500).json({ action: "createOrganization", error: err.message });
   }

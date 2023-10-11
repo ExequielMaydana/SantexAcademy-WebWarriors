@@ -15,4 +15,13 @@ export class ProductsService {
     const url = `${this.apiUrl}/usuarios/products`;
     return this.http.get(url);
   }
+
+  confirmPurchase(token: string, data: any): Observable<any> {
+    const url = `${this.apiUrl}/usuarios/exchange`;
+    const headers = new HttpHeaders({
+      'x-access-token': token,
+    });
+    const options = { headers: headers };
+    return this.http.post(url, data, options);
+  }
 }
