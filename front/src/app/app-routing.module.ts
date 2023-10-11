@@ -14,7 +14,6 @@ import { ConfirmOrderComponent } from './pages/confirm-order/confirm-order.compo
 import { StepsToVolunteerComponent } from './pages/steps-to-volunteer/steps-to-volunteer.component';
 import { BenefitsComponent } from './pages/benefits/benefits.component';
 
-
 const routes: Routes = [
   { path: '', title: 'VolunTime - Inicio', component: HomePageComponent },
   {

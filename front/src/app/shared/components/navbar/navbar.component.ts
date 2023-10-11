@@ -1,17 +1,18 @@
+import { Component, OnInit } from '@angular/core';
 import { Component, HostListener } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { OrgServicesService } from '../../../services/org-services.service';
 import { Store } from '@ngrx/store';
 import { selectToken, selectUserType } from '../../../core/auth.selectors';
 import { resetToken, resetUserType } from '../../../core/auth.actions';
-import { CartService } from 'src/app/modules/home/services/cart.service';
+import { CartService } from '../../../services/cart.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   isOpen: boolean = false;
   openOptionOne: boolean = false;
   openOptionTwo: boolean = false;
@@ -21,6 +22,7 @@ export class NavbarComponent {
   dataUser: any = {};
   openCart: boolean = false;
   cartItemCount: number = 0;
+
   constructor(
     private usersServices: UsersService,
     private orgServices: OrgServicesService,

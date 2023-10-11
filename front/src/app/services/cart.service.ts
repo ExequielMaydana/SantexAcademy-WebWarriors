@@ -14,7 +14,13 @@ export class CartService {
 
   private loadCartFromLocalStorage() {
     const cartItems = JSON.parse(localStorage.getItem('cart') || '[]');
-    this.cartItemsSubject.next(cartItems);
+    if (!Array.isArray(cartItems)) {
+      // Si los datos no son un array válido, establecer un array vacío.
+      localStorage.setItem('cart', '[]');
+      this.cartItemsSubject.next([]);
+    } else {
+      this.cartItemsSubject.next(cartItems);
+    }
   }
 
   getCartItems() {
@@ -25,7 +31,7 @@ export class CartService {
     let cartItems: any[] = JSON.parse(localStorage.getItem('cart') || '[]');
 
     // Buscar si el producto ya está en el carrito
-    const existingItem = cartItems.find(
+    const existingItem = cartItems?.find(
       (item) => item.product.id === product.id
     );
 
@@ -53,6 +59,6 @@ export class CartService {
   clearCart() {
     const emptyCart: any[] = [];
     localStorage.removeItem('cart');
-    this.cartItemsSubject.next(emptyCart);
+    this.cartItemsSubject.next(emptyCart); // Emitir cambios aquí
   }
 }
