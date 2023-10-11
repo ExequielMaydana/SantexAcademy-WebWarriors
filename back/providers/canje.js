@@ -1,7 +1,8 @@
 const { OrdenDeCanje, Producto, Usuario } = require("../models");
 
-const createOrder = async (userId, productId, quantity) => {
+const createOrder = async (userId, productInfo) => {
   try {
+    const { productId, quantity } = productInfo;
     const product = await Producto.findByPk(productId);
 
     if (!product) {
@@ -29,8 +30,7 @@ const createOrder = async (userId, productId, quantity) => {
     const emisionDate = new Date();
     const order = await OrdenDeCanje.create({
       userId: userId,
-      productId: productId,
-      quantity: quantity,
+      productInfo: { productId, quantity }, // Usa la nueva estructura de productInfo
       emisionDate: emisionDate,
     });
 
@@ -43,6 +43,11 @@ const createOrder = async (userId, productId, quantity) => {
     throw error;
   }
 };
+
+module.exports = {
+  createOrder,
+};
+
 
 const getAllOrders = async (req, res) => {
   try {
