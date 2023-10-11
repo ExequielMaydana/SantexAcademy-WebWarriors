@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
 import { products } from '../../models/products.model';
-import { CartService } from '../../services/cart.service';
+import { CartService } from '../../../../services/cart.service';
 import { Store } from '@ngrx/store';
 import { selectToken } from 'src/app/core/auth.selectors';
 
