@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { Subscription } from 'rxjs';
+import { Subscription, timeout } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { responsevolunterRegister } from '../../models/volunteer.model';
 @Component({
@@ -67,7 +67,7 @@ export class FormVolunteerregisterComponent {
       this.authService.registerVolunteer(formData).subscribe({
         next: (response: responsevolunterRegister) => {
 
-          this.loading = false;
+            this.loading = false;
 
           if (!response){
             return;

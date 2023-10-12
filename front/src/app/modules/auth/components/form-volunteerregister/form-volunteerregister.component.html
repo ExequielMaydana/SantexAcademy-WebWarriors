@@ -223,11 +223,13 @@
     </form>
   </div>
 
-  <div class="flex justify-center items-center" *ngIf="loading">
-    <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500"></div>
+  <div class="container" *ngIf="!loading">
+    <h1>Procesando tu solicitud</h1>
+    <div class="loader">
+      <div class="mask"></div>
+      <div class="mask2"></div>
+    </div>
   </div>
-
-
 
   </article>
 </section>
