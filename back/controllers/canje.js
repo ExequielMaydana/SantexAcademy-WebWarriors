@@ -5,9 +5,10 @@ const { canjeService } = require("../services");
 const createOrder = async (req, res) => {
   try {
     const userId = req.userId;
-    const { productId, quantity } = req.body;
+    const { productInfo } = req.body; 
+    const { productId, quantity } = productInfo; 
     const order = await canjeService.createOrder(userId, productId, quantity);
-    
+
     if (order) {
       res.status(201).json(order);
     } else {
