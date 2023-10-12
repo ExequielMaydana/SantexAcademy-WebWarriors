@@ -223,13 +223,7 @@
     </form>
   </div>
 
-  <div class="container" *ngIf="!loading">
-    <h1>Procesando tu solicitud</h1>
-    <div class="loader">
-      <div class="mask"></div>
-      <div class="mask2"></div>
-    </div>
-  </div>
+  <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
   </article>
 </section>
