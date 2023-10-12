@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { selectToken } from 'src/app/core/auth.selectors';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -17,7 +19,8 @@ export class FormConfirmOrderComponent {
   constructor(
     private fb: FormBuilder,
     private cartServices: CartService,
-    private productService: ProductsService
+    private productService: ProductsService,
+    private store: Store
   ) {
     this.dataConfirmPurchase = this.fb.group({
       full_name: ['', [Validators.required]],
@@ -35,16 +38,33 @@ export class FormConfirmOrderComponent {
       const products = this.cartServices.getCartItems();
       const dataUser = this.dataConfirmPurchase.value;
       if (products && dataUser) {
-        console.log({ products, dataUser });
-        // this.cartServices.clearCart();
-        this.onModalStatus = true;
-        this.statusModal = 'success';
-        this.messageModal =
-          '¡Felicidades! Tu compra se ha realizado con éxito. Pronto procesaremos tu pedido y te enviaremos un correo electrónico con el código de seguimiento para que puedas rastrear tu paquete.';
-      } else {
-        this.statusModal = 'failed';
+        let data = {
+          dataUser,
+          products,
+        };
+
+        console.log('DATA', data);
+
+        this.store.select(selectToken).subscribe((token) => {
+          if (token) {
+            this.productService.confirmPurchase(token, data).subscribe({
+              next: (res) => {
+                console.log(res);
+                this.onModalStatus = true;
+                this.statusModal = 'success';
+                this.messageModal =
+                  '¡Felicidades! Tu compra se ha realizado con éxito. Pronto procesaremos tu pedido y te enviaremos un correo electrónico con el código de seguimiento para que puedas rastrear tu paquete.';
+                this.cartServices.clearCart();
+              },
+              error: (err) => {
+                console.log(err);
+
+                this.statusModal = 'failed';
+              },
+            });
+          }
+        });
       }
     }
-    return;
   }
 }

@@ -96,12 +96,12 @@ export class OrganizationService {
     return this.http.get(url, options);
   }
 
-  creditRewardVolunteer(token: string): Observable<any> {
+  creditRewardVolunteer(token: string, data: any): Observable<any> {
     const url = `${this.apiUrl}/organizacion/postulation/accreditation`;
     const headers = new HttpHeaders({
       'x-access-token': token,
     });
     const options = { headers: headers };
-    return this.http.post(url, {}, options);
+    return this.http.post(url, data, options);
   }
 }
