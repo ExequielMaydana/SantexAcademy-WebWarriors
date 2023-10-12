@@ -68,6 +68,7 @@
               class="py-4 whitespace-no-wrap text-center flex items-center justify-center"
             >
               <button
+                *ngIf="item.isProcessed !== false"
                 mat-icon-button
                 class="btn__delete font-semibold"
                 (click)="creditReward()"
