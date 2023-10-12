@@ -24,6 +24,8 @@ export class CompletedVolunteeringComponent implements OnInit {
       if (token) {
         this.orgServices.getVolunteeringsCompleted(token).subscribe({
           next: (res) => {
+            console.log(res);
+
             this.volunteeringsCompleted = res;
           },
           error: (err) => {
@@ -37,7 +39,8 @@ export class CompletedVolunteeringComponent implements OnInit {
   creditReward() {
     this.store.select(selectToken).subscribe((token) => {
       if (token) {
-        this.orgServices.creditRewardVolunteer(token).subscribe({
+        const data = { action: 'acreditar' };
+        this.orgServices.creditRewardVolunteer(token, data).subscribe({
           next: (res) => {
             this.onModal = true;
             this.statusModal = 'success';
@@ -45,6 +48,7 @@ export class CompletedVolunteeringComponent implements OnInit {
               'La recompensa ha sido acredita con éxito al usuario.';
             setTimeout(() => {
               this.onModal = false;
+              window.location.reload();
             }, 2000);
           },
           error: (err) => {
