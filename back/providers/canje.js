@@ -1,41 +1,51 @@
 const { OrdenDeCanje, Producto, Usuario } = require("../models");
 
-const createOrder = async (userId, productInfo) => {
+
+const createOrder = async (userId, productInfoArray) => {
   try {
-    const { productId, quantity } = productInfo;
-    const product = await Producto.findByPk(productId);
-
-    if (!product) {
-      throw new Error('Producto no encontrado');
-    }
-
-    if (quantity > product.stock) {
-      throw new Error('No hay suficiente stock disponible');
-    }
-
-    const costInHours = product.costInHours;
     const user = await Usuario.findByPk(userId);
 
     if (!user) {
       throw new Error('Usuario no encontrado');
     }
 
-    if (user.hoursAcc < costInHours) {
+    const emisionDate = new Date();
+    
+    let totalCostInHours = 0;
+    
+    for (let productInfo of productInfoArray) {
+      const { productId, quantity } = productInfo;
+      const product = await Producto.findByPk(productId);
+
+      if (!product) {
+        throw new Error('Producto no encontrado');
+      }
+
+      if (quantity > product.stock) {
+        throw new Error('No hay suficiente stock disponible');
+      }
+
+      totalCostInHours += product.costInHours * quantity;
+
+      product.stock -= quantity;
+      await product.save();
+      
+      // Agrega los datos del producto al objeto productInfo
+      productInfo.productData = product;
+    }
+
+    if (user.hoursAcc < totalCostInHours) {
       throw new Error('No tiene suficiente saldo en horas');
     }
 
-    user.hoursAcc -= costInHours;
+    user.hoursAcc -= totalCostInHours;
     await user.save();
 
-    const emisionDate = new Date();
     const order = await OrdenDeCanje.create({
       userId: userId,
-      productInfo: { productId, quantity }, // Usa la nueva estructura de productInfo
+      productInfo: productInfoArray,
       emisionDate: emisionDate,
     });
-
-    product.stock -= quantity;
-    await product.save();
 
     return order;
   } catch (error) {
@@ -43,11 +53,6 @@ const createOrder = async (userId, productInfo) => {
     throw error;
   }
 };
-
-module.exports = {
-  createOrder,
-};
-
 
 const getAllOrders = async (req, res) => {
   try {
