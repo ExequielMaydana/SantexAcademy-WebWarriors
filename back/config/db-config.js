@@ -14,8 +14,10 @@ const sequelize = new Sequelize(
   //   host: process.env.DB_HOST,
   //   dialect: "mysql",
   // }
+
   // process.env.DB_URL_LOCAL
   );
+
 
 sequelize.options.logging = console.log;
 
@@ -26,9 +28,8 @@ const initializeDB = async () => {
 
     // Sync all defined models to DB
     await sequelize.sync({ force: false }); // force: if true, each start deletes DB
-    // await sequelize.sync({ alter: true });
+    //await sequelize.sync({ alter: true });
 
-    //await sequelize.sync({ alter: true })
     // Create default roles
     const { Roles } = require("../models");
     await Roles.bulkCreateDefaultRoles();

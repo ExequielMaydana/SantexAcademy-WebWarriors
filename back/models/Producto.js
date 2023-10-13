@@ -4,7 +4,7 @@ const { sequelize } = require("../config/db-config");
 const Producto = sequelize.define(
   "producto",
   {
-    id: {
+    productId: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,

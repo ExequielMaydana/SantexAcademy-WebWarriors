@@ -51,7 +51,6 @@ export class VolunteerHistoryComponent implements OnInit {
   deletePostulation(idPostulation: string) {
     this.volServices.deletePostulation(idPostulation).subscribe({
       next: (res) => {
-        console.log(res);
         window.location.reload();
       },
       error: (err) => {

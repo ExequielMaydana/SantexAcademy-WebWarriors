@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { Subscription } from 'rxjs';
+import { Subscription, timeout } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { responsevolunterRegister } from '../../models/volunteer.model';
 @Component({
@@ -10,6 +10,7 @@ import { responsevolunterRegister } from '../../models/volunteer.model';
   styleUrls: ['./form-volunteerregister.component.css'],
 })
 export class FormVolunteerregisterComponent {
+  loading: boolean = false;
   registerVolunteer: FormGroup;
 
   showPassword: boolean = false;
@@ -22,6 +23,7 @@ export class FormVolunteerregisterComponent {
   textBtnModal: string = '';
   imageUrl: string | ArrayBuffer | null = null;
   errors: any = [];
+
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -34,9 +36,11 @@ export class FormVolunteerregisterComponent {
       password: ['', Validators.required],
       file: [null],
     });
+
   }
 
   sendValues() {
+    this.loading= true;
     if (this.registerVolunteer.valid) {
       const formData = new FormData();
       Object.keys(this.registerVolunteer.controls).forEach((key) => {
@@ -58,8 +62,17 @@ export class FormVolunteerregisterComponent {
         }
       });
 
+
+
       this.authService.registerVolunteer(formData).subscribe({
         next: (response: responsevolunterRegister) => {
+
+            this.loading = false;
+
+          if (!response){
+            return;
+          }
+
           this.onModal = true;
           this.statusSession = 'success';
           this.messageModal =
@@ -68,6 +81,7 @@ export class FormVolunteerregisterComponent {
           this.textBtnModal = 'Iniciar Sesión';
         },
         error: (error: any) => {
+          this.loading = false;
           if (error.status === 400 && error.error.emailFound) {
             this.onModal = true;
             this.statusSession = 'failed';
@@ -89,7 +103,9 @@ export class FormVolunteerregisterComponent {
             this.textBtnModal = 'Reintentar';
           }
         },
-        complete: () => {},
+        complete: () => {
+          this.loading = false;
+        },
       });
     }
   }
