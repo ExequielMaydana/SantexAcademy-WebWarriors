@@ -1,0 +1,79 @@
+.container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+
+
+
+.loader {
+  position: relative;
+  margin-top: 1.5em; /* Ajustado */
+  width: 10em; /* Ajustado */
+  height: 10em; /* Ajustado */
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 0.6em; /* Ajustado */
+  animation: color 6.4s infinite step-end;
+}
+
+.mask {
+  position: absolute;
+  width: 5em; /* Ajustado */
+  height: 10em; /* Ajustado */
+  background-color: white;
+  left: 5em; /* Ajustado */
+  transform-origin: 0em 5em; /* Ajustado */
+  animation: spin 1.5s ease-out infinite;
+}
+
+.mask2 {
+  position: absolute;
+  width: 5em; /* Ajustado */
+  height: 10em; /* Ajustado */
+  background-color: white;
+  left: 0em;
+  transform-origin: 5em 5em; /* Ajustado */
+  animation: spinNoDelay 1.5s infinite 0.2s;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(2deg);
+  }
+
+  50%, 100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinNoDelay {
+  0% {
+    transform: rotate(10deg);
+  }
+
+  100% {
+    transform: rotate(353deg);
+  }
+}
+
+@keyframes color {
+  0% {
+    color: #24215f
+  }
+
+  20% {
+    color: #54378e
+  }
+
+  40% {
+    color: #ee5724
+  }
+
+  60% {
+    color: #d22b90
+  }
+  80%{
+    color: #a8378a
+  }
+}
