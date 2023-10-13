@@ -1,13 +1,14 @@
 const { canjeProvider } = require("../providers");
 
-const createOrder = async (userId, productId, quantity) => {
+const createOrder = async (userId, productInfoArray) => {
   try {
-    const order = await canjeProvider.createOrder(userId, productId, quantity);
+    const order = await canjeProvider.createOrder(userId, productInfoArray);
     return order;
   } catch (error) {
     throw error;
   }
 };
+
 
 
 const getAllOrders = async () => {
