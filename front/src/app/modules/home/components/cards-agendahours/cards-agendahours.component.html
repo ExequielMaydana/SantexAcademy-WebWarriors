@@ -11,7 +11,7 @@
       class="relative w-full h-[140px] border border-lightGray shadow-2xl overflow-hidden rounded-md s:max-w-[400px] m:max-w-[500px] m:h-[200px]"
     >
       <h3
-        class="absolute top-2 left-1 text-xs font-semibold s:text-sm m:text-xl m:left-4"
+        class="absolute top-6 left-1 text-xs font-semibold s:text-sm m:text-xl m:left-4"
       >
         Agenda de voluntariados
       </h3>
@@ -26,7 +26,7 @@
           alt="logo"
           class="absolute top-[-3em] right-[-3em] w-[220px] opacity-[.5] m:w-[300px] m:top-[-3.5em] m:right-[-4em]"
         />
-        <button
+        <button (click)="redirectToPage('voluntariados')"
           class="absolute bottom-4 right-7 text-xs font-bold py-1 px-1 bg-darkSlateBlue text-white rounded-md m:text-sm m:right-[2.6em] m:bottom-5 m:px-3 btn-shadow"
         >
           Sumate
@@ -37,14 +37,14 @@
       class="relative w-full h-[140px] border border-lightGray shadow-2xl overflow-hidden rounded-md s:max-w-[400px] m:max-w-[500px] m:h-[200px]"
     >
       <h3
-        class="absolute top-2 left-1 text-xs font-semibold s:text-sm m:text-xl m:left-4"
+        class="absolute top-6 left-1 text-xs font-semibold s:text-sm m:text-xl m:left-4"
       >
-        Tus horas cuentan
+        Tu espacio
       </h3>
       <p
         class="absolute bottom-2 left-1 text-xs w-[50%] text-center s:bottom-6 s:text-center m:text-base m:bottom-8 m:left-4"
       >
-        Consultá tus horas acumuladas y recibí recompensas
+        Consultá tus datos y gestiona tu perfil
       </p>
       <figure>
         <img
@@ -52,7 +52,7 @@
           alt="logo"
           class="absolute top-[-3em] right-[-3em] w-[220px] opacity-[.5] m:w-[300px] m:top-[-3.5em] m:right-[-4em]"
         />
-        <button
+        <button (click)="redirectToPage('dashboard')"
           class="absolute bottom-4 right-7 text-xs font-bold py-1 px-1 bg-darkSlateBlue text-white rounded-md m:text-sm m:right-[2.8em] m:bottom-5 m:px-4 btn-shadow"
         >
           Entrar
