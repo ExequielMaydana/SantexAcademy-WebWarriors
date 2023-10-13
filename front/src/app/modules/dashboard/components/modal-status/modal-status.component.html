@@ -4,23 +4,35 @@
   <article
     class="w-11/12 p-4 flex flex-col items-center justify-center gap-4 rounded-md bg-white sm:w-[600px] sm:mt-[3em]"
   >
-    <figure class="w-full h-[150px]">
+    <figure
+      class="w-full h-[150px]"
+      *ngIf="status === 'success' || status === 'failed'"
+    >
       <img
         [src]="
           status === 'success'
             ? '/assets/icons/good.png'
-            : 'assets/icons/bad.png'
+            : '/assets/icons/bad.png'
         "
         alt="icono good"
         class="w-full h-full object-contain"
       />
     </figure>
+
+    <figure class="w-full h-[150px]" *ngIf="status === 'procesed'">
+      <img
+        [src]="status === 'procesed' && '/assets/imgs/procesed.jpg'"
+        alt="icono good"
+        class="w-full h-full object-contain"
+      />
+    </figure>
+
     <p class="text-center sm:w-[80%]">
       {{ message }}
     </p>
     <p class="text-center sm:w-[80%]"></p>
     <button
-      *ngIf="status === 'failed'"
+      *ngIf="status === 'failed' || status === 'procesed'"
       type="button"
       (click)="handlleContinue()"
       class="py-2 px-4 bg-mediumViolet text-white rounded-md font-semibold shadow-md shadow-dimGray"
