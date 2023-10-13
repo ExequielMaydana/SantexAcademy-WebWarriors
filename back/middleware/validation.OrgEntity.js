@@ -28,11 +28,10 @@ const createAndUpdateOrganizationValidation = [
     .withMessage("La ubicación debe tener al menos 2 caracteres"),
 
   body("password")
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/)
+  .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9\s]).{8,}$/ )
     .withMessage(
-      "La contraseña debe contener al menos una letra minúscula, una letra mayúscula, un número y un símbolo, y tener al menos 8 caracteres de longitud"
+      "La contraeña tener al menos 8 caracteres, incluyendo al menos un carácter en minúscula, un carácter en mayúscula, un dígito y cualquier carácter especial o símbolo (excluyendo espacios)"
     ),
-
   body("category")
     .isIn([
       "medio ambiente y fauna",

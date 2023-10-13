@@ -14,9 +14,9 @@ const createAndUpdateUserValidation = [
     .isLength({ min: 8 })
     .withMessage("La contraseña debe tener al menos 8 caracteres.")
     .bail() // Este método detiene la cadena de validación si alguna de las validaciones anteriores ha fallado
-    .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, "i")
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9\s]).{8,}$/ )
     .withMessage(
-      "La contraseña debe contener al menos una letra minúscula, una letra mayúscula, un número y un símbolo."
+      "La contraeña tener al menos 8 caracteres, incluyendo al menos un carácter en minúscula, un carácter en mayúscula, un dígito y cualquier carácter especial o símbolo (excluyendo espacios)"
     ),
 ];
 
