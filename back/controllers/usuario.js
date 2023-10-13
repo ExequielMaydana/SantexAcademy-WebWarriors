@@ -4,12 +4,14 @@ require("dotenv").config();
 const fs = require("fs-extra");
 const cloudinary = require("../config/cloudinary");
 
-
 const createTestimonialsById = async (req, res) => {
   const userId = req.userId;
   const testimonial = req.body;
   try {
-    const testimonials = await userService.createTestimonialsById(userId, testimonial) ;
+    const testimonials = await userService.createTestimonialsById(
+      userId,
+      testimonial
+    );
     res.status(201).json(testimonials);
   } catch (err) {
     res
@@ -23,12 +25,9 @@ const getAllTestimonials = async (req, res) => {
     const testimonials = await userService.getAllTestimonials();
     res.status(200).json(testimonials);
   } catch (err) {
-    res
-      .status(500)
-      .json({ action: "getTestimonials", error: err.message });
+    res.status(500).json({ action: "getTestimonials", error: err.message });
   }
-
-}
+};
 
 const loginUser = async (req, res) => {
   try {
@@ -68,15 +67,14 @@ const createUser = async (req, res) => {
       imageUrl = uploadResult.secure_url;
       publicId = uploadResult.public_id;
     }
-
+    if (req.file) {
+      await fs.unlink(req.file.path);
+    }
     const newUser = await userService.createUser({
       image: { imageUrl, publicId },
       ...restOfData,
     });
     res.status(201).json(newUser);
-    if (req.file) {
-      await fs.unlink(req.file.path);
-    }
   } catch (err) {
     if (err.message == "Validation error") {
       res.status(409).json({ action: "createUser", error: err.message });

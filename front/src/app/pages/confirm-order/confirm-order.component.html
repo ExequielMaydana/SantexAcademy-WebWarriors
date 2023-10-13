@@ -1,0 +1,22 @@
+<section class="w-full flex flex-col gap-4 mt-[115px] lg:mt-0">
+  <header class="w-full flex flex-col items-center justify-center gap-2">
+    <h2 class="text-2xl font-bold md:text-4xl">Finaliza tu compra</h2>
+    <p class="md:w-[80%] text-center md:text-xl">
+      Por favor, proporciónanos la información necesaria en el formulario a
+      continuación para garantizar una entrega eficiente y oportuna de tus
+      productos adquiridos.
+    </p>
+  </header>
+  <article class="w-full p-4">
+    <app-table-confirm-order
+      [products]="products"
+      (deleteProduct)="removeProductCart($event)"
+    ></app-table-confirm-order>
+    <div class="w-full">
+      <p class="text-end font-bold text-2xl">
+        Total a pagar: {{ total }} Puntos
+      </p>
+    </div>
+  </article>
+  <app-form-confirm-order></app-form-confirm-order>
+</section>

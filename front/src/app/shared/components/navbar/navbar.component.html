@@ -17,19 +17,35 @@
   ></a>
 
   <i
-    [ngClass]="!isOpen ? 'hidden' : 'visible absolute top-8 right-4'"
+    [ngClass]="!isOpen ? 'hidden' : 'visible absolute top-8 right-16'"
     class="bx bx-menu text-3xl cursor-pointer m:text-4xl lg:hidden"
     (click)="handleMenu()"
   ></i>
   <i
-    [ngClass]="isOpen ? 'hidden' : 'visible absolute top-8 right-4'"
+    [ngClass]="isOpen ? 'hidden' : 'visible absolute top-8 right-16'"
     class="bx bx-x text-3xl cursor-pointer m:text-4xl lg:hidden"
     (click)="handleMenu()"
   ></i>
 
+  <div
+    class="absolute top-[2em] right-4 cursor-pointer lg:top-[2.3em]"
+    (click)="openCartProducts()"
+  >
+    <div class="relative">
+      <i class="bx bx-cart text-2xl m:text-3xl"></i>
+      <div
+        class="absolute top-0 right-[-.2em] bg-lightGray px-1 rounded-full text-xs"
+      >
+        <span>{{ cartItemCount }}</span>
+      </div>
+    </div>
+  </div>
+
+  <app-cart *ngIf="openCart" (closeCart)="openCartProducts()"></app-cart>
+
   <nav [ngClass]="isOpen ? 'navbar' : 'navbar navbar-closed'">
     <ul
-      class="w-full flex flex-col items-center justify-center gap-4 m:text-lg lg:flex-row lg:justify-end lg:gap-8 lg:items-start lg:pt-4 lg:absolute"
+      class="w-full flex flex-col items-center justify-center gap-4 m:text-lg lg:flex-row lg:justify-end lg:gap-8 lg:items-start lg:pt-4 lg:absolute lg:mr-24"
     >
       <li
         *ngIf="isToken"
@@ -92,7 +108,13 @@
             class="cursor-pointer lg:hover:text-blueViolet"
             (click)="handleMenu()"
           >
-            6 pasos para ser voluntario
+            <a routerLink="/steps">6 pasos para ser voluntario</a>
+          </li>
+          <li
+            class="cursor-pointer lg:hover:text-blueViolet"
+            (click)="handleMenu()"
+          >
+            <a routerLink="/benefits">Beneficios de ser voluntario</a>
           </li>
         </ul>
       </li>
@@ -127,7 +149,7 @@
             class="cursor-pointer lg:hover:text-blueViolet"
             (click)="handleMenu()"
           >
-            Testimonios de voluntarios
+            <a href="#testimonials"> Testimonios de voluntarios </a>
           </li>
           <li class="text-xl cursor-pointer" (click)="handleMenu()">
             <a routerLink="/contacto"> Contacto </a>
@@ -196,7 +218,9 @@
                 <li
                   class="w-full flex flex-col gap-2 items-center justify-center"
                 >
-                  <span class="text-lightGray">{{ dataUser.email }}</span>
+                  <span class="text-lightGray text-center flex flex-wrap">{{
+                    dataUser.email
+                  }}</span>
                   <figure
                     *ngIf="dataUser.image?.imageUrl"
                     class="w-[80px] h-[80px] aspect-square rounded-full border border-lightGray shadow-lg shadow-lightGray"
@@ -217,7 +241,8 @@
                       class="w-full h-full object-cover rounded-full"
                     />
                   </figure>
-                  <h4>
+
+                  <h4 class="text-center">
                     ¡Hola,
                     {{ dataUser.cuit ? dataUser.name : dataUser.fullName }}!
                   </h4>
@@ -243,8 +268,6 @@
             </div>
           </article>
         </div>
-
-        <i class="bx bx-search hidden lg:flex lg:text-xl cursor-pointer"></i>
       </li>
     </ul>
   </nav>

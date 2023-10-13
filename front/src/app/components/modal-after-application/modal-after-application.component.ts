@@ -8,7 +8,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ModalAfterApplicationComponent {
   @Input() status: string = '';
   @Input() message: string = '';
-  @Input() textBtn: string = '';
   @Output() continueViewing = new EventEmitter();
 
   continueView() {

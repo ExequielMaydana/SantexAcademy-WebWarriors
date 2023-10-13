@@ -14,7 +14,7 @@ const join = async (req, res) => {
     );
     res.status(201).json({ action: "join", postulation });
   } catch (err) {
-    res.status(500).json({ action: "join", error: "Internal server error." });
+    res.status(500).json({ action: "join", error: err.message });
   }
 };
 
@@ -28,7 +28,7 @@ const getJoins = async (req, res) => {
   } catch (err) {
     res
       .status(500)
-      .json({ action: "getJoins", error: "Internal server error." });
+      .json({ action: "getJoins", error: err.message });
   }
 };
 
@@ -66,14 +66,15 @@ const updateStatusById = async (req, res) => {
     console.error(err);
     res
       .status(500)
-      .json({ action: "updateStatusById", error: "Internal server error." });
+      .json({ action: "updateStatusById", error: err.message });
   }
 };
 
 const accreditationReward = async (req, res) => {
   try {
     const idOrg = req.orgId;
-    await usuarioEnVoluntariadoService.accreditationReward(idOrg);
+    const { action } = req.body
+    await usuarioEnVoluntariadoService.accreditationReward(idOrg, action);
     res.status(200).send({ message: "Recompensas acreditadas con éxito." });
   } catch (error) {
     res
@@ -92,7 +93,7 @@ const deleteJoinById = async (req, res) => {
     console.error(err);
     res
       .status(500)
-      .json({ action: "deleteJoinById", error: "Internal server error." });
+      .json({ action: "deleteJoinById", error: err.message });
   }
 };
 

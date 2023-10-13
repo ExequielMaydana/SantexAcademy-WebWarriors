@@ -11,7 +11,6 @@ const {
 
 const { verifyToken, isAdmin } = require("../middleware/authMiddleware");
 
-
 //****** GESTION DE ORGANIZACIONES ******* */
 adminRouter.delete(
   "/org/:id",
@@ -40,8 +39,8 @@ adminRouter.delete(
 
 adminRouter.post(
   "/product",
-   verifyToken,
-   isAdmin,
+  //  verifyToken,
+  //  isAdmin,
   upload.single("file"),
   productController.createProduct
 );
@@ -71,7 +70,5 @@ adminRouter.delete(
 );
 
 //*******GESTION DE PEDIDOS **************/
-
-
 
 module.exports = adminRouter;

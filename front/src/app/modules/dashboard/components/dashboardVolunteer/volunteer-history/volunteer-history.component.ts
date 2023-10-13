@@ -11,7 +11,10 @@ import { selectToken } from 'src/app/core/auth.selectors';
 export class VolunteerHistoryComponent implements OnInit {
   meVolunteerings: any;
   constructor(private store: Store, private volServices: VolunteerService) {}
-
+  onModalViewResult: boolean = false;
+  statusModalView: string = '';
+  messageModalView: string = '';
+  textBtnModalView: string = '';
   ngOnInit(): void {
     this.getAllVolunteering();
   }
@@ -21,8 +24,9 @@ export class VolunteerHistoryComponent implements OnInit {
       if (token) {
         this.volServices.getMePostulations(token).subscribe({
           next: (res) => {
-            this.meVolunteerings = res;
             console.log(res);
+
+            this.meVolunteerings = res;
           },
           error: (err) => {
             console.log(err);
@@ -36,7 +40,6 @@ export class VolunteerHistoryComponent implements OnInit {
     const data = { status: status };
     this.volServices.updateStatusPostulation(data, idPostulation).subscribe({
       next: (res) => {
-        console.log(res);
         window.location.reload();
       },
       error: (err) => {
@@ -48,12 +51,22 @@ export class VolunteerHistoryComponent implements OnInit {
   deletePostulation(idPostulation: string) {
     this.volServices.deletePostulation(idPostulation).subscribe({
       next: (res) => {
-        console.log(res);
         window.location.reload();
       },
       error: (err) => {
         console.log(err);
       },
     });
+  }
+
+  viewResultPostulation() {
+    this.onModalViewResult = true;
+    this.statusModalView = 'procesed';
+    this.textBtnModalView = 'Aceptar';
+    this.messageModalView = this.meVolunteerings[0]?.observations;
+  }
+
+  closeModalView() {
+    this.onModalViewResult = false;
   }
 }

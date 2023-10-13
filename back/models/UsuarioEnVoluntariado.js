@@ -52,6 +52,16 @@ const UsuarioEnVoluntariado = sequelize.define(
     deletedAt: {
       type: DataTypes.DATE,
       allowNull: true,
+    },
+    isProcessed:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
+    observations: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      defaultValue: "Su solicitud se esta procesando",
     }
   },
   {

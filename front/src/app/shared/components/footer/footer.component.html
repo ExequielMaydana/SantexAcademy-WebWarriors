@@ -8,17 +8,19 @@
       class="w-full flex flex-col items-center justify-center gap-2 lg:w-[50%] lg:border-r border-lightGray lg:pb-8"
     >
       <figure class="flex items-center gap-2">
-        <img
-          src="/assets/logo/logohand.svg"
-          alt="logo"
-          class="w-[50px] sm:w-[70px]"
-        />
-        <img
-          src="/assets/logo/logovoluntime.svg"
-          alt="logo"
-          class="w-[80px] sm:w-[100px]"
-        />
-      </figure>
+  <a routerLink="/">
+    <img
+      src="/assets/logo/logohand.svg"
+      alt="logo"
+      class="w-[50px] sm:w-[70px]"
+    />
+    <img
+      src="/assets/logo/logovoluntime.svg"
+      alt="logo"
+      class="w-[80px] sm:w-[100px]"
+    />
+  </a>
+</figure>
     </article>
     <hr class="boder border-lightGray lg:hidden" />
     <article class="w-full items-center justify-center">
@@ -39,10 +41,11 @@
         <li>
           <b class="text-lg lg:text-xl">Quienes somos</b>
           <p class="lg:text-lg cursor-pointer lg:hover:text-blueViolet">
-            Acerca de nosotros
-          </p>
+            <a routerLink="/nosotros">Acerca de nosotros</a>
+
           <p class="lg:text-lg cursor-pointer lg:hover:text-blueViolet">
-            Nuestro equipo
+            <a routerLink="/team">Nuestro equipo</a>
+
           </p>
         </li>
         <li>

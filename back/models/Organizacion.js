@@ -13,7 +13,10 @@ const Organizacion = sequelize.define(
     name: {
       type: DataTypes.STRING(100),
       allowNull: false,
-      unique: "nombre_UNIQUE",
+      unique: {
+        name: "nombre_UNIQUE",
+        msg: "Ya existe una organización con ese nombre.",
+      },
     },
     description: {
       type: DataTypes.STRING(1000),
@@ -22,17 +25,26 @@ const Organizacion = sequelize.define(
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: "email_UNIQUE",
+      unique: {
+        name: "email_UNIQUE",
+        msg: "El email ya está en uso.",
+      },
     },
     phone: {
       type: DataTypes.STRING,
       allowNull: true,
-      unique: "telefono_UNIQUE",
+      unique: {
+        name: "telefono_UNIQUE",
+        msg: "El número de teléfono ya está en uso.",
+      },
     },
     cuit: {
       type: DataTypes.STRING(15),
       allowNull: false,
-      unique: "cuit_UNIQUE",
+      unique: {
+        name: "cuit_UNIQUE",
+        msg: "El número de CUIT ya está en uso.",
+      },
     },
     location: {
       type: DataTypes.STRING,

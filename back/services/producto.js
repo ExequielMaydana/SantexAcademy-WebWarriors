@@ -1,5 +1,4 @@
-const { productProvider } = require('../providers');
-
+const { productProvider } = require("../providers");
 
 const createProduct = async (data) => {
   const { image, ...restOfData } = data;
@@ -9,7 +8,6 @@ const createProduct = async (data) => {
   });
   return createdProduct;
 };
-
 
 const getProduct = async (id) => {
   const product = await productProvider.getProduct(id);
@@ -21,10 +19,7 @@ const getProduct = async (id) => {
 
 const getAllProducts = async () => {
   const products = await productProvider.getAllProducts();
-  if (products) {
-    return products;
-  }
-  return null;
+  return products;
 };
 
 const updateProduct = async (id, producto) => {

@@ -11,6 +11,7 @@ import { HeroComponent } from './components/hero/hero.component';
 import { RouterModule } from '@angular/router';
 import { SliderExchangeComponent } from './components/slider-exchange/slider-exchange.component';
 import { RegisterLoginExchangeModalComponent } from './components/register-login-exchange-modal/register-login-exchange-modal.component';
+import { ModalStatusCartComponent } from './components/modal-status-cart/modal-status-cart.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { RegisterLoginExchangeModalComponent } from './components/register-login
     WhatsappButtonComponent,
     SliderExchangeComponent,
     RegisterLoginExchangeModalComponent,
+    ModalStatusCartComponent,
   ],
   imports: [CommonModule, RouterModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

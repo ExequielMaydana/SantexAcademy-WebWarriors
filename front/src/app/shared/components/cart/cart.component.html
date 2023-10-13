@@ -1,0 +1,76 @@
+<section
+  class="fixed top-0 right-0 bottom-0 left-0 m-auto w-full min-h-screen bg-black z-10 bg-opacity-[.6]"
+></section>
+<article
+  class="w-3/4 p-4 flex flex-col gap-4 bg-white z-10 fixed right-0 top-0 h-full sm:w-96"
+>
+  <header class="w-full flex items-center justify-between">
+    <p class="uppercase">Mi compra</p>
+    <i class="bx bx-x text-2xl cursor-pointer" (click)="closeCartUser()"></i>
+  </header>
+  <div
+    class="flex flex-col items-center justify-center gap-4 mt-16"
+    *ngIf="items.length <= 0"
+  >
+    <i class="bx bx-cart text-4xl"></i>
+    <p>Tu carrito está vacío</p>
+  </div>
+  <ng-container *ngFor="let item of items">
+    <div class="w-full flex items-center justify-between gap-2">
+      <figure class="w-[100px]">
+        <img
+          [src]="
+            item.product?.image.imageUrl ? item.product?.image.imageUrl : ''
+          "
+          alt="imagen producto"
+          class="w-full h-full object-contain"
+        />
+      </figure>
+      <div class="flex flex-col gap-2 items-center justify-center">
+        <p class="text-xs font-bold text-center">{{ item.product.name }}</p>
+        <div
+          class="w-24 px-2 flex items-center justify-between border border-DarkGray rounded-lg"
+        >
+          <button class="font-bold" (click)="resQuantityProduct(item)">
+            -
+          </button>
+          <span>{{ item.quantity }}</span>
+          <button
+            class="font-bold"
+            (click)="sumQuantityProduct(item, item.product.stock)"
+          >
+            +
+          </button>
+        </div>
+      </div>
+      <div class="w-24 flex flex-col items-end justify-center gap-2">
+        <i
+          class="bx bx-trash cursor-pointer"
+          (click)="removeProductCart(item.product.id)"
+        ></i>
+        <p class="font-bold flex">
+          $ {{ item.product.costInHours * item.quantity }}
+        </p>
+      </div>
+    </div>
+  </ng-container>
+
+  <hr class="" *ngIf="items.length !== 0" />
+  <div
+    class="w-full flex items-center justify-between"
+    *ngIf="items.length !== 0"
+  >
+    <p class="text-2xl font-bold">Total</p>
+    <p class="text-2xl font-bold flex">${{ total }}</p>
+  </div>
+  <button
+    *ngIf="items.length !== 0"
+    class="px-4 py-2 bg-black text-white uppercase rounded-lg shadow-md"
+    [routerLink]="'confirmar-orden'"
+  >
+    Iniciar compra
+  </button>
+  <p class="text-redError text-xs text-center" *ngIf="message.length > 0">
+    {{ message }}
+  </p>
+</article>
