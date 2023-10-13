@@ -1,4 +1,12 @@
 <article class="w-full mt-16 px-4 pb-16 overflow-auto">
+  <app-modal-status
+    *ngIf="onModalViewResult"
+    [status]="statusModalView"
+    [message]="messageModalView"
+    [textBtn]="textBtnModalView"
+    (changueValueModal)="closeModalView()"
+  >
+  </app-modal-status>
   <div
     class="w-full flex items-center flex-col gap-4 shadow-md shadow-dimGray p-2 bg-white rounded-lg xl:p-8"
   >
@@ -119,7 +127,11 @@
                   <mat-icon>delete</mat-icon>
                   <span>Eliminar</span>
                 </button>
-                <button mat-menu-item *ngIf="dato.status == 'finished'">
+                <button
+                  mat-menu-item
+                  *ngIf="dato.status == 'finished'"
+                  (click)="viewResultPostulation()"
+                >
                   <mat-icon>list</mat-icon>
                   <span>Ver resultados</span>
                 </button>

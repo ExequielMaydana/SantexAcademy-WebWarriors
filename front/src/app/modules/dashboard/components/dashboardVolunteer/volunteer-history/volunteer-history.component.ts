@@ -11,7 +11,10 @@ import { selectToken } from 'src/app/core/auth.selectors';
 export class VolunteerHistoryComponent implements OnInit {
   meVolunteerings: any;
   constructor(private store: Store, private volServices: VolunteerService) {}
-
+  onModalViewResult: boolean = false;
+  statusModalView: string = '';
+  messageModalView: string = '';
+  textBtnModalView: string = '';
   ngOnInit(): void {
     this.getAllVolunteering();
   }
@@ -21,6 +24,8 @@ export class VolunteerHistoryComponent implements OnInit {
       if (token) {
         this.volServices.getMePostulations(token).subscribe({
           next: (res) => {
+            console.log(res);
+
             this.meVolunteerings = res;
           },
           error: (err) => {
@@ -53,5 +58,16 @@ export class VolunteerHistoryComponent implements OnInit {
         console.log(err);
       },
     });
+  }
+
+  viewResultPostulation() {
+    this.onModalViewResult = true;
+    this.statusModalView = 'procesed';
+    this.textBtnModalView = 'Aceptar';
+    this.messageModalView = this.meVolunteerings[0]?.observations;
+  }
+
+  closeModalView() {
+    this.onModalViewResult = false;
   }
 }

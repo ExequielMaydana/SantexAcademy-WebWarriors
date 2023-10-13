@@ -4,14 +4,12 @@ const { sequelize } = require("../config/db-config");
 const OrdenDeCanje = sequelize.define(
   "ordenDeCanje",
   {
-
     orderId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
-
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -20,18 +18,9 @@ const OrdenDeCanje = sequelize.define(
         key: "id",
       },
     },
-    productId: {
-      type: DataTypes.INTEGER,
+    productInfo: {
+      type: DataTypes.JSON,
       allowNull: false,
-      references: {
-        model: "producto",
-        key: "id",
-      },
-    },
-    quantity: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      min:1,
     },
     emisionDate: {
       type: DataTypes.DATE,
@@ -40,8 +29,7 @@ const OrdenDeCanje = sequelize.define(
     deletedAt: {
       type: DataTypes.DATE,
       allowNull: true,
-    
-    }
+    },
   },
   {
     sequelize,
