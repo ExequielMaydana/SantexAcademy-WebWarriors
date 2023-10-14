@@ -28,6 +28,7 @@ import { VolunteerFiltersComponent } from './components/volunteer-filters/volunt
 import { VolunteerCardComponent } from './components/volunteer-card/volunteer-card.component';
 import { OrganizationDetailsComponent } from './pages/organization-details/organization-details.component';
 import { VolunterIdComponent } from './pages/volunter-id/volunter-id.component';
+import { WhatsappButtonComponent } from './shared/components/btn-whatsapp/whatsapp-button/whatsapp-button.component';
 
 import { StoreModule, ActionReducer } from '@ngrx/store';
 import { authReducer } from './core/auth.reducer';
@@ -72,6 +73,7 @@ export function localStorageSyncReducer(
     VolunteerCardComponent,
     OrganizationDetailsComponent,
     VolunterIdComponent,
+    WhatsappButtonComponent,
     ModalAplicationComponent,
     ExchangeComponent,
     ModalAfterApplicationComponent,

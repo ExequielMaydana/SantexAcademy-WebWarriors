@@ -6,7 +6,6 @@ import { SliderOrganizationsComponent } from './components/slider-organizations/
 import { CardsAgendahoursComponent } from './components/cards-agendahours/cards-agendahours.component';
 import { VolunteeringSearchComponent } from './components/volunteering-search/volunteering-search.component';
 import { TestimonialsComponent } from './components/testimonials/testimonials.component';
-import { WhatsappButtonComponent } from './components/whatsapp-button/whatsapp-button.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { RouterModule } from '@angular/router';
 import { SliderExchangeComponent } from './components/slider-exchange/slider-exchange.component';
@@ -22,7 +21,6 @@ import { ModalStatusCartComponent } from './components/modal-status-cart/modal-s
     CardsAgendahoursComponent,
     VolunteeringSearchComponent,
     TestimonialsComponent,
-    WhatsappButtonComponent,
     SliderExchangeComponent,
     RegisterLoginExchangeModalComponent,
     ModalStatusCartComponent,
