@@ -27,6 +27,7 @@ export class NewVolunteeringComponent implements OnInit {
     this.newVolunteering = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
+      category: ['', Validators.required],
       modeOfwork: ['', Validators.required],
       workTime: ['', Validators.required],
       vacancies: [, [Validators.required]],
@@ -40,6 +41,7 @@ export class NewVolunteeringComponent implements OnInit {
       this.newVolunteering.setValue({
         name: this.volunteerDataEdit.name,
         description: this.volunteerDataEdit.description,
+        category: this.volunteerDataEdit.category,
         modeOfwork: this.volunteerDataEdit.modeOfwork,
         workTime: this.volunteerDataEdit.workTime,
         vacancies: this.volunteerDataEdit.vacancies,
@@ -47,6 +49,12 @@ export class NewVolunteeringComponent implements OnInit {
         reward: this.volunteerDataEdit.reward,
       });
     }
+  }
+
+  onCategoryChange(keyForm: string, event: Event) {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+    const updateObject = { [keyForm]: selectedValue };
+    this.newVolunteering.patchValue(updateObject);
   }
 
   onTimeWorkChange(keyForm: string, event: Event) {
@@ -90,7 +98,7 @@ export class NewVolunteeringComponent implements OnInit {
                 this.newVolunteering.reset();
                 setTimeout(() => {
                   this.onModalStatus = false;
-                  this.newVolunteeringCompleted.emit(); 
+                  this.newVolunteeringCompleted.emit();
                 }, 2000);
               },
               error: (err) => {

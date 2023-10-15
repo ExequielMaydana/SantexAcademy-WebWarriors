@@ -29,4 +29,9 @@ export class OrgServicesService {
     const options = { headers: headers };
     return this.http.get(url, options);
   }
+
+  getVoluntariadosByOrganization(organizationId: string): Observable<any[]> {
+    const url = `${this.apiUrl}/voluntariados?organizationId=${organizationId}`;
+    return this.http.get<any[]>(url);
+  }
 }

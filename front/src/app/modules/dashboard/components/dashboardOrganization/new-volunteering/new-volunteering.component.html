@@ -48,6 +48,33 @@
     <div>
       <div class="flex items-center">
         <div class="w-1/6 p-4">
+          <label for="category"><strong>Categoría:</strong></label>
+        </div>
+        <div class="p-4 w-full">
+          <select id="category" class="w-full border-none rounded-md py-2 pl-2 bg-white"
+            (change)="onCategoryChange('category', $event)">
+            <option value="" disabled selected class="text-DarkGray">
+              Seleccionar una opción
+            </option>
+            <option value="Medioambiente y fauna">Medioambiente y fauna</option>
+            <option value="Asistencia social">Asistencia social</option>
+            <option value="Salud y discapacidad">Salud y discapacidad</option>
+          </select>
+        </div>
+      </div>
+      <div class="w-full items-center justify-end">
+        <p *ngIf="
+            newVolunteering.get('category')?.invalid &&
+            (newVolunteering.get('category')?.dirty ||
+              newVolunteering.get('category')?.touched)
+          " class="flex-initial text-end text-deepPink">
+          Seleccione una opción válida.
+        </p>
+      </div>
+    </div>
+    <div>
+      <div class="flex items-center">
+        <div class="w-1/6 p-4">
           <label for="mode"><strong>Modalidad de trabajo:</strong></label>
         </div>
         <div class="p-4 w-full">

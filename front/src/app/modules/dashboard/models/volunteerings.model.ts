@@ -1,6 +1,7 @@
 export interface volunteering {
   idVolunteering: number;
   name: string;
+  category: string;
   description: string;
   modeOfwork: string;
   workTime: string;
