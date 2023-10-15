@@ -1,7 +1,16 @@
-.imageUpload {
+/* .imageUpload {
   filter: drop-shadow(2px 2px 3px #000);
-}
+} */
 
 .Tsha {
   text-shadow: 2px 2px 8px #18181b;
+}
+
+.header-org {
+
+  height: 200px;
+  background: linear-gradient(125deg, #FFFFFF 0%, #000000 100%), linear-gradient(200deg, #FFD9E8 0%, #FFD9E8 50%, #DE95BA calc(50% + 1px), #DE95BA 60%, #7F4A88 calc(60% + 1px), #7F4A88 75%, #4A266A calc(75% + 1px), #4A266A 100%), linear-gradient(113deg, #FFD9E8 0%, #FFD9E8 40%, #DE95BA calc(40% + 1px), #DE95BA 50%, #7F4A88 calc(50% + 1px), #7F4A88 70%, #4A266A calc(70% + 1px), #4A266A 100%);
+  background-blend-mode: overlay, overlay, normal;
+  transform: scaleX(-1);
+    filter: FlipH;
 }

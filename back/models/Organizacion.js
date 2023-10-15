@@ -67,9 +67,9 @@ const Organizacion = sequelize.define(
     category: {
       type: DataTypes.ENUM({
         values: [
-          "medio ambiente y fauna",
-          "asistencia social",
-          "salud y discapacidad",
+          "Medioambiente y fauna",
+          "Asistencia social",
+          "Salud y discapacidad",
         ],
       }),
       allowNull: false,
