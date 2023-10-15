@@ -1,3 +1,4 @@
+import { volunteering } from './../../../../../models/volunteering.model';
 import { Component, OnInit } from '@angular/core';
 import { VolunteerService } from '../../../services/volunteer.service';
 import { Store } from '@ngrx/store';
@@ -26,7 +27,10 @@ export class VolunteerHistoryComponent implements OnInit {
           next: (res) => {
             console.log(res);
 
-            this.meVolunteerings = res;
+            this.meVolunteerings = res.map((volunteering: any) => ({
+              ...volunteering,
+              isVisible: true,
+            }));
           },
           error: (err) => {
             console.log(err);
@@ -68,5 +72,18 @@ export class VolunteerHistoryComponent implements OnInit {
 
   closeModalView() {
     this.onModalViewResult = false;
+  }
+
+  deleteViewPostulationFinished(postulateId: any) {
+
+    const data = this.meVolunteerings.find((item: { postulateId: any; }) => item.postulateId ===postulateId)
+    if(data) {
+      data.isVisible = false;
+    }
+
+    this.onModalViewResult = true;
+    this.statusModalView = 'procesed';
+    this.textBtnModalView = 'Aceptar';
+    this.messageModalView = 'El registro ha sido eliminado exitosamente.';
   }
 }

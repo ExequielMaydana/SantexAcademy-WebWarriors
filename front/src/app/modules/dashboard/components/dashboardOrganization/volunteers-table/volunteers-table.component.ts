@@ -37,9 +37,9 @@ export class VolunteersTableComponent implements OnInit {
     });
   }
 
-  deleteVolunteering(idVol: string, nameVol: string) {
+  deleteVolunteering(idVolunteering: string, nameVol: string) {
     this.nameVolunteeringDelete = nameVol;
-    this.idVolunteeringDelete = idVol;
+    this.idVolunteeringDelete = idVolunteering;
     this.onModalQuestion = true;
   }
 

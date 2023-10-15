@@ -88,9 +88,9 @@ const updateVoluntariadoById = async (req, res) => {
 
 const deleteVoluntariadoById = async (req, res) => {
   try {
-    const { idVoluntariado } = req.params;
+    const { idVolunteering } = req.params;
     const volunteering = await voluntariadoService.deleteVoluntariadoById(
-      idVoluntariado
+      idVolunteering
     );
     if (!volunteering) {
       res.status(404).json({

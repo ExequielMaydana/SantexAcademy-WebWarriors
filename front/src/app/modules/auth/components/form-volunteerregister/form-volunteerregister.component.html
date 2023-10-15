@@ -222,8 +222,8 @@
       </div>
     </form>
   </div>
-
-  <app-loading-spinner *ngIf="loading"></app-loading-spinner>
-
+  <div class="overlay" *ngIf="loading" >
+    <app-loading-spinner></app-loading-spinner>
+  </div>
   </article>
 </section>
