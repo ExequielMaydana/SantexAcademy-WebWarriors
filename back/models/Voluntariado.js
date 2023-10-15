@@ -71,6 +71,7 @@ const Voluntariado = sequelize.define(
     sequelize,
     tableName: "voluntariado",
     timestamps: true,
+    paranoid: true,
     indexes: [
       {
         name: "PRIMARY",

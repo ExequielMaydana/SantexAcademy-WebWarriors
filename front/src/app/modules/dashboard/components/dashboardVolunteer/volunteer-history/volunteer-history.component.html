@@ -51,93 +51,99 @@
           </tr>
         </thead>
         <tbody class="w-full bg-white divide-y divide-lightGray">
-          <tr *ngFor="let dato of meVolunteerings">
-            <td class="px-6 py-4 whitespace-no-wrap lg:font-bold lg:text-lg">
-              {{ dato.voluntariado.description }}
-            </td>
-            <td class="px-6 py-4 whitespace-no-wrap lg:font-bold lg:text-lg">
-              {{ dato.voluntariado.name }}
-            </td>
-            <td class="px-6 py-4 whitespace-no-wrap lg:font-bold lg:text-lg">
-              {{ dato.voluntariado.modeOfwork }}
-            </td>
-            <td class="px-6 py-4 whitespace-no-wrap lg:font-bold lg:text-lg">
-              {{ dato.voluntariado.workTime }}
-            </td>
-            <td
-              class="py-4 whitespace-no-wrap text-center flex items-center justify-center"
-            >
-              <p
-                [ngClass]="{
+          <ng-container *ngFor="let dato of meVolunteerings">
+            <tr *ngIf="dato.isVisible">
+              <td class="px-6 py-4 whitespace-no-wrap lg:font-bold lg:text-lg">
+                {{ dato.voluntariado.description }}
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap lg:font-bold lg:text-lg">
+                {{ dato.voluntariado.name }}
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap lg:font-bold lg:text-lg">
+                {{ dato.voluntariado.modeOfwork }}
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap lg:font-bold lg:text-lg">
+                {{ dato.voluntariado.workTime }}
+              </td>
+              <td
+                class="py-4 whitespace-no-wrap text-center flex items-center justify-center"
+              >
+                <p
+                  [ngClass]="{
                 'bg-forestGreen':dato.status === 'finished',
                 'bg-red': dato.status === 'abandoned',
                 'bg-darkSlateBlue': dato.status === 'active',
 
               }"
-                class="text-white py-1 font-semibold rounded-md w-[105px] xl:px-0 lg:text-lg"
-              >
-                {{
-                  dato.status === "active"
-                    ? "En Proceso"
-                    : dato.status === "abandoned"
-                    ? "Abandonado"
-                    : dato.status === "finished"
-                    ? "Finalizado"
-                    : ""
-                }}
-              </p>
-              <button
-                mat-icon-button
-                [matMenuTriggerFor]="menu"
-                class="flex items-center justify-center text-center mb-1"
-              >
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button
-                  mat-menu-item
-                  *ngIf="dato.status == 'active'"
-                  (click)="
-                    updateStatusPostulation('abandoned', dato.postulateId)
-                  "
+                  class="text-white py-1 font-semibold rounded-md w-[105px] xl:px-0 lg:text-lg"
                 >
-                  <mat-icon>cancel</mat-icon>
-                  <span>Abandonar</span>
-                </button>
+                  {{
+                    dato.status === "active"
+                      ? "En Proceso"
+                      : dato.status === "abandoned"
+                      ? "Abandonado"
+                      : dato.status === "finished"
+                      ? "Finalizado"
+                      : ""
+                  }}
+                </p>
                 <button
-                  mat-menu-item
-                  *ngIf="dato.status == 'active'"
-                  (click)="
-                    updateStatusPostulation('finished', dato.postulateId)
-                  "
+                  mat-icon-button
+                  [matMenuTriggerFor]="menu"
+                  class="flex items-center justify-center text-center mb-1"
                 >
-                  <mat-icon>done</mat-icon>
-                  <span>Dar por finalizado</span>
+                  <mat-icon>more_vert</mat-icon>
                 </button>
+                <mat-menu #menu="matMenu">
+                  <button
+                    mat-menu-item
+                    *ngIf="dato.status == 'active'"
+                    (click)="
+                      updateStatusPostulation('abandoned', dato.postulateId)
+                    "
+                  >
+                    <mat-icon>cancel</mat-icon>
+                    <span>Abandonar</span>
+                  </button>
+                  <button
+                    mat-menu-item
+                    *ngIf="dato.status == 'active'"
+                    (click)="
+                      updateStatusPostulation('finished', dato.postulateId)
+                    "
+                  >
+                    <mat-icon>done</mat-icon>
+                    <span>Dar por finalizado</span>
+                  </button>
 
-                <button
-                  mat-menu-item
-                  *ngIf="dato.status == 'abandoned'"
-                  (click)="deletePostulation(dato.postulateId)"
-                >
-                  <mat-icon>delete</mat-icon>
-                  <span>Eliminar</span>
-                </button>
-                <button mat-menu-item *ngIf="dato.status == 'finished'">
-                  <mat-icon>delete</mat-icon>
-                  <span>Eliminar</span>
-                </button>
-                <button
-                  mat-menu-item
-                  *ngIf="dato.status == 'finished'"
-                  (click)="viewResultPostulation()"
-                >
-                  <mat-icon>list</mat-icon>
-                  <span>Ver resultados</span>
-                </button>
-              </mat-menu>
-            </td>
-          </tr>
+                  <button
+                    mat-menu-item
+                    *ngIf="dato.status == 'abandoned'"
+                    (click)="deletePostulation(dato.postulateId)"
+                  >
+                    <mat-icon>delete</mat-icon>
+                    <span>Eliminar</span>
+                  </button>
+                  <button
+                    mat-menu-item
+                    *ngIf="dato.status == 'finished'"
+                    (click)="deleteViewPostulationFinished(dato.postulateId)"
+                  >
+                    <mat-icon>delete</mat-icon>
+                    <span>Eliminar</span>
+                  </button>
+                  <button
+                    mat-menu-item
+                    *ngIf="dato.status == 'finished'"
+                    (click)="viewResultPostulation()"
+                  >
+                    <mat-icon>list</mat-icon>
+                    <span>Ver resultados</span>
+                  </button>
+                </mat-menu>
+              </td>
+            </tr>
+          </ng-container>
         </tbody>
       </table>
     </div>

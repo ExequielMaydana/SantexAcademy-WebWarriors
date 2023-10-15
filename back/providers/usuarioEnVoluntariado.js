@@ -80,11 +80,12 @@ const accreditationReward = async (idOrg, action) => {
       // Obtener el usuario de la postulación
       const user = await Usuario.findOne({ where: { id: postulation.userId } });
 
+      if (postulation.isProcessed) {
+        throw new Error("The reward has already been processed.");
+      };
+
       if (action === 'acreditar') {
         //Validar que la recompensa no haya sido acreditada
-        if (postulation.isAccredited) {
-          throw new Error("The reward has already been acredited.");
-        };
 
         // Sumar la recompensa de la postulación a la recompensa del usuario
         user.hoursAcc += postulation.voluntariado.reward;
@@ -94,17 +95,23 @@ const accreditationReward = async (idOrg, action) => {
 
         // Mandar un mensaje de confirmacion a traves de la columna observations:
         postulation.observations = "Recompensa acreditada exitosamente.";
-      } else {
 
+        //Guardar la observacion de la postulacion:
+        
+      } else if (action === 'rechazar') {
+        
+        
         // Marcar la postulacion como no acreditada:
         postulation.isProcessed = true;
-
+        
         // Mandar un mensaje de cancelacion a traves de la columna observations:
-        postulation.observations = "Se detectaron incumplimientos en la postulación, la recompensa no ha sido acreditada";
+        postulation.observations = "Se detectaron incumplimientos en las condiciones del voluntariado.La recompensa no ha sido acreditada";
+
       }
 
       // Guardar el usuario actualizado
       await user.save();
+      await postulation.save();
     }
   } catch (error) {
     console.error(error);

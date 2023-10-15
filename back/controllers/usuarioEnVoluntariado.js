@@ -73,9 +73,14 @@ const updateStatusById = async (req, res) => {
 const accreditationReward = async (req, res) => {
   try {
     const idOrg = req.orgId;
-    const { action } = req.body
+    const { action } = req.body;
+
+    if (!action || (action !== 'acreditar' && action !== 'rechazar')) {
+      return res.status(400).send({ message: "La acción es requerida y debe ser 'acreditar' o 'rechazar'." });
+    }
+    
     await usuarioEnVoluntariadoService.accreditationReward(idOrg, action);
-    res.status(200).send({ message: "Recompensas acreditadas con éxito." });
+    res.status(200).send({ message: "Acreditacion procesada con éxito." });
   } catch (error) {
     res
       .status(500)

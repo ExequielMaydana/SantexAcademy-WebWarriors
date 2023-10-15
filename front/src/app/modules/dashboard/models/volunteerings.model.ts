@@ -1,5 +1,5 @@
 export interface volunteering {
-  idVolunteering: number;
+  idVolunteering: string;
   name: string;
   category: string;
   description: string;

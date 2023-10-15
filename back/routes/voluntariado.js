@@ -8,8 +8,8 @@ voluntariadoRouter.get("/:id", voluntariadoController.getVolunteerById);
 
 voluntariadoRouter.post(
   "/",
-  verifyToken,
-  isOrg,
+   verifyToken,
+   isOrg,
   voluntariadoController.createVoluntariado
 );
 
@@ -29,14 +29,14 @@ voluntariadoRouter.put(
 );
 
 voluntariadoRouter.delete(
-  "/:idOrg/:idVoluntariado",
+  "/:idOrg/:idVolunteering",
   verifyToken,
   isOrg,
   voluntariadoController.deleteVoluntariadoById
 );
 
 voluntariadoRouter.delete(
-  "/admin/:idOrg/:idVoluntariado",
+  "/admin/:idOrg/:idVolunteering",
   verifyToken,
   isAdmin,
   voluntariadoController.deleteVoluntariadoById
