@@ -56,7 +56,7 @@ export class FormLoginComponent implements OnInit {
           this.statusSession = 'success';
           this.messageModal =
             'Has iniciado sesión exitosamente en tu cuenta de VolunTime. Estamos emocionados de tenerte de vuelta y listos para colaborar juntos en proyectos significativos de voluntariado. Gracias por ser parte de nuestra comunidad comprometida con el cambio positivo.';
-          this.routeBtnContinue = 'voluntariados';
+          this.routeBtnContinue = '';
           this.textBtnModal = 'Explorar Oportunidades';
         },
         error: (error) => {

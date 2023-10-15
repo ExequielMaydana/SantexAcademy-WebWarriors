@@ -34,9 +34,9 @@ const createAndUpdateOrganizationValidation = [
     ),
   body("category")
     .isIn([
-      "medio ambiente y fauna",
-      "asistencia social",
-      "salud y discapacidad",
+      "Medioambiente y fauna",
+      "Asistencia social",
+      "Salud y discapacidad",
     ])
     .withMessage("La categoría no es válida"),
 ];
