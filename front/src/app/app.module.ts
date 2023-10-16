@@ -51,6 +51,7 @@ import { ConfirmOrderComponent } from './pages/confirm-order/confirm-order.compo
 import { TableConfirmOrderComponent } from './components/table-confirm-order/table-confirm-order.component';
 import { FormConfirmOrderComponent } from './components/form-confirm-order/form-confirm-order.component';
 import { ModalStatusPurchaseComponent } from './components/modal-status-purchase/modal-status-purchase.component';
+import { ModalStatusCartComponent } from './pages/modal-status-cart/modal-status-cart.component';
 
 
 export function localStorageSyncReducer(
@@ -90,6 +91,7 @@ export function localStorageSyncReducer(
     TableConfirmOrderComponent,
     FormConfirmOrderComponent,
     ModalStatusPurchaseComponent,
+    ModalStatusCartComponent,
   ],
   imports: [
     BrowserModule,
