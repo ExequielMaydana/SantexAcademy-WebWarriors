@@ -1,4 +1,3 @@
-import { volunteering } from './../../../../../models/volunteering.model';
 import { Component, OnInit } from '@angular/core';
 import { VolunteerService } from '../../../services/volunteer.service';
 import { Store } from '@ngrx/store';
@@ -26,11 +25,7 @@ export class VolunteerHistoryComponent implements OnInit {
         this.volServices.getMePostulations(token).subscribe({
           next: (res) => {
             console.log(res);
-
-            this.meVolunteerings = res.map((volunteering: any) => ({
-              ...volunteering,
-              isVisible: true,
-            }));
+            this.meVolunteerings = res;
           },
           error: (err) => {
             console.log(err);
@@ -53,7 +48,7 @@ export class VolunteerHistoryComponent implements OnInit {
   }
 
   deletePostulation(idPostulation: string) {
-    this.volServices.deletePostulation(idPostulation).subscribe({
+    this.volServices.deletePostulation(idPostulation.toString()).subscribe({
       next: (res) => {
         window.location.reload();
       },
@@ -63,11 +58,11 @@ export class VolunteerHistoryComponent implements OnInit {
     });
   }
 
-  viewResultPostulation() {
+  viewResultPostulation(index: number) {
     this.onModalViewResult = true;
     this.statusModalView = 'procesed';
     this.textBtnModalView = 'Aceptar';
-    this.messageModalView = this.meVolunteerings[0]?.observations;
+    this.messageModalView = this.meVolunteerings[index]?.observations;
   }
 
   closeModalView() {
@@ -75,9 +70,10 @@ export class VolunteerHistoryComponent implements OnInit {
   }
 
   deleteViewPostulationFinished(postulateId: any) {
-
-    const data = this.meVolunteerings.find((item: { postulateId: any; }) => item.postulateId ===postulateId)
-    if(data) {
+    const data = this.meVolunteerings.find(
+      (item: { postulateId: any }) => item.postulateId === postulateId
+    );
+    if (data) {
       data.isVisible = false;
     }
 

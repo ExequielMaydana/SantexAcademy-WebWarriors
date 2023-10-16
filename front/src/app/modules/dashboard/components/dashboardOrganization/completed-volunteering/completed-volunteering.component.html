@@ -43,50 +43,50 @@
           </tr>
         </thead>
         <tbody class="w-full bg-white divide-y divide-lightGray">
-          <ng-container  *ngFor="let item of volunteeringsCompleted" >
-          <tr *ngIf="!item.isProcessed">
-            <td class="px-6 py-4 whitespace-no-wrap">
-              {{ item.voluntariado.name }}
-            </td>
-            <td class="px-6 py-4 whitespace-no-wrap">
-              {{ item.voluntariado.modeOfwork }}
-            </td>
-            <td class="px-6 py-4 whitespace-no-wrap">
-              {{ item.voluntariado.workTime }}
-            </td>
-            <td class="px-6 py-4 whitespace-no-wrap">
-              {{ item.voluntariado.address }}
-            </td>
-            <td class="px-6 py-4 whitespace-no-wrap">
-              {{ item.voluntariado.reward }}
-            </td>
-            <td class="px-6 py-4 whitespace-no-wrap">
-              {{ item.usuario.fullName }}
-              <span>{{ item.usuario.email }}</span>
-            </td>
-            <td
-              class="py-4 whitespace-no-wrap text-center flex items-center justify-center"
-            >
-            <button
-                mat-icon-button
-                class="btn__delete font-semibold"
-                (click)="creditReward('acreditar')"
+          <ng-container *ngFor="let item of volunteeringsCompleted">
+            <tr *ngIf="!item.isProcessed">
+              <td class="px-6 py-4 whitespace-no-wrap">
+                {{ item.voluntariado.name }}
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap">
+                {{ item.voluntariado.modeOfwork }}
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap">
+                {{ item.voluntariado.workTime }}
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap">
+                {{ item.voluntariado.address }}
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap">
+                {{ item.voluntariado.reward }}
+              </td>
+              <td class="px-6 py-4 whitespace-no-wrap">
+                {{ item.usuario.fullName }}
+                <span>{{ item.usuario.email }}</span>
+              </td>
+              <td
+                class="py-4 whitespace-no-wrap text-center flex items-center justify-center"
               >
-                <span class="tooltip"><p>Acreditar recompensa</p></span>
-
-                <mat-icon class="text-[#00ff00] font-black">done</mat-icon>
-              </button>
-              <button
+                <button
                   mat-icon-button
                   class="btn__delete font-semibold"
-                  (click)="creditReward('rechazar')"
+                  (click)="creditReward('acreditar', item.postulateId)"
                 >
-                <span class="tooltip"><p>Eliminar</p></span>
-                <mat-icon class="text-[#ff0000] font-black">clear</mat-icon>
-              </button>
-            </td>
-          </tr>
-        </ng-container>
+                  <span class="tooltip"><p>Acreditar recompensa</p></span>
+
+                  <mat-icon class="text-[#00ff00] font-black">done</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  class="btn__delete font-semibold"
+                  (click)="creditReward('rechazar', item.postulateId)"
+                >
+                  <span class="tooltip"><p>Eliminar</p></span>
+                  <mat-icon class="text-[#ff0000] font-black">clear</mat-icon>
+                </button>
+              </td>
+            </tr>
+          </ng-container>
         </tbody>
       </table>
     </div>

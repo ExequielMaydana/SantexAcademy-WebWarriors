@@ -51,8 +51,8 @@
           </tr>
         </thead>
         <tbody class="w-full bg-white divide-y divide-lightGray">
-          <ng-container *ngFor="let dato of meVolunteerings">
-            <tr *ngIf="dato.isVisible">
+          <ng-container *ngFor="let dato of meVolunteerings; let i = index">
+            <tr>
               <td class="px-6 py-4 whitespace-no-wrap lg:font-bold lg:text-lg">
                 {{ dato.voluntariado.description }}
               </td>
@@ -127,15 +127,16 @@
                   <button
                     mat-menu-item
                     *ngIf="dato.status == 'finished'"
-                    (click)="deleteViewPostulationFinished(dato.postulateId)"
+                    (click)="deletePostulation(dato.postulateId)"
                   >
                     <mat-icon>delete</mat-icon>
                     <span>Eliminar</span>
                   </button>
+
                   <button
                     mat-menu-item
                     *ngIf="dato.status == 'finished'"
-                    (click)="viewResultPostulation()"
+                    (click)="viewResultPostulation(i)"
                   >
                     <mat-icon>list</mat-icon>
                     <span>Ver resultados</span>
