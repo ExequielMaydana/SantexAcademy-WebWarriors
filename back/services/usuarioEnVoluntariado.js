@@ -28,7 +28,7 @@ const getJoins = async (userId) => {
   }
 };
 
-const getCompletedPostulation = async (idOrg ) => {
+const getCompletedPostulation = async (idOrg) => {
   try {
     const postulations =
       await usuarioEnVoluntariadoProvider.getCompletedPostulation(idOrg);
@@ -38,9 +38,12 @@ const getCompletedPostulation = async (idOrg ) => {
   }
 };
 
-const accreditationReward = async (idOrg, action) => {
+const accreditationReward = async (idPostulation, action) => {
   try {
-    await usuarioEnVoluntariadoProvider.accreditationReward(idOrg, action);
+    await usuarioEnVoluntariadoProvider.accreditationReward(
+      idPostulation,
+      action
+    );
   } catch (error) {
     console.error("Hubo un problema al acreditar las recompensas.", error);
     throw error;
