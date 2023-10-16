@@ -64,6 +64,27 @@ const getVoluntariadosByOrganization = async (req, res) => {
   }
 };
 
+const getVolByIdOrg = async (req, res) => {
+  try {
+    const volunteerings =
+      await voluntariadoService.getVoluntariadosByOrganization(
+        req.params.idOrg
+      );
+    if (!volunteerings) {
+      res.status(404).json({
+        action: "getVoluntariadosByOrganization",
+        error: "Voluntariados not found.",
+      });
+    } else {
+      res.json(volunteerings);
+    }
+  } catch (err) {
+    res
+      .status(500)
+      .json({ action: "getVoluntariadosByOrganization", error: err.message });
+  }
+};
+
 const updateVoluntariadoById = async (req, res) => {
   try {
     const volunteering = await voluntariadoService.updateVoluntariadoById(
@@ -112,6 +133,7 @@ module.exports = {
   getAllVolunteers,
   getVolunteerById,
   getVoluntariadosByOrganization,
+  getVolByIdOrg,
   updateVoluntariadoById,
   deleteVoluntariadoById,
 };

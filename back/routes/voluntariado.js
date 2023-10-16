@@ -8,18 +8,19 @@ voluntariadoRouter.get("/:id", voluntariadoController.getVolunteerById);
 
 voluntariadoRouter.post(
   "/",
-   verifyToken,
-   isOrg,
+  verifyToken,
+  isOrg,
   voluntariadoController.createVoluntariado
 );
 
 voluntariadoRouter.get(
-  "/me/:idOrg",
+  "/me/volunteerings",
   verifyToken,
   isOrg,
   voluntariadoController.getVoluntariadosByOrganization
 );
 
+voluntariadoRouter.get("/me/:idOrg", voluntariadoController.getVolByIdOrg);
 
 voluntariadoRouter.put(
   "/me/:idVol",
