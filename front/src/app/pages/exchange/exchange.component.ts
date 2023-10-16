@@ -1,4 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { selectToken } from 'src/app/core/auth.selectors';
+import { products } from 'src/app/models/product.model';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -7,145 +11,18 @@ import { ProductsService } from 'src/app/services/products.service';
   styleUrls: ['./exchange.component.css'],
 })
 export class ExchangeComponent implements OnInit {
-  constructor(private productsServices: ProductsService) {}
-  productos = [
-    {
-      nombre: 'Vaso Termico',
-      puntos: 10,
-      imagen: '../../../../../assets/products/vaso-termico.png',
-    },
-    {
-      nombre: 'Mochila',
-      puntos: 10,
-      imagen: '../../../../../assets/products/mochila.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-    {
-      nombre: 'Producto 3',
-      puntos: 10,
-      imagen: '../../../../../assets/imgs/patron1.png',
-    },
-  ];
+  constructor(
+    private productsServices: ProductsService,
+    private cartServices: CartService,
+    private store: Store
+  ) {}
+  isModalOpen = false;
 
+  productos: any[] = [];
+  onModalStatus: boolean = false;
+  statusModal: string = '';
+  messageModal: string = '';
+  typeUser: string = '';
   productosPorPaginaLargeScreen = 10;
   productosPorPaginaMediumScreen = 8;
   productosPorPaginaSmallScreen = 6;
@@ -159,7 +36,7 @@ export class ExchangeComponent implements OnInit {
     this.detectScreenSize();
     this.productsServices.getAllProducts().subscribe({
       next: (res) => {
-        console.log('exchange en el component', res);
+        this.productos = res;
       },
       error: (err) => {
         console.log(err);
@@ -212,5 +89,22 @@ export class ExchangeComponent implements OnInit {
     const totalTarjetas = this.productos.length;
     const totalPaginas = Math.ceil(totalTarjetas / cantidadPorPagina);
     return Array.from({ length: totalPaginas }, (_, index) => index + 1);
+  }
+
+  addToCart(product: products) {
+    this.store.select(selectToken).subscribe((token) => {
+      if (!token) {
+        this.isModalOpen = true;
+      } else {
+        this.cartServices.addToCart(product);
+        this.onModalStatus = true;
+        this.statusModal = 'success';
+        this.messageModal =
+          '¡Excelente elección! Has agregado el producto al carrito con éxito. Tu selección se encuentra ahora en tu carrito de compras, listo para ser procesado.';
+        setTimeout(() => {
+          this.onModalStatus = false;
+        }, 2000);
+      }
+    });
   }
 }
