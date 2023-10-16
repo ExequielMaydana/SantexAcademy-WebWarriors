@@ -62,10 +62,7 @@
         />
         <div class="w-full items-center justify-end">
           <p
-            *ngIf="
-              loginForm.get('email')?.invalid &&
-              (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)
-            "
+            *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)"
             class="flex-initial text-end text-deepPink"
           >
             Eso no parece un correo válido.
@@ -106,7 +103,7 @@
         <button
           [disabled]="!loginForm.valid"
           type="submit"
-          class="w-full py-2 bg-darkSlateBlue text-white rounded-md font-semibold"
+          class="btn-login w-full py-2 bg-darkSlateBlue text-white rounded-md font-semibold"
           (click)="sendValues()"
         >
           Iniciar sesión

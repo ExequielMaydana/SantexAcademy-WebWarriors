@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { VolunteerService } from '../../../services/volunteer.service';
 import { Store } from '@ngrx/store';
 import { selectToken } from 'src/app/core/auth.selectors';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,7 @@ import { selectToken } from 'src/app/core/auth.selectors';
 })
 export class HeaderComponent {
   @Input() dataHeader: any = {};
-  constructor(private volhServices: VolunteerService, private store: Store) {}
+  constructor(private router: Router, private volhServices: VolunteerService, private store: Store) {}
   statusModal: string = '';
   messageModal: string = '';
   onModalStatus: boolean = false;
@@ -50,5 +51,8 @@ export class HeaderComponent {
         }
       });
     }
+  }
+  redirectToExchange() {
+    this.router.navigate(['/exchange']);
   }
 }
