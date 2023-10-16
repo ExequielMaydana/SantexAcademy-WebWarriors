@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
   dataUser: any = {};
   openCart: boolean = false;
   cartItemCount: number = 0;
+  typeUser: string = '';
 
   constructor(
     private usersServices: UsersService,
@@ -88,6 +89,7 @@ export class NavbarComponent implements OnInit {
           if (userType === 'vol') {
             this.usersServices.getProfileVolunteer(token).subscribe({
               next: (res) => {
+                this.typeUser = userType;
                 this.dataUser = res;
                 this.isToken = true;
               },
@@ -99,6 +101,8 @@ export class NavbarComponent implements OnInit {
           } else if (userType === 'org') {
             this.orgServices.getProfileOrganization(token).subscribe({
               next: (res) => {
+                this.typeUser = userType;
+
                 this.dataUser = res;
                 this.isToken = true;
               },

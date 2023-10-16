@@ -115,4 +115,8 @@ export class NewVolunteeringComponent implements OnInit {
       });
     }
   }
+
+  closeModalStatus() {
+    this.onModalStatus = false;
+  }
 }

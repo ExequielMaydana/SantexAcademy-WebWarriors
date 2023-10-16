@@ -28,6 +28,7 @@
   ></i>
 
   <div
+    *ngIf="typeUser === 'vol'"
     class="absolute top-[2em] right-4 cursor-pointer lg:top-[2.3em]"
     (click)="openCartProducts()"
   >
@@ -149,7 +150,9 @@
             class="cursor-pointer lg:hover:text-blueViolet"
             (click)="handleMenu()"
           >
-            <a href="#testimonials" class="testimonials"> Testimonios de voluntarios </a>
+            <a href="#testimonials" class="testimonials">
+              Testimonios de voluntarios
+            </a>
           </li>
           <li class="text-xl cursor-pointer" (click)="handleMenu()">
             <a routerLink="/contacto"> Contacto </a>
