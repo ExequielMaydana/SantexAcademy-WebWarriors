@@ -65,6 +65,11 @@ export class OrganizationService {
     return this.http.get<[volunteering]>(url, options);
   }
 
+  volsByIdOrg(idOrg: string): Observable<[volunteering]> {
+    const url = `${this.apiUrl}/voluntariado/me/${idOrg}`;
+    return this.http.get<[volunteering]>(url);
+  }
+
   updateVolunteeringByIdOrg(
     token: string,
     data: any,
