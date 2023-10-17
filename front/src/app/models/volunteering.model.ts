@@ -9,6 +9,7 @@ export interface volunteering {
   address: string;
   updatedAt?: any;
   createdAt: Date;
+  category: string;
   organization: {
     description: string;
     image: {

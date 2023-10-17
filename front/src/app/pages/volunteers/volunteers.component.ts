@@ -69,14 +69,15 @@ export class VolunteersComponent implements OnInit {
       return;
     }
 
-    this.volunteeringFilter = this.volunteering.filter((e) => {
-      const categoriesToCheck = selectedOrganizations
-        .slice(1)
-        .map((value) => value.toLowerCase());
-      return categoriesToCheck.includes(
-        (e.organization as organization)?.category?.toLowerCase()
+    let category = selectedOrganizations[1];
+
+    if (category) {
+      this.volunteeringFilter = this.volunteering.filter(
+        (e) => e.category?.toLowerCase() === category?.toLowerCase()
       );
-    });
+    } else {
+      this.volunteeringFilter = this.volunteering;
+    }
   }
 
   filteredVolunteersByDate(event: string[]) {

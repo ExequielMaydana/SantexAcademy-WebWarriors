@@ -17,7 +17,10 @@ export class VolunteerFiltersComponent implements OnInit {
   filteredVolunteerings: volunteering[] = [];
   allVolunteerings: volunteering[] = [];
 
-  constructor(private orgServices: OrgServicesService, private volunteeringService: VolunteeringService) {}
+  constructor(
+    private orgServices: OrgServicesService,
+    private volunteeringService: VolunteeringService
+  ) {}
   @Output() selectFiltered = new EventEmitter<string[]>();
   @Output() selectOrgByName = new EventEmitter<string[]>();
   @Output() selectDate = new EventEmitter<string[]>();
@@ -63,7 +66,7 @@ export class VolunteerFiltersComponent implements OnInit {
     this.getAllVolunteerings();
   }
 
-onChangeModeWord(key: string, value: string) {
+  onChangeModeWord(key: string, value: string) {
     if (!this.selectedFilters[key]) {
       this.selectedFilters[key] = new Set<string>();
     }
@@ -78,7 +81,6 @@ onChangeModeWord(key: string, value: string) {
     }
     this.selectFiltered.emit([key, ...selectedValues]);
   }
-
 
   onChangeCategory(key: string, value: string) {
     if (!this.selectedFilters[key]) {
@@ -147,7 +149,7 @@ onChangeModeWord(key: string, value: string) {
   category = [
     {
       key: 'category',
-      value: 'medio ambiente y fauna',
+      value: 'medioambiente y fauna',
       label: 'Medio Ambiente y Fauna.',
     },
     {
