@@ -74,7 +74,7 @@
 
 }
 
-.member-text .category {
+.member-text .name {
   text-align: center;
   font-weight: semibold;
   padding: 5px;
@@ -84,14 +84,14 @@
 
 }
 
-.member-text .category>* {
+.member-text .name>* {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.member-text .category>span {
+.member-text .name>span {
   width: 100%;
   padding: 12px 10px;
   /* border: 1px solid #313131; */
@@ -107,13 +107,13 @@
   transition: all 0.05s ease-in-out;
 }
 
-.member:hover .member-text .category>span {
+.member:hover .member-text .name>span {
   border-color: #ddd;
   box-shadow: none;
   padding: 11px 28px;
 }
 
-.member:hover .member-text .category {
+.member:hover .member-text .name {
   margin-top: 0px;
 }
 

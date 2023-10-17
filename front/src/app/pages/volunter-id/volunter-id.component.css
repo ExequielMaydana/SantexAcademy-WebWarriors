@@ -1,0 +1,75 @@
+.container-logo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  left: 150px;
+  width: clamp(3.125rem, -1.339rem + 22.32vw, 18.75rem);
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  padding: 25px;
+  border-radius: 25px;
+  height: 260px;
+  z-index: 1;
+}
+
+.container-text {
+  /* position: absolute; */
+  left: 400px;
+  width: clamp(15.625rem, 3.125rem + 62.5vw, 59.375rem);
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+  padding: 25px;
+  border-radius: 25px;
+  height: auto;
+  padding-left: 8%;
+}
+
+.description {
+  width: auto;
+  max-width: 75%;
+  word-wrap: break-word;
+  min-height: 24px;
+  text-align: left;
+  margin: auto;
+}
+
+.btn-org {
+  position: absolute;
+  margin-top: 12rem;
+  margin-left: 35%;
+}
+
+.btn-vol {
+  font-size: clamp(0.75rem, 0.679rem + 0.36vw, 1rem);
+  margin-top: 3rem;
+  text-transform: uppercase;
+}
+
+.btn-vol:hover {
+  color: rgb(63, 40, 131);
+  background-color: #ffffff;
+  outline: 3px solid rgb(63, 40, 131);
+}
+
+.area {
+  background: linear-gradient(to left, #b1237d, #3f2883);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 715px;
+}
+
+
+
+@media (max-width: 768px) {
+  .area {
+    display: flex;
+    flex-direction:column;
+  }
+
+}
+
+

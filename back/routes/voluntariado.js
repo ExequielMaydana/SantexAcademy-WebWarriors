@@ -14,12 +14,13 @@ voluntariadoRouter.post(
 );
 
 voluntariadoRouter.get(
-  "/me/:idOrg",
+  "/me/volunteerings",
   verifyToken,
   isOrg,
   voluntariadoController.getVoluntariadosByOrganization
 );
 
+voluntariadoRouter.get("/me/:idOrg", voluntariadoController.getVolByIdOrg);
 
 voluntariadoRouter.put(
   "/me/:idVol",
@@ -29,14 +30,14 @@ voluntariadoRouter.put(
 );
 
 voluntariadoRouter.delete(
-  "/:idOrg/:idVoluntariado",
+  "/:idOrg/:idVolunteering",
   verifyToken,
   isOrg,
   voluntariadoController.deleteVoluntariadoById
 );
 
 voluntariadoRouter.delete(
-  "/admin/:idOrg/:idVoluntariado",
+  "/admin/:idOrg/:idVolunteering",
   verifyToken,
   isAdmin,
   voluntariadoController.deleteVoluntariadoById

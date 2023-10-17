@@ -18,6 +18,16 @@ const Voluntariado = sequelize.define(
       type: DataTypes.STRING(1000),
       allowNull: false,
     },
+    category: {
+      type: DataTypes.ENUM({
+        values: [
+          "Medioambiente y fauna",
+          "Asistencia social",
+          "Salud y discapacidad",
+        ],
+      }),
+      allowNull: false,
+    },
     modeOfwork: {
       type: DataTypes.ENUM({
         values: ["hibrido", "presencial", "remoto"],
@@ -61,6 +71,7 @@ const Voluntariado = sequelize.define(
     sequelize,
     tableName: "voluntariado",
     timestamps: true,
+    paranoid: true,
     indexes: [
       {
         name: "PRIMARY",

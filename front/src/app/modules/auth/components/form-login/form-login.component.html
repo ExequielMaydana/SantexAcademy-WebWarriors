@@ -62,10 +62,7 @@
         />
         <div class="w-full items-center justify-end">
           <p
-            *ngIf="
-              loginForm.get('email')?.invalid &&
-              (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)
-            "
+            *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)"
             class="flex-initial text-end text-deepPink"
           >
             Eso no parece un correo válido.
@@ -106,18 +103,18 @@
         <button
           [disabled]="!loginForm.valid"
           type="submit"
-          class="w-full py-2 bg-darkSlateBlue text-white rounded-md font-semibold"
+          class="btn-login w-full py-2 bg-darkSlateBlue text-white rounded-md font-semibold"
           (click)="sendValues()"
         >
           Iniciar sesión
         </button>
-        <b>o</b>
+        <!-- <b>o</b>
         <button
           class="w-full flex items-center justify-center gap-2 py-2 border border-darkSlateBlue rounded-md font-normal"
         >
           <img src="/assets/logo/logo-google.svg" />
           Iniciar sesión con Google
-        </button>
+        </button> -->
         <p class="text-sm">
           ¿Todavía no tienes una cuenta?
           <span

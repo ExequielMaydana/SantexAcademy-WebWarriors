@@ -149,7 +149,9 @@
             class="cursor-pointer lg:hover:text-blueViolet"
             (click)="handleMenu()"
           >
-            <a href="#testimonials"> Testimonios de voluntarios </a>
+            <a href="#testimonials" class="testimonials">
+              Testimonios de voluntarios
+            </a>
           </li>
           <li class="text-xl cursor-pointer" (click)="handleMenu()">
             <a routerLink="/contacto"> Contacto </a>
@@ -218,9 +220,9 @@
                 <li
                   class="w-full flex flex-col gap-2 items-center justify-center"
                 >
-                  <span class="text-lightGray text-center flex flex-wrap">{{
+                  <!-- <span class="text-lightGray text-center flex flex-wrap">{{
                     dataUser.email
-                  }}</span>
+                  }}</span> -->
                   <figure
                     *ngIf="dataUser.image?.imageUrl"
                     class="w-[80px] h-[80px] aspect-square rounded-full border border-lightGray shadow-lg shadow-lightGray"

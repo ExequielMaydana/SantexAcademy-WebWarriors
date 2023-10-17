@@ -1,21 +1,28 @@
-<section class="w-full flex flex-col p-2">
+<section class="w-full flex flex-col p-2 px-14">
   <app-modal-status
     [status]="statusModal"
     [textBtn]="textBtnModalStatus"
     [message]="messageModalStatus"
     *ngIf="onModalStatus"
+    (changueValueModal)="closeModalStatus()"
   ></app-modal-status>
-  <h3 class="text-center text-2xl">Crear nuevo voluntariado</h3>
-  <form [formGroup]="newVolunteering" class="flex flex-col gap-4">
-    <div class="flex flex-col text-start gap-2">
-      <label for="name">Nombre:</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        formControlName="name"
-        class="border-none rounded-md py-1 pl-2"
-      />
+  <p class="text-[32px] font-semibold my-6">Datos del voluntariado</p>
+  <form [formGroup]="newVolunteering" class="datos h-auto w-[100%]">
+    <div>
+      <div class="flex items-center">
+        <div class="w-1/6 p-4">
+          <label for="name"><strong>Nombre:</strong></label>
+        </div>
+        <div class="p-4 w-full">
+          <input
+            type="text"
+            id="name"
+            name="name"
+            formControlName="name"
+            class="w-full border-none rounded-md py-1 pl-2"
+          />
+        </div>
+      </div>
       <div class="w-full items-center justify-end">
         <p
           *ngIf="
@@ -29,16 +36,22 @@
         </p>
       </div>
     </div>
-    <div class="flex flex-col text-start gap-2">
-      <label for="description">Breve descripción:</label>
-      <textarea
-        type="text"
-        id="description"
-        name="description"
-        formControlName="description"
-        class="h-[150px] pl-2 rounded-md resize-none"
-      >
-      </textarea>
+    <div>
+      <div class="flex items-center">
+        <div class="w-1/6 p-4">
+          <label for="description"><strong>Breve descripción:</strong></label>
+        </div>
+        <div class="p-4 w-full">
+          <textarea
+            type="text"
+            id="description"
+            name="description"
+            formControlName="description"
+            class="w-full h-[150px] pl-2 rounded-md resize-none"
+          >
+          </textarea>
+        </div>
+      </div>
       <div class="w-full items-center justify-end">
         <p
           *ngIf="
@@ -52,21 +65,59 @@
         </p>
       </div>
     </div>
-    <div class="flex flex-col text-start gap-2">
-      <label for="mode">Modalidad de trabajo:</label>
-      <select
-        id="mode"
-        class="border-none rounded-md py-2 pl-2 bg-white"
-        (change)="onTimeWorkChange('modeOfwork', $event)"
-      >
-        <option value="" disabled selected class="text-DarkGray">
-          Seleccionar una opción
-        </option>
-        <option value="presencial">Presencial</option>
-        <option value="hibrido">Híbrido</option>
-        <option value="remoto">Remoto</option>
-      </select>
-
+    <div>
+      <div class="flex items-center">
+        <div class="w-1/6 p-4">
+          <label for="category"><strong>Categoría:</strong></label>
+        </div>
+        <div class="p-4 w-full">
+          <select
+            id="category"
+            class="w-full border-none rounded-md py-2 pl-2 bg-white"
+            (change)="onCategoryChange('category', $event)"
+          >
+            <option value="" disabled selected class="text-DarkGray">
+              Seleccionar una opción
+            </option>
+            <option value="Medioambiente y fauna">Medioambiente y fauna</option>
+            <option value="Asistencia social">Asistencia social</option>
+            <option value="Salud y discapacidad">Salud y discapacidad</option>
+          </select>
+        </div>
+      </div>
+      <div class="w-full items-center justify-end">
+        <p
+          *ngIf="
+            newVolunteering.get('category')?.invalid &&
+            (newVolunteering.get('category')?.dirty ||
+              newVolunteering.get('category')?.touched)
+          "
+          class="flex-initial text-end text-deepPink"
+        >
+          Seleccione una opción válida.
+        </p>
+      </div>
+    </div>
+    <div>
+      <div class="flex items-center">
+        <div class="w-1/6 p-4">
+          <label for="mode"><strong>Modalidad de trabajo:</strong></label>
+        </div>
+        <div class="p-4 w-full">
+          <select
+            id="mode"
+            class="w-full border-none rounded-md py-2 pl-2 bg-white"
+            (change)="onTimeWorkChange('modeOfwork', $event)"
+          >
+            <option value="" disabled selected class="text-DarkGray">
+              Seleccionar una opción
+            </option>
+            <option value="presencial">Presencial</option>
+            <option value="hibrido">Híbrido</option>
+            <option value="remoto">Remoto</option>
+          </select>
+        </div>
+      </div>
       <div class="w-full items-center justify-end">
         <p
           *ngIf="
@@ -80,20 +131,26 @@
         </p>
       </div>
     </div>
-    <div class="flex flex-col text-start gap-2">
-      <label for="time-work">Tiempo de trabajo:</label>
-      <select
-        id="time-work"
-        class="border-none rounded-md py-2 pl-2 bg-white"
-        (change)="onTimeWorkChange('workTime', $event)"
-      >
-        <option value="" disabled selected class="text-DarkGray">
-          Seleccionar una opción
-        </option>
-        <option value="tiempo completo">Tiempo Completo</option>
-        <option value="tiempo parcial">Tiempo Parcial</option>
-        <option value="temporada">Temporada</option>
-      </select>
+    <div>
+      <div class="flex items-center">
+        <div class="w-1/6 p-4">
+          <label for="time-work"><strong>Tiempo de trabajo:</strong></label>
+        </div>
+        <div class="p-4 w-full">
+          <select
+            id="time-work"
+            class="w-full border-none rounded-md py-2 pl-2 bg-white"
+            (change)="onTimeWorkChange('workTime', $event)"
+          >
+            <option value="" disabled selected class="text-DarkGray">
+              Seleccionar una opción
+            </option>
+            <option value="tiempo completo">Tiempo Completo</option>
+            <option value="tiempo parcial">Tiempo Parcial</option>
+            <option value="temporada">Temporada</option>
+          </select>
+        </div>
+      </div>
       <div class="w-full items-center justify-end">
         <p
           *ngIf="
@@ -107,15 +164,21 @@
         </p>
       </div>
     </div>
-    <div class="flex flex-col text-start gap-2">
-      <label for="vacancies">Vacantes a cubrir:</label>
-      <input
-        type="number"
-        id="vacancies"
-        name="vacancies"
-        formControlName="vacancies"
-        class="border-none rounded-md py-1 pl-2"
-      />
+    <div>
+      <div class="flex items-center">
+        <div class="w-1/6 p-4">
+          <label for="vacancies"><strong>Vacantes a cubrir:</strong></label>
+        </div>
+        <div class="p-4 w-full">
+          <input
+            type="number"
+            id="vacancies"
+            name="vacancies"
+            formControlName="vacancies"
+            class="w-full border-none rounded-md py-1 pl-2"
+          />
+        </div>
+      </div>
       <div class="w-full items-center justify-end">
         <p
           *ngIf="
@@ -129,15 +192,23 @@
         </p>
       </div>
     </div>
-    <div class="flex flex-col text-start gap-2">
-      <label for="address">Ubicación del voluntariado:</label>
-      <input
-        type="text"
-        id="address"
-        name="address"
-        formControlName="address"
-        class="border-none rounded-md py-1 pl-2"
-      />
+    <div>
+      <div class="flex items-center">
+        <div class="w-1/6 p-4">
+          <label for="address"
+            ><strong>Ubicación del voluntariado:</strong></label
+          >
+        </div>
+        <div class="p-4 w-full">
+          <input
+            type="text"
+            id="address"
+            name="address"
+            formControlName="address"
+            class="w-full border-none rounded-md py-1 pl-2"
+          />
+        </div>
+      </div>
       <div class="w-full items-center justify-end">
         <p
           *ngIf="
@@ -151,15 +222,23 @@
         </p>
       </div>
     </div>
-    <div class="flex flex-col text-start gap-2">
-      <label for="reward">Recompensas por completar la tarea:</label>
-      <input
-        type="number"
-        id="reward"
-        name="reward"
-        formControlName="reward"
-        class="border-none rounded-md py-1 pl-2"
-      />
+    <div>
+      <div class="flex items-center">
+        <div class="w-1/6 p-4">
+          <label for="reward"
+            ><strong>Recompensas por completar la tarea:</strong></label
+          >
+        </div>
+        <div class="p-4 w-full">
+          <input
+            type="number"
+            id="reward"
+            name="reward"
+            formControlName="reward"
+            class="w-full border-none rounded-md py-1 pl-2"
+          />
+        </div>
+      </div>
       <div class="w-full items-center justify-end">
         <p
           *ngIf="
@@ -173,7 +252,7 @@
         </p>
       </div>
     </div>
-    <div class="w-full flex items-center justify-around">
+    <div class="w-full flex items-center justify-around pt-14">
       <button
         (click)="closeNewVolunteering()"
         class="w-[200px] px-4 py-1 border-none rounded-md bg-mediumViolet text-white font-bold btn-cancel"

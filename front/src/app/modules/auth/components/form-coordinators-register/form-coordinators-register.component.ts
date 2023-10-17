@@ -12,6 +12,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class FormCoordinatorsRegisterComponent {
   registerCoordinator: FormGroup;
 
+  loading: boolean = false
+
   onModal: boolean = false;
   statusSession: string = '';
   messageModal: string = '';
@@ -67,6 +69,13 @@ export class FormCoordinatorsRegisterComponent {
 
       this.authService.registerCoordinator(formData).subscribe({
         next: (response) => {
+
+          this.loading = false;
+
+          if (!response){
+            return;
+          }
+
           this.onModal = true;
           this.statusSession = 'success';
           this.messageModal =
@@ -75,6 +84,8 @@ export class FormCoordinatorsRegisterComponent {
           this.textBtn = 'Iniciar Sesión';
         },
         error: (error: any) => {
+          this.loading = false;
+
           if (error.error.emailFound) {
             this.onModal = true;
             this.statusSession = 'failed';
@@ -98,7 +109,9 @@ export class FormCoordinatorsRegisterComponent {
           }
         },
 
-        complete: () => {},
+        complete: () => {
+          this.loading = false;
+        },
       });
     }
   }

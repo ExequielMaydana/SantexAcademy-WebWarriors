@@ -26,9 +26,7 @@ const getJoins = async (req, res) => {
     );
     res.status(200).json(allPostulationsUser);
   } catch (err) {
-    res
-      .status(500)
-      .json({ action: "getJoins", error: err.message });
+    res.status(500).json({ action: "getJoins", error: err.message });
   }
 };
 
@@ -64,18 +62,29 @@ const updateStatusById = async (req, res) => {
       .json({ action: "updateStatusPostulation", postulationUpdate });
   } catch (err) {
     console.error(err);
-    res
-      .status(500)
-      .json({ action: "updateStatusById", error: err.message });
+    res.status(500).json({ action: "updateStatusById", error: err.message });
   }
 };
 
 const accreditationReward = async (req, res) => {
   try {
-    const idOrg = req.orgId;
-    const { action } = req.body
-    await usuarioEnVoluntariadoService.accreditationReward(idOrg, action);
-    res.status(200).send({ message: "Recompensas acreditadas con éxito." });
+    // const idOrg = req.orgId;
+    const { action, idPostulation } = req.body;
+
+    if (!action || (action !== "acreditar" && action !== "rechazar")) {
+      return res
+        .status(400)
+        .send({
+          message:
+            "La acción es requerida y debe ser 'acreditar' o 'rechazar'.",
+        });
+    }
+
+    await usuarioEnVoluntariadoService.accreditationReward(
+      idPostulation,
+      action
+    );
+    res.status(200).send({ message: "Acreditacion procesada con éxito." });
   } catch (error) {
     res
       .status(500)
@@ -91,9 +100,7 @@ const deleteJoinById = async (req, res) => {
     res.status(200).json({ action: "deleteJoinById", message: result });
   } catch (err) {
     console.error(err);
-    res
-      .status(500)
-      .json({ action: "deleteJoinById", error: err.message });
+    res.status(500).json({ action: "deleteJoinById", error: err.message });
   }
 };
 

@@ -47,13 +47,18 @@ const getProduct = async (id) => {
 
 const getAllProducts = async () => {
   try {
-    const products = await Producto.findAll();
+    const products = await Producto.findAll({
+      order: [
+        ['costInHours', 'ASC'] 
+      ]
+    });
     return products;
   } catch (err) {
     console.error('Error getting products', err);
     throw err;
   }
 };
+
 
 const updateProduct = async (id, producto) => {
     try {

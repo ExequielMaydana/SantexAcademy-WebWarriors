@@ -3,7 +3,7 @@ import { ProductsService } from '../../services/products.service';
 import { products } from '../../models/products.model';
 import { CartService } from '../../../../services/cart.service';
 import { Store } from '@ngrx/store';
-import { selectToken } from 'src/app/core/auth.selectors';
+import { selectToken, selectUserType } from 'src/app/core/auth.selectors';
 
 @Component({
   selector: 'app-slider-exchange',
@@ -16,6 +16,7 @@ export class SliderExchangeComponent implements OnInit {
   onModalStatus: boolean = false;
   statusModal: string = '';
   messageModal: string = '';
+  typeUser: string = '';
   constructor(
     private productsServices: ProductsService,
     private cartServices: CartService,
@@ -25,11 +26,17 @@ export class SliderExchangeComponent implements OnInit {
   ngOnInit(): void {
     this.productsServices.getAllProducts().subscribe({
       next: (res) => {
-        this.dataProducts = res;
+        this.dataProducts = res.slice(0, 10);
       },
       error: (err) => {
         console.log(err);
       },
+    });
+
+    this.store.select(selectUserType).subscribe((userType) => {
+      if (userType) {
+        this.typeUser = userType;
+      }
     });
   }
 

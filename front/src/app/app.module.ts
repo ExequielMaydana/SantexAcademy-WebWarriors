@@ -28,6 +28,7 @@ import { VolunteerFiltersComponent } from './components/volunteer-filters/volunt
 import { VolunteerCardComponent } from './components/volunteer-card/volunteer-card.component';
 import { OrganizationDetailsComponent } from './pages/organization-details/organization-details.component';
 import { VolunterIdComponent } from './pages/volunter-id/volunter-id.component';
+import { WhatsappButtonComponent } from './shared/components/btn-whatsapp/whatsapp-button/whatsapp-button.component';
 
 import { StoreModule, ActionReducer } from '@ngrx/store';
 import { authReducer } from './core/auth.reducer';
@@ -50,6 +51,7 @@ import { ConfirmOrderComponent } from './pages/confirm-order/confirm-order.compo
 import { TableConfirmOrderComponent } from './components/table-confirm-order/table-confirm-order.component';
 import { FormConfirmOrderComponent } from './components/form-confirm-order/form-confirm-order.component';
 import { ModalStatusPurchaseComponent } from './components/modal-status-purchase/modal-status-purchase.component';
+import { ModalStatusCartComponent } from './pages/modal-status-cart/modal-status-cart.component';
 
 
 export function localStorageSyncReducer(
@@ -72,6 +74,7 @@ export function localStorageSyncReducer(
     VolunteerCardComponent,
     OrganizationDetailsComponent,
     VolunterIdComponent,
+    WhatsappButtonComponent,
     ModalAplicationComponent,
     ExchangeComponent,
     ModalAfterApplicationComponent,
@@ -88,6 +91,7 @@ export function localStorageSyncReducer(
     TableConfirmOrderComponent,
     FormConfirmOrderComponent,
     ModalStatusPurchaseComponent,
+    ModalStatusCartComponent,
   ],
   imports: [
     BrowserModule,

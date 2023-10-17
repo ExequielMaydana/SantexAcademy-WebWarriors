@@ -36,16 +36,18 @@ export class CompletedVolunteeringComponent implements OnInit {
     });
   }
 
-  creditReward() {
+  creditReward(action: string, idPostulation: number) {
     this.store.select(selectToken).subscribe((token) => {
       if (token) {
-        const data = { action: 'acreditar' };
+        const data = { action: action, idPostulation: idPostulation };
         this.orgServices.creditRewardVolunteer(token, data).subscribe({
           next: (res) => {
             this.onModal = true;
             this.statusModal = 'success';
             this.messageModal =
-              'La recompensa ha sido acredita con éxito al usuario.';
+              action === 'acreditar'
+                ? 'La recompensa ha sido acredita'
+                : 'La postulación ha sido rechazada';
             setTimeout(() => {
               this.onModal = false;
               window.location.reload();

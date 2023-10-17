@@ -44,9 +44,10 @@ const signUpVolunteer = [
   check("password")
     .notEmpty()
     .withMessage("La contraseña es obligatoria")
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/)
+
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9\s]).{8,}$/ )
     .withMessage(
-      "La contraseña debe contener al menos una letra minúscula, una letra mayúscula, un número y un símbolo, y tener al menos 8 caracteres de longitud"
+      "La contraeña tener al menos 8 caracteres, incluyendo al menos un carácter en minúscula, un carácter en mayúscula, un dígito y cualquier carácter especial o símbolo (excluyendo espacios)"
     ),
   check("phone")
     .optional()
@@ -113,17 +114,16 @@ const signUpCoordinator = [
 
   check("password")
     .notEmpty()
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/)
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9\s]).{8,}$/)
     .withMessage(
-      "La contraseña debe contener al menos una letra minúscula, una letra mayúscula, un número y un símbolo, y tener al menos 8 caracteres de longitud"
+      "La contraeña tener al menos 8 caracteres, incluyendo al menos un carácter en minúscula, un carácter en mayúscula, un dígito y cualquier carácter especial o símbolo (excluyendo espacios)"
     ),
-
   check("category")
     .notEmpty()
     .isIn([
-      "medio ambiente y fauna",
-      "asistencia social",
-      "salud y discapacidad",
+      "Medioambiente y fauna",
+      "Asistencia social",
+      "Salud y discapacidad",
     ])
     .withMessage("La categoría no es válida"),
 

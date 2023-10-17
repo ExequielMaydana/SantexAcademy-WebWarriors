@@ -69,48 +69,51 @@ const getCompletedPostulation = async (idOrg) => {
   }
 };
 
-const accreditationReward = async (idOrg, action) => {
+const accreditationReward = async (idPostulation, action) => {
   try {
-    // Obtener las postulaciones completadas
-    const completedPostulations = await getCompletedPostulation(idOrg);
+    const postulationFinish = await UsuarioEnVoluntariado.findOne({
+      where: { postulateId: idPostulation },
+      include: [{ model: Voluntariado, as: "voluntariado" }],
+    });
 
-    // Iterar sobre cada postulación completada
-    for (let postulation of completedPostulations) {
+    const user = await Usuario.findOne({
+      where: { id: postulationFinish.dataValues.userId },
+    });
 
-      // Obtener el usuario de la postulación
-      const user = await Usuario.findOne({ where: { id: postulation.userId } });
-
-      if (action === 'acreditar') {
-        //Validar que la recompensa no haya sido acreditada
-        if (postulation.isAccredited) {
-          throw new Error("The reward has already been acredited.");
-        };
-
-        // Sumar la recompensa de la postulación a la recompensa del usuario
-        user.hoursAcc += postulation.voluntariado.reward;
-
-        // Marcar la postulacion como acreditada:
-        postulation.isProcessed = true;
-
-        // Mandar un mensaje de confirmacion a traves de la columna observations:
-        postulation.observations = "Recompensa acreditada exitosamente.";
-      } else {
-
-        // Marcar la postulacion como no acreditada:
-        postulation.isProcessed = true;
-
-        // Mandar un mensaje de cancelacion a traves de la columna observations:
-        postulation.observations = "Se detectaron incumplimientos en la postulación, la recompensa no ha sido acreditada";
-      }
-
-      // Guardar el usuario actualizado
-      await user.save();
+    if (postulationFinish.dataValues.isProcessed) {
+      throw new Error("The reward has already been processed.");
     }
+
+    if (action === "acreditar") {
+      //Validar que la recompensa no haya sido acreditada
+
+      // Sumar la recompensa de la postulación a la recompensa del usuario
+      user.hoursAcc += postulationFinish.voluntariado.reward;
+
+      // Marcar la postulacion como acreditada:
+      postulationFinish.isProcessed = true;
+
+      // Mandar un mensaje de confirmacion a traves de la columna observations:
+      postulationFinish.observations = "Recompensa acreditada exitosamente.";
+
+      //Guardar la observacion de la postulacion:
+    } else if (action === "rechazar") {
+      // Marcar la postulacion como no acreditada:
+      postulationFinish.isProcessed = true;
+
+      // Mandar un mensaje de cancelacion a traves de la columna observations:
+      postulationFinish.observations =
+        "Se detectaron incumplimientos en las condiciones del voluntariado.La recompensa no ha sido acreditada";
+    }
+
+    // Guardar el usuario actualizado
+    await user.save();
+    await postulationFinish.save();
+    // }
   } catch (error) {
     console.error(error);
   }
-}
-
+};
 
 const updateStatusById = async (idPostulation, status) => {
   try {
@@ -146,8 +149,8 @@ const deleteJoinById = async (postulateId) => {
       { deletedAt: new Date() },
       { where: { postulateId } }
     );
-
-    await postulate.increment("spots");
+    // ESTO da error en el front
+    // await postulate.increment("vacancies");
   } catch (err) {
     console.error(err);
     throw err;

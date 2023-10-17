@@ -1,10 +1,7 @@
 <article
-  class="w-full flex flex-col items-center justify-center shadow-md shadow-lightGray lg:items-start lg:w-[400px]"
->
+  class="w-full flex flex-col items-center justify-center shadow-md shadow-lightGray lg:items-start lg:w-[400px]">
   <div class="hidden lg:flex flex-col lg:w-full text-start">
-    <h3
-      class="flex text-start items-center justify-start pl-6 gap-2 cursor-pointer lg:text-lg lg:pb-2"
-    >
+    <h3 class="flex text-start items-center justify-start pl-6 gap-2 cursor-pointer lg:text-lg lg:pb-2">
       Filtros <i class="bx bx-filter text-xl"></i>
     </h3>
     <mat-divider></mat-divider>
@@ -16,7 +13,13 @@
         <mat-expansion-panel-header>
           <mat-panel-title> Ubicación </mat-panel-title>
         </mat-expansion-panel-header>
-        <p>Cargando...</p>
+        <div class="flex flex-col">
+          <mat-checkbox class="example-margin" (change)="getAllVolunteerings()">Todas</mat-checkbox>
+        <mat-checkbox class="example-margin" *ngFor="let volunteering of filteredVolunteerings"
+          (change)="onChangeLocation('address', volunteering.address)">
+          {{ volunteering.address }}
+        </mat-checkbox>
+        </div>
       </mat-expansion-panel>
       <mat-divider></mat-divider>
 
@@ -24,15 +27,11 @@
         <mat-expansion-panel-header>
           <mat-panel-title> Categoría </mat-panel-title>
         </mat-expansion-panel-header>
+
         <div class="flex flex-col">
-          <mat-checkbox class="example-margin" (change)="getAllVolunteerings()"
-            >Todas.</mat-checkbox
-          >
-          <mat-checkbox
-            class="example-margin"
-            *ngFor="let checkbox of category"
-            (change)="onChangeCategory(checkbox.key, checkbox.value)"
-          >
+          <mat-checkbox class="example-margin" (change)="getAllVolunteerings()">Todas</mat-checkbox>
+          <mat-checkbox class="example-margin" *ngFor="let checkbox of category"
+            (change)="onChangeCategory(checkbox.key, checkbox.value)">
             {{ checkbox.label }}
           </mat-checkbox>
         </div>
@@ -45,14 +44,9 @@
           <mat-panel-title> Modalidad </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="flex flex-col">
-          <mat-checkbox class="example-margin" (change)="getAllVolunteerings()"
-            >Todas.</mat-checkbox
-          >
-          <mat-checkbox
-            class="example-margin"
-            *ngFor="let checkbox of modeOfwork"
-            (change)="onChangeModeWord(checkbox.key, checkbox.value)"
-          >
+          <mat-checkbox class="example-margin" (change)="getAllVolunteerings()">Todas</mat-checkbox>
+          <mat-checkbox class="example-margin" *ngFor="let checkbox of modeOfwork"
+            (change)="onChangeModeWord(checkbox.key, checkbox.value)">
             {{ checkbox.label }}
           </mat-checkbox>
         </div>
@@ -65,14 +59,9 @@
           <mat-panel-title> Organizaciones/Fundaciones </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="flex flex-col">
-          <mat-checkbox class="example-margin" (change)="getAllVolunteerings()"
-            >Todas.</mat-checkbox
-          >
-          <mat-checkbox
-            class="example-margin"
-            *ngFor="let checkbox of dataOrganizations"
-            (change)="onChangeOrgByName('name', checkbox.name)"
-          >
+          <mat-checkbox class="example-margin" (change)="getAllVolunteerings()">Todas</mat-checkbox>
+          <mat-checkbox class="example-margin" *ngFor="let checkbox of dataOrganizations"
+            (change)="onChangeOrgByName('name', checkbox.name)">
             {{ checkbox.name }}
           </mat-checkbox>
         </div>
@@ -85,12 +74,9 @@
           <mat-panel-title> Fecha de publicación </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="flex flex-col">
-          <mat-checkbox class="example-margin">Todas.</mat-checkbox>
-          <mat-checkbox
-            class="example-margin"
-            *ngFor="let checkbox of publicationDate"
-            (change)="onChangeDate(checkbox.key, checkbox.value)"
-          >
+          <mat-checkbox class="example-margin">Todas</mat-checkbox>
+          <mat-checkbox class="example-margin" *ngFor="let checkbox of publicationDate"
+            (change)="onChangeDate(checkbox.key, checkbox.value)">
             {{ checkbox.label }}
           </mat-checkbox>
         </div>
@@ -98,7 +84,7 @@
     </mat-accordion>
   </div>
 
-  <div class="lg:hidden">
+  <!-- <div class="lg:hidden">
     <mat-accordion>
       <mat-expansion-panel hideToggle>
         <mat-expansion-panel-header>
@@ -126,80 +112,73 @@
           </mat-expansion-panel-header>
 
           <div class="flex flex-col">
-            <mat-checkbox class="example-margin">Todas.</mat-checkbox>
-
-            <mat-checkbox class="example-margin"
-              >Medio Ambiente y Fauna.</mat-checkbox
-            >
-            <mat-checkbox class="example-margin"
-              >Asistencia Social.</mat-checkbox
-            >
-            <mat-checkbox class="example-margin"
-              >Salud y Discapacidad.</mat-checkbox
-            >
+            <mat-checkbox class="example-margin">Todas</mat-checkbox>
+            <mat-checkbox class="example-margin">Medioambiente y fauna</mat-checkbox>
+            <mat-checkbox class="example-margin">Asistencia social</mat-checkbox>
+            <mat-checkbox class="example-margin">Salud y discapacidad</mat-checkbox>
           </div>
         </mat-expansion-panel>
 
-        <mat-divider></mat-divider>
+        <mat-divider></mat-divider> -->
 
-        <mat-expansion-panel>
+  <!-- <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title> Modalidad </mat-panel-title>
           </mat-expansion-panel-header>
           <div class="flex flex-col">
-            <mat-checkbox class="example-margin">Todas.</mat-checkbox>
+            <mat-checkbox class="example-margin">Todas</mat-checkbox>
 
-            <mat-checkbox class="example-margin">Presencial.</mat-checkbox>
-            <mat-checkbox class="example-margin">Hibrido.</mat-checkbox>
-            <mat-checkbox class="example-margin">Remoto.</mat-checkbox>
+            <mat-checkbox class="example-margin">Presencial</mat-checkbox>
+            <mat-checkbox class="example-margin">Hibrido</mat-checkbox>
+            <mat-checkbox class="example-margin">Remoto</mat-checkbox>
           </div>
-        </mat-expansion-panel>
+        </mat-expansion-panel> -->
 
-        <mat-divider></mat-divider>
+  <!-- <mat-divider></mat-divider> -->
 
-        <mat-expansion-panel>
+  <!-- <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title> Organizaciones/Fundaciones </mat-panel-title>
           </mat-expansion-panel-header>
           <div class="flex flex-col">
-            <mat-checkbox class="example-margin">Todas.</mat-checkbox>
+            <mat-checkbox class="example-margin">Todas</mat-checkbox>
             <mat-checkbox class="example-margin"
-              >Asociación Civil Manos Abiertas.</mat-checkbox
+              >Asociación Civil Manos Abiertas</mat-checkbox
             >
             <mat-checkbox class="example-margin"
-              >Banco de Alimentos Córdoba.</mat-checkbox
+              >Banco de Alimentos Córdoba</mat-checkbox
             >
             <mat-checkbox class="example-margin"
-              >Caritas Argentina.</mat-checkbox
+              >Caritas Argentina</mat-checkbox
             >
             <mat-checkbox class="example-margin"
-              >Cruz Roja Argentina.</mat-checkbox
+              >Cruz Roja Argentina</mat-checkbox
             >
-            <mat-checkbox class="example-margin">Fundación Sí.</mat-checkbox>
-            <mat-checkbox class="example-margin">Greenpeace.</mat-checkbox>
-            <mat-checkbox class="example-margin">Techo.</mat-checkbox>
-            <mat-checkbox class="example-margin">Voluntarios UNC.</mat-checkbox>
+            <mat-checkbox class="example-margin">Fundación Sí</mat-checkbox>
+            <mat-checkbox class="example-margin">Greenpeace</mat-checkbox>
+            <mat-checkbox class="example-margin">Techo</mat-checkbox>
+            <mat-checkbox class="example-margin">Voluntarios UNC</mat-checkbox>
           </div>
-        </mat-expansion-panel>
+        </mat-expansion-panel> -->
 
-        <mat-divider></mat-divider>
+  <!-- <mat-divider></mat-divider> -->
 
-        <mat-expansion-panel>
+  <!-- <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title> Fecha de publicación </mat-panel-title>
           </mat-expansion-panel-header>
           <div class="flex flex-col">
-            <mat-checkbox class="example-margin">Todas.</mat-checkbox>
+            <mat-checkbox class="example-margin">Todas</mat-checkbox>
             <mat-checkbox class="example-margin"
-              >En las últimas 24 horas.</mat-checkbox
+              >En las últimas 24 horas</mat-checkbox
             >
             <mat-checkbox class="example-margin"
-              >La semana pasada.</mat-checkbox
+              >La semana pasada</mat-checkbox
             >
-            <mat-checkbox class="example-margin">El mes pasado.</mat-checkbox>
+            <mat-checkbox class="example-margin">El mes pasado</mat-checkbox>
           </div>
-        </mat-expansion-panel>
-      </mat-expansion-panel>
+        <!-- </mat-expansion-panel> -->
+  <!-- </mat-expansion-panel>
     </mat-accordion>
-  </div>
+  </div> -->
 </article>

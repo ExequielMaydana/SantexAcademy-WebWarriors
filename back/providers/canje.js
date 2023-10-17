@@ -1,41 +1,38 @@
 const { OrdenDeCanje, Producto, Usuario } = require("../models");
 
-
 const createOrder = async (userId, productInfoArray) => {
   try {
     const user = await Usuario.findByPk(userId);
 
     if (!user) {
-      throw new Error('Usuario no encontrado');
+      throw new Error("Usuario no encontrado");
     }
 
     const emisionDate = new Date();
-    
-    let totalCostInHours = 0;
-    
-    for (let productInfo of productInfoArray) {
-      const { productId, quantity } = productInfo;
-      const product = await Producto.findByPk(productId);
 
-      if (!product) {
-        throw new Error('Producto no encontrado');
+    let totalCostInHours = 0;
+
+    for (let productInfo of productInfoArray) {
+      const { product, quantity } = productInfo;
+      const productFound = await Producto.findByPk(product.productId);
+
+      if (!productFound) {
+        throw new Error("Producto no encontrado");
       }
 
       if (quantity > product.stock) {
-        throw new Error('No hay suficiente stock disponible');
+        throw new Error("No hay suficiente stock disponible");
       }
 
-      totalCostInHours += product.costInHours * quantity;
+      totalCostInHours += productFound.costInHours * quantity;
 
-      product.stock -= quantity;
-      await product.save();
-      
-      // Agrega los datos del producto al objeto productInfo
-      productInfo.productData = product;
+      productFound.stock -= quantity;
+      await productFound.save();
+
     }
 
     if (user.hoursAcc < totalCostInHours) {
-      throw new Error('No tiene suficiente saldo en horas');
+      throw new Error("No tiene suficiente saldo en horas");
     }
 
     user.hoursAcc -= totalCostInHours;
@@ -49,7 +46,7 @@ const createOrder = async (userId, productInfoArray) => {
 
     return order;
   } catch (error) {
-    console.error('Error creating order', error);
+    console.error("Error creating order", error);
     throw error;
   }
 };

@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { organization } from 'src/app/models/organization.model';
+import { volunteering } from 'src/app/models/volunteering.model';
 import { OrgServicesService } from 'src/app/services/org-services.service';
+import { VolunteeringService } from 'src/app/services/volunteering.service';
 
 @Component({
   selector: 'app-volunteer-filters',
@@ -11,7 +13,14 @@ export class VolunteerFiltersComponent implements OnInit {
   keySelected: string = '';
   valueSelected: string = '';
   dataOrganizations: organization[] = [];
-  constructor(private orgServices: OrgServicesService) {}
+  dataVolunteerings: volunteering[] = [];
+  filteredVolunteerings: volunteering[] = [];
+  allVolunteerings: volunteering[] = [];
+
+  constructor(
+    private orgServices: OrgServicesService,
+    private volunteeringService: VolunteeringService
+  ) {}
   @Output() selectFiltered = new EventEmitter<string[]>();
   @Output() selectOrgByName = new EventEmitter<string[]>();
   @Output() selectDate = new EventEmitter<string[]>();
@@ -28,9 +37,34 @@ export class VolunteerFiltersComponent implements OnInit {
         console.log(err);
       },
     });
+    this.volunteeringService.getVolunteers().subscribe({
+      next: (res) => {
+        this.allVolunteerings = res.volunteerings;
+        this.filteredVolunteerings = this.allVolunteerings; // Inicializa los voluntariados filtrados
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   selectedFilters: { [key: string]: Set<string> } = {};
+
+  onChangeLocation(key: string, value: string) {
+    if (!this.selectedFilters[key]) {
+      this.selectedFilters[key] = new Set<string>();
+    }
+    if (this.selectedFilters[key].has(value)) {
+      this.selectedFilters[key].delete(value);
+    } else {
+      this.selectedFilters[key].add(value);
+    }
+    const selectedValues = Array.from(this.selectedFilters[key]);
+    if (selectedValues.length === 0) {
+      delete this.selectedFilters[key];
+    }
+    this.getAllVolunteerings();
+  }
 
   onChangeModeWord(key: string, value: string) {
     if (!this.selectedFilters[key]) {
@@ -97,7 +131,14 @@ export class VolunteerFiltersComponent implements OnInit {
   }
 
   getAllVolunteerings() {
-    this.getAllVolunteers.emit();
+    if (this.selectedFilters['address']) {
+      const selectedAddresses = Array.from(this.selectedFilters['address']);
+      // Emitir las ubicaciones seleccionadas
+      this.selectFiltered.emit(selectedAddresses);
+    } else {
+      // Si no hay direcciones seleccionadas, emitir un arreglo vacío
+      this.selectFiltered.emit([]);
+    }
   }
 
   modeOfwork = [
@@ -108,7 +149,7 @@ export class VolunteerFiltersComponent implements OnInit {
   category = [
     {
       key: 'category',
-      value: 'medio ambiente y fauna',
+      value: 'medioambiente y fauna',
       label: 'Medio Ambiente y Fauna.',
     },
     {

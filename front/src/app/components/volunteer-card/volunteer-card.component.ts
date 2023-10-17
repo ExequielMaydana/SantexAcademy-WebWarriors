@@ -20,6 +20,7 @@ export class VolunteerCardComponent implements OnInit {
   statusModalApplication: string = '';
   messageModalApplication: string = '';
   userType: string = '';
+  activeTab: number = 2;
 
   constructor(
     private datePipe: DatePipe,
@@ -39,12 +40,12 @@ export class VolunteerCardComponent implements OnInit {
     const createdAtDate = new Date(dateString);
     const now = new Date();
     /*
-      calcula la diferencia en milisegundos entre la fecha y la hora actual y la fecha de creación. 
+      calcula la diferencia en milisegundos entre la fecha y la hora actual y la fecha de creación.
       Esto te da la cantidad total de milisegundos que han pasado entre ambas fechas.
     */
     const diffInMilliseconds = now.getTime() - createdAtDate.getTime();
-    /* 
-      calcula la diferencia en días redondeando hacia abajo la cantidad de milisegundos en diffInMilliseconds. 
+    /*
+      calcula la diferencia en días redondeando hacia abajo la cantidad de milisegundos en diffInMilliseconds.
       dividiendo por la cantidad de milisegundos en un día (1000 milisegundos por segundo, 3600 segundos por hora, y 24 horas por día).
       */
     const diffInDays = Math.floor(diffInMilliseconds / (1000 * 3600 * 24));
@@ -101,4 +102,13 @@ export class VolunteerCardComponent implements OnInit {
   viewVolunteering(id: number) {
     this.router.navigateByUrl(`/voluntariado/${id}`);
   }
-}
+
+  redirectToTab() {
+    // Redirigir a la Tab 2
+    this.router.navigate([], {
+      queryParams: { tab: 2 },
+      queryParamsHandling: 'merge',
+    });
+  }
+  }
+

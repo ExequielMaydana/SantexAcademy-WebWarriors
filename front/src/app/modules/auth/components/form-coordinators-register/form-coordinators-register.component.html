@@ -9,35 +9,36 @@
     [message]="messageModal"
   ></app-modal-status-form>
   <header
-    class="w-full flex flex-col items-center justify-center gap-4 text-center"
+  class="w-full flex flex-col items-center justify-center gap-4 text-center"
   >
     <h2 class="font-semibold text-2xl lg:text-4xl">¡Bienvenido!</h2>
     <p class="lg:text-2xl">Registra tu ONG en VolunTime</p>
+
   </header>
   <article
-    class="w-full flex flex-col items-center justify-center gap-4 lg:flex-row lg:items-start"
+  class="w-full flex flex-col items-center justify-center gap-4 lg:flex-row lg:items-start"
   >
-    <form
-      [formGroup]="registerCoordinator"
-      class="w-full flex flex-col px-4 gap-4 max-w-[600px]"
-      enctype="multipart/form-data"
-    >
-      <div
-        class="flex flex-col items-center gap-4 mb-4 lg:items-start"
-        *ngIf="!registerCoordinator.get('file')?.value"
-      >
-        <p class="text-center sm:text-start lg:text-lg">
-          <b> Por favor, subí una imagen que represente tu organización. </b>
-        </p>
-        <figure class="w-full">
-          <label for="file" class="cursor-pointer">
-            <div class="w-full sm:h-[250px]">
-              <img
-                src="/assets/imgs/upload-photo.svg"
-                alt="subir logo"
-                class="w-full h-full object-contain shadow-md shadow-DarkGray rounded-md"
-              />
-            </div>
+  <form
+  [formGroup]="registerCoordinator"
+  class="w-full flex flex-col px-4 gap-4 max-w-[600px]"
+  enctype="multipart/form-data"
+  >
+  <div
+  class="flex flex-col items-center gap-4 mb-4 lg:items-start"
+  *ngIf="!registerCoordinator.get('file')?.value"
+  >
+  <p class="text-center sm:text-start lg:text-lg">
+    <b> Por favor, subí una imagen que represente tu organización. </b>
+  </p>
+  <figure class="w-full">
+    <label for="file" class="cursor-pointer">
+      <div class="w-full sm:h-[250px]">
+        <img
+        src="/assets/imgs/upload-photo.svg"
+        alt="subir logo"
+        class="w-full h-full object-contain shadow-md shadow-DarkGray rounded-md"
+        />
+      </div>
 
             <input
               type="file"
@@ -54,15 +55,15 @@
       </div>
 
       <div
-        class="flex flex-col gap-4 items-center lg:items-start"
-        *ngIf="registerCoordinator.get('file')?.value"
+      class="flex flex-col gap-4 items-center lg:items-start"
+      *ngIf="registerCoordinator.get('file')?.value"
       >
-        <p class="text-center lg:text-lg"><b> Imagen seleccionada. </b></p>
-        <figure class="w-full sm:h-[250px]">
-          <img
-            [src]="imageUrl"
-            alt="Vista previa"
-            class="w-full h-full object-contain shadow-md shadow-DarkGray rounded-md"
+      <p class="text-center lg:text-lg"><b> Imagen seleccionada. </b></p>
+      <figure class="w-full sm:h-[250px]">
+        <img
+        [src]="imageUrl"
+        alt="Vista previa"
+        class="w-full h-full object-contain shadow-md shadow-DarkGray rounded-md"
           />
         </figure>
         <button (click)="deleteImage()" class="btn__delete font-semibold">
@@ -76,30 +77,30 @@
           ><b>Organización a la que representa</b></label
         >
         <input
-          id="name"
-          type="text"
-          name="name"
-          placeholder="Introduce el nombre de tu organización"
-          class="border border-dimGray rounded-md py-2 pl-2"
-          formControlName="name"
+        id="name"
+        type="text"
+        name="name"
+        placeholder="Introduce el nombre de tu organización"
+        class="border border-dimGray rounded-md py-2 pl-2"
+        formControlName="name"
         />
 
         <div class="w-full items-center justify-end">
           <p
-            *ngIf="
-              registerCoordinator.get('name')?.invalid &&
-              (registerCoordinator.get('name')?.dirty ||
-                registerCoordinator.get('name')?.touched)
-            "
-            class="flex-initial text-end text-redError"
+          *ngIf="
+          registerCoordinator.get('name')?.invalid &&
+          (registerCoordinator.get('name')?.dirty ||
+          registerCoordinator.get('name')?.touched)
+          "
+          class="flex-initial text-end text-redError"
           >
-            Por favor, ingresa un nombre.
-          </p>
+          Por favor, ingresa un nombre.
+        </p>
         </div>
       </div>
       <div class="w-full flex flex-col text-start gap-1">
         <label for="description" class="lg:text-lg"
-          ><b>Breve descripción</b></label
+        ><b>Breve descripción</b></label
         >
         <textarea
           id="description"
@@ -109,23 +110,23 @@
           class="border border-dimGray rounded-md h-[120px] pl-2 pt-1 resize-none"
           formControlName="description"
         >
-        </textarea>
+      </textarea>
 
-        <div class="w-full items-center justify-end">
-          <p
-            *ngIf="
-              registerCoordinator.get('description')?.invalid &&
-              (registerCoordinator.get('description')?.dirty ||
-                registerCoordinator.get('description')?.touched)
-            "
-            class="flex-initial text-end text-redError"
-          >
-            Por favor, ingresa una descripción
-          </p>
-        </div>
-      </div>
-      <div class="w-full flex flex-col text-start gap-1">
-        <label for="email" class="lg:text-lg"><b>Correo electrónico</b></label>
+      <div class="w-full items-center justify-end">
+        <p
+        *ngIf="
+        registerCoordinator.get('description')?.invalid &&
+        (registerCoordinator.get('description')?.dirty ||
+        registerCoordinator.get('description')?.touched)
+        "
+        class="flex-initial text-end text-redError"
+        >
+        Por favor, ingresa una descripción
+      </p>
+    </div>
+  </div>
+  <div class="w-full flex flex-col text-start gap-1">
+    <label for="email" class="lg:text-lg"><b>Correo electrónico</b></label>
         <input
           id="email"
           type="email"
@@ -133,9 +134,9 @@
           placeholder="Introduce tu correo electrónico"
           class="border border-dimGray rounded-md py-2 pl-2"
           formControlName="email"
-        />
-        <div class="w-full items-center justify-end">
-          <p
+          />
+          <div class="w-full items-center justify-end">
+            <p
             *ngIf="
               registerCoordinator.get('email')?.invalid &&
               (registerCoordinator.get('email')?.dirty ||
@@ -149,25 +150,25 @@
       </div>
       <div class="w-full flex flex-col gap-1 relative">
         <label for="password" class="text-start lg:text-lg"
-          ><b>Contraseña</b></label
+        ><b>Contraseña</b></label
         >
         <input
-          id="password"
-          [type]="showPassword ? 'text' : 'password'"
-          name="password"
-          placeholder="Introduce tu contraseña"
-          class="border border-dimGray rounded-md py-2 pl-2"
-          formControlName="password"
+        id="password"
+        [type]="showPassword ? 'text' : 'password'"
+        name="password"
+        placeholder="Introduce tu contraseña"
+        class="border border-dimGray rounded-md py-2 pl-2"
+        formControlName="password"
         />
         <div class="w-full items-center justify-end">
           <p
-            *ngIf="
+          *ngIf="
               registerCoordinator.get('password')?.invalid &&
               (registerCoordinator.get('password')?.dirty ||
-                registerCoordinator.get('password')?.touched)
-            "
-            class="flex-initial text-end text-redError"
-          >
+              registerCoordinator.get('password')?.touched)
+              "
+              class="flex-initial text-end text-redError"
+              >
             Por favor, ingresa una Contraseña.
           </p>
         </div>
@@ -188,13 +189,13 @@
         />
         <div class="w-full items-center justify-end">
           <p
-            *ngIf="
+          *ngIf="
               registerCoordinator.get('phone')?.invalid &&
               (registerCoordinator.get('phone')?.dirty ||
-                registerCoordinator.get('phone')?.touched)
-            "
+              registerCoordinator.get('phone')?.touched)
+              "
             class="flex-initial text-end text-redError"
-          >
+            >
             Por favor, ingresa un teléfono válido para Argentina.
           </p>
         </div>
@@ -203,86 +204,86 @@
       <div class="w-full flex flex-col text-start gap-1">
         <label for="cuit" class="lg:text-lg"><b>CUIT de ONG</b></label>
         <input
-          id="cuit"
+        id="cuit"
           type="number"
           name="cuit"
           placeholder="Introduce el número de CUIT de ONG"
           class="border border-dimGray rounded-md py-2 pl-2"
           formControlName="cuit"
-        />
+          />
 
         <div class="w-full items-center justify-end">
           <p
             *ngIf="
               registerCoordinator.get('cuit')?.invalid &&
               (registerCoordinator.get('cuit')?.dirty ||
-                registerCoordinator.get('cuit')?.touched)
+              registerCoordinator.get('cuit')?.touched)
             "
             class="flex-initial text-end text-redError"
           >
-            Por favor, ingresa un CUIT.
+          Por favor, ingresa un CUIT.
           </p>
         </div>
       </div>
 
       <div class="w-full flex flex-col text-start gap-1">
         <label for="website" class="lg:text-lg"
-          ><b>Página Web de la Organizacion</b></label
+        ><b>Página Web de la Organizacion</b></label
         >
         <input
-          id="website"
-          type="text"
-          name="website"
-          placeholder="Introduce la URL de tu página"
-          class="border border-dimGray rounded-md py-2 pl-2"
-          formControlName="urlWebSite"
+        id="website"
+        type="text"
+        name="website"
+        placeholder="Introduce la URL de tu página"
+        class="border border-dimGray rounded-md py-2 pl-2"
+        formControlName="urlWebSite"
         />
       </div>
 
       <div class="w-full flex flex-col text-start gap-1">
         <label for="location" class="lg:text-lg"><b>Ubicación</b></label>
         <input
-          id="location"
-          type="text"
-          name="location"
-          placeholder="Introduce la Ubicación de tu ONG"
-          class="border border-dimGray rounded-md py-2 pl-2"
-          formControlName="location"
+        id="location"
+        type="text"
+        name="location"
+        placeholder="Introduce la Ubicación de tu ONG"
+        class="border border-dimGray rounded-md py-2 pl-2"
+        formControlName="location"
         />
 
         <div class="w-full items-center justify-end">
           <p
-            *ngIf="
-              registerCoordinator.get('location')?.invalid &&
-              (registerCoordinator.get('location')?.dirty ||
-                registerCoordinator.get('location')?.touched)
-            "
-            class="flex-initial text-end text-redError"
+          *ngIf="
+          registerCoordinator.get('location')?.invalid &&
+          (registerCoordinator.get('location')?.dirty ||
+          registerCoordinator.get('location')?.touched)
+          "
+          class="flex-initial text-end text-redError"
           >
-            Por favor, ingresa una Ubicación.
-          </p>
+          Por favor, ingresa una Ubicación.
+        </p>
         </div>
       </div>
 
       <div class="w-full flex flex-col text-start gap-1">
         <label for="category" class="lg:text-lg"><b>Categoría</b></label>
         <select
-          id="category"
-          name="category"
-          class="border border-dimGray rounded-md py-3 pl-2 bg-white"
-          formControlName="category"
+        id="category"
+        name="category"
+        class="border border-dimGray rounded-md py-3 pl-2 bg-white"
+        formControlName="category"
         >
           <option value="" disabled selected style="color: #ccc">
             Seleccione una categoría
           </option>
-          <option value="medio ambiente y fauna">Medio Ambiente y Fauna</option>
-          <option value="asistencia social">Asistencia Social</option>
-          <option value="salud y discapacidad">Salud y Discapacidad</option>
+          <option value="Medioambiente y fauna">Medioambiente y fauna</option>
+          <option value="Asistencia social">Asistencia social</option>
+          <option value="Salud y discapacidad">Salud y discapacidad</option>
         </select>
 
         <div class="w-full items-center justify-end">
           <p
-            *ngIf="
+          *ngIf="
               registerCoordinator.get('category')?.invalid &&
               (registerCoordinator.get('category')?.dirty ||
                 registerCoordinator.get('category')?.touched)
@@ -296,40 +297,39 @@
 
       <div class="w-full flex flex-col items-center justify-center gap-4 mt-2">
         <button
-          type="submit"
+        type="submit"
           class="w-full py-2 bg-darkSlateBlue text-white rounded-md font-semibold lg:text-lg"
           (click)="sendValues()"
         >
           Registrate
         </button>
-        <b class="lg:text-lg">o</b>
+        <!-- <b class="lg:text-lg">o</b>
         <button
           class="w-full flex items-center justify-center gap-2 py-2 border border-darkSlateBlue rounded-md font-normal lg:text-lg"
-        >
+          >
           <img src="/assets/logo/logo-google.svg" />
           Registrate con Google
-        </button>
+        </button> -->
         <p class="text-sm">
           ¿Ya tienes una cuenta?
 
           <span
-            class="text-darkSlateBlue cursor-pointer"
-            (click)="navigateToLogin()"
+          class="text-darkSlateBlue cursor-pointer"
+          (click)="navigateToLogin()"
           >
-            Iniciar sesión.
+          Iniciar sesión.
           </span>
         </p>
       </div>
     </form>
-
     <figure class="w-full h-[500px] bg-darkSlateBlue relative lg:h-[872px]">
       <img
-        src="https://res.cloudinary.com/carina-bosio/image/upload/v1692627567/xAcademy/cerrar-personas-cogidas-mano_wnslhq.jpg"
-        alt=""
-        class="w-full h-full object-cover opacity-[0.8]"
+      src="https://res.cloudinary.com/carina-bosio/image/upload/v1692627567/xAcademy/cerrar-personas-cogidas-mano_wnslhq.jpg"
+      alt=""
+      class="w-full h-full object-cover opacity-[0.8]"
       />
       <div
-        class="p-4 bg-white opacity-[.7] flex flex-col items-center justify-center gap-4 text-center min-w-[100px] w-[220px] h-[250px] rounded-md absolute top-[5em] left-0 right-0 bottom-0 m-auto lg:gap-12 lg:top-[-3em] lg:w-[300px] lg:h-[350px]"
+      class="p-4 bg-white opacity-[.7] flex flex-col items-center justify-center gap-4 text-center min-w-[100px] w-[220px] h-[250px] rounded-md absolute top-[5em] left-0 right-0 bottom-0 m-auto lg:gap-12 lg:top-[-3em] lg:w-[300px] lg:h-[350px]"
       >
         <figure class="flex items-center gap-2">
           <img

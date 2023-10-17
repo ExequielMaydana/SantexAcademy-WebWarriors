@@ -23,8 +23,9 @@ export class CartService {
     }
   }
 
-  getCartItems() {
-    return JSON.parse(localStorage.getItem('cart') || '[]');
+  getCartItems(): any[] {
+    const cartData = localStorage.getItem('cart');
+    return cartData ? JSON.parse(cartData) : [];
   }
 
   addToCart(product: any) {

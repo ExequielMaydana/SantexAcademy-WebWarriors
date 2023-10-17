@@ -65,6 +65,11 @@ export class OrganizationService {
     return this.http.get<[volunteering]>(url, options);
   }
 
+  volsByIdOrg(idOrg: string): Observable<[volunteering]> {
+    const url = `${this.apiUrl}/voluntariado/me/${idOrg}`;
+    return this.http.get<[volunteering]>(url);
+  }
+
   updateVolunteeringByIdOrg(
     token: string,
     data: any,
@@ -103,5 +108,11 @@ export class OrganizationService {
     });
     const options = { headers: headers };
     return this.http.post(url, data, options);
+  }
+
+  getPublicVolunteerings(idVol: string): Observable<[volunteering]> {
+    const url = `${this.apiUrl}/voluntariado/me/${idVol}`; // Reemplaza 'voluntariado/public' con la URL correcta para obtener los voluntariados públicos.
+
+    return this.http.get<[volunteering]>(url);
   }
 }

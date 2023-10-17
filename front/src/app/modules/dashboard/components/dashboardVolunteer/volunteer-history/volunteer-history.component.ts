@@ -25,7 +25,6 @@ export class VolunteerHistoryComponent implements OnInit {
         this.volServices.getMePostulations(token).subscribe({
           next: (res) => {
             console.log(res);
-
             this.meVolunteerings = res;
           },
           error: (err) => {
@@ -49,7 +48,7 @@ export class VolunteerHistoryComponent implements OnInit {
   }
 
   deletePostulation(idPostulation: string) {
-    this.volServices.deletePostulation(idPostulation).subscribe({
+    this.volServices.deletePostulation(idPostulation.toString()).subscribe({
       next: (res) => {
         window.location.reload();
       },
@@ -59,14 +58,28 @@ export class VolunteerHistoryComponent implements OnInit {
     });
   }
 
-  viewResultPostulation() {
+  viewResultPostulation(index: number) {
     this.onModalViewResult = true;
     this.statusModalView = 'procesed';
     this.textBtnModalView = 'Aceptar';
-    this.messageModalView = this.meVolunteerings[0]?.observations;
+    this.messageModalView = this.meVolunteerings[index]?.observations;
   }
 
   closeModalView() {
     this.onModalViewResult = false;
+  }
+
+  deleteViewPostulationFinished(postulateId: any) {
+    const data = this.meVolunteerings.find(
+      (item: { postulateId: any }) => item.postulateId === postulateId
+    );
+    if (data) {
+      data.isVisible = false;
+    }
+
+    this.onModalViewResult = true;
+    this.statusModalView = 'procesed';
+    this.textBtnModalView = 'Aceptar';
+    this.messageModalView = 'El registro ha sido eliminado exitosamente.';
   }
 }

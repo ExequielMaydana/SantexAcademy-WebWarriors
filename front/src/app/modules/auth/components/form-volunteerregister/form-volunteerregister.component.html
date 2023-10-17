@@ -43,6 +43,9 @@
       <h2 class="font-semibold text-2xl">¡Bienvenido!</h2>
       <p>Registrate en tu cuenta VolunTime</p>
     </header>
+
+    <div *ngIf="!loading;">
+
     <form
       [formGroup]="registerVolunteer"
       class="w-full flex flex-col px-4 gap-4 max-w-[600px]"
@@ -199,13 +202,13 @@
         >
           Registrate
         </button>
-        <b>o</b>
+        <!-- <b>o</b>
         <button
           class="w-full flex items-center justify-center gap-2 py-2 border border-mediumViolet rounded-md font-normal"
         >
           <img src="/assets/logo/logo-google.svg" />
           Registrate con Google
-        </button>
+        </button> -->
         <p class="text-sm">
           ¿Ya tienes una cuenta?
 
@@ -218,5 +221,9 @@
         </p>
       </div>
     </form>
+  </div>
+  <div class="overlay" *ngIf="loading" >
+    <app-loading-spinner></app-loading-spinner>
+  </div>
   </article>
 </section>
