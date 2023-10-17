@@ -26,7 +26,7 @@ export class SliderExchangeComponent implements OnInit {
   ngOnInit(): void {
     this.productsServices.getAllProducts().subscribe({
       next: (res) => {
-        this.dataProducts = res;
+        this.dataProducts = res.slice(0, 10);
       },
       error: (err) => {
         console.log(err);
