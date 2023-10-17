@@ -28,7 +28,8 @@
 }
 
 .description {
-  width: 75%;
+  width: auto;
+  max-width: 75%;
   word-wrap: break-word;
   min-height: 24px;
   text-align: left;

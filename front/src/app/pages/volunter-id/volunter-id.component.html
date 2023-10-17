@@ -1,16 +1,4 @@
 <section>
-  <ul class="circles">
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-  </ul>
   <app-modal-after-application *ngIf="onModalAfterApplication" [status]="statusModalAfterApplication"
     [message]="messageModalAfterApplication"
     (continueViewing)="closeModalAfterApplication()"></app-modal-after-application>
@@ -26,7 +14,7 @@
       </figure>
       <button class="btn-org">
         <a [routerLink]="['/organizacion']" [queryParams]="{ id: volunteering.organizationId }"
-          class="text-midnightBlue">Ver
+          class="text-midnightBlue border p-1 rounded">Ver
           mas</a>
       </button>
     </div>
@@ -43,11 +31,11 @@
           </div>
         </li>
         <li class="w-full flex flex-col gap-2 text-center">
-          <!-- <span class="text-DarkGray text-sm md:text-base">Voluntariado</span> -->
+
           <h2 class="text-4xl font-bold md:text-5xl mt-2">
             {{ volunteering.name }}
           </h2>
-          <div>
+          <div class="flex justify-center ">
             <p class="text-black  text-lg md:text-xl description">
               {{ volunteering.description }}
             </p>
@@ -55,7 +43,7 @@
 
         </li>
         <li class="flex flex-col lg:text-center gap-2 ">
-          <!-- <span class="text-center text-DarkGray text-sm md:text-base">Descripción del Voluntariado</span> -->
+
           <p class="text-xl">
             <b class="text-black ">Modalidad de trabajo: </b>
             {{ volunteering.modeOfwork }}

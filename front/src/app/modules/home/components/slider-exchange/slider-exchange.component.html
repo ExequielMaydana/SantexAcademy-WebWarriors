@@ -18,7 +18,9 @@
       <p class="recommended text-3xl font-semibold mb-[10px]">
         Más recomendados
       </p>
-      <button class="bg-darkSlateBlue px-4 py-1 text-white rounded-md"><a href="/exchange">Ver mas</a></button>
+      <button class="bg-darkSlateBlue px-4 py-1 text-white rounded-md" *ngIf="typeUser === 'vol'"><a href="/exchange">Ver
+          mas</a></button>
+
     </div>
     <div class="cards inline-flex flex-wrap justify-center gap-4">
       <div
