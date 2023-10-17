@@ -87,6 +87,18 @@ const getOrganizations = async (req, res) => {
   }
 };
 
+const getOrgById = async (req, res, next) => {
+  try {
+    const organizationFound = await orgService.getOrgById(req.params.idOrg);
+    if (!organizationFound) {
+      res.status(400).json({ message: "NO existe esa organizacion" });
+    }
+    res.status(200).json(organizationFound);
+  } catch (error) {
+    res.status(500).json({ action: "getOrgById", error: err.message });
+  }
+};
+
 const updateOrganizationById = async (req, res) => {
   try {
     const orgId = req.orgId;
@@ -210,4 +222,5 @@ module.exports = {
   deleteOrganizationById,
   getOrganizationByLocation,
   updatePhotoMyProfile,
+  getOrgById,
 };

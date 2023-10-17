@@ -19,6 +19,8 @@ orgRouter.get(
   orgController.getOrganizationsById
 );
 
+orgRouter.get("/idOrg", orgController.getOrgById);
+
 orgRouter.put(
   "/me/update",
   verifyToken,
