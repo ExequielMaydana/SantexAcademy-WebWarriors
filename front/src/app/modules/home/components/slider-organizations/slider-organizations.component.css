@@ -6,6 +6,10 @@
   justify-content: center;
 }
 
+.mySwiper .swiper-slide {
+  width: 200px !important;
+}
+
 /* .swiper-button-prev,
 .swiper-button-next {
   color: #f3f4f6 !important;
