@@ -27,8 +27,8 @@ const getOrganizations = async () => {
   const organizations = await orgProvider.getOrganizations();
   return organizations;
 };
-const getOrgById = async (id) => {
-  const organizations = await orgProvider.getOrgById(id);
+const getOrgById = async (idOrg) => {
+  const organizations = await orgProvider.getOrgById(idOrg);
   return organizations;
 };
 

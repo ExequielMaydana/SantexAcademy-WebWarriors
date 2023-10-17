@@ -173,10 +173,10 @@ const deleteOrganizationById = async (id) => {
   }
 };
 
-const getOrgById = async (id) => {
+const getOrgById = async (idOrg) => {
   try {
     const organization = await Organizacion.findOne({
-      where: { id: id },
+      where: { id: idOrg },
     });
     return organization;
   } catch (error) {

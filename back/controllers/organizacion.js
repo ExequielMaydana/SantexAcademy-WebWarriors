@@ -96,6 +96,7 @@ const getOrgById = async (req, res, next) => {
     res.status(200).json(organizationFound);
   } catch (error) {
     res.status(500).json({ action: "getOrgById", error: err.message });
+    next();
   }
 };
 
