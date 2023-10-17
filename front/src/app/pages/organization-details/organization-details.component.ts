@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { OrgServicesService } from 'src/app/services/org-services.service';
 import { OrganizationService } from '../../../app/modules/dashboard/services/organization.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { volunteering } from '../../../app/modules/dashboard/models/volunteerings.model';
-import { selectToken } from '../../core/auth.selectors';
+
 @Component({
   selector: 'app-organization-details',
   templateUrl: './organization-details.component.html',
@@ -14,7 +13,6 @@ export class OrganizationDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private orgS: OrgServicesService,
-    private store: Store,
     private orgServices: OrganizationService,
     private router: Router
   ) {}
@@ -37,7 +35,6 @@ export class OrganizationDetailsComponent implements OnInit {
 
       this.orgServices.volsByIdOrg(this.organizationId.toString()).subscribe({
         next: (res) => {
-          console.log(res);
           this.volunteerings = res;
         },
         error: (err) => {

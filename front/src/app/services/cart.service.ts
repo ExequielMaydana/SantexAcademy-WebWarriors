@@ -30,10 +30,11 @@ export class CartService {
 
   addToCart(product: any) {
     let cartItems: any[] = JSON.parse(localStorage.getItem('cart') || '[]');
+    console.log(cartItems);
 
     // Buscar si el producto ya está en el carrito
     const existingItem = cartItems?.find(
-      (item) => item.product.id === product.id
+      (item) => item.product.productId === product.productId
     );
 
     if (existingItem) {
