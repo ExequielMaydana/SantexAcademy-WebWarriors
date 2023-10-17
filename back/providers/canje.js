@@ -29,9 +29,6 @@ const createOrder = async (userId, productInfoArray) => {
       productFound.stock -= quantity;
       await productFound.save();
 
-      // NO ENTENDIII ESTO.
-      // Agrega los datos del producto al objeto productInfo
-      // productInfo.productData = productFound;
     }
 
     if (user.hoursAcc < totalCostInHours) {
