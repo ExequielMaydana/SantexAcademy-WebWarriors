@@ -12,7 +12,7 @@ const loginOrg = async (email, cuit, password) => {
 const updatePassword = async (orgId, password) => {
   const updatedPassword = await orgProvider.updatePassword(orgId, password);
   return updatedPassword;
-}
+};
 
 const createOrganization = async (data) => {
   const { image, ...restOfData } = data;
@@ -25,6 +25,10 @@ const createOrganization = async (data) => {
 
 const getOrganizations = async () => {
   const organizations = await orgProvider.getOrganizations();
+  return organizations;
+};
+const getOrgById = async (idOrg) => {
+  const organizations = await orgProvider.getOrgById(idOrg);
   return organizations;
 };
 
@@ -78,4 +82,5 @@ module.exports = {
   deleteOrganizationById,
   getOrganizationByLocation,
   updatePhotoMyProfile,
+  getOrgById,
 };

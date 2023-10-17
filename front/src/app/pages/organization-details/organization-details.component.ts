@@ -25,6 +25,8 @@ export class OrganizationDetailsComponent implements OnInit {
       this.organizationId = +queryParams['id'];
       this.orgS.getOrganizationById(this.organizationId.toString()).subscribe({
         next: (response) => {
+          console.log('organization', response);
+
           this.organization = response;
         },
         error: (error) => {

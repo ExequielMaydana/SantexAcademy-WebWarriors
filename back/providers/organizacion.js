@@ -173,6 +173,21 @@ const deleteOrganizationById = async (id) => {
   }
 };
 
+const getOrgById = async (idOrg) => {
+  try {
+    const organization = await Organizacion.findOne({
+      where: { id: idOrg },
+    });
+    return organization;
+  } catch (error) {
+    console.error(
+      "The organization/s could not be retrieved due to an error.",
+      error
+    );
+    throw error;
+  }
+};
+
 // query parameters
 
 const getOrganizationByCriteria = async (queryOptions, bodyOptions) => {
@@ -250,4 +265,5 @@ module.exports = {
   deleteOrganizationById,
   getOrganizationByLocation,
   updatePhotoMyProfile,
+  getOrgById,
 };
