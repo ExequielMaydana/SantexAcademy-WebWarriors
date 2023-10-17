@@ -1,5 +1,5 @@
 <section>
-  <app-modal-after-application *ngIf="onModalAfterApplication" [status]="statusModalAfterApplication"
+   <app-modal-after-application *ngIf="onModalAfterApplication" [status]="statusModalAfterApplication"
     [message]="messageModalAfterApplication"
     (continueViewing)="closeModalAfterApplication()"></app-modal-after-application>
   <div class="area ">
@@ -31,11 +31,11 @@
           </div>
         </li>
         <li class="w-full flex flex-col gap-2 text-center">
-
+          <!-- <span class="text-DarkGray text-sm md:text-base">Voluntariado</span> -->
           <h2 class="text-4xl font-bold md:text-5xl mt-2">
             {{ volunteering.name }}
           </h2>
-          <div class="flex justify-center ">
+          <div>
             <p class="text-black  text-lg md:text-xl description">
               {{ volunteering.description }}
             </p>
@@ -43,7 +43,7 @@
 
         </li>
         <li class="flex flex-col lg:text-center gap-2 ">
-
+          <!-- <span class="text-center text-DarkGray text-sm md:text-base">Descripción del Voluntariado</span> -->
           <p class="text-xl">
             <b class="text-black ">Modalidad de trabajo: </b>
             {{ volunteering.modeOfwork }}
