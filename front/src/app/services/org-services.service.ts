@@ -17,7 +17,7 @@ export class OrgServicesService {
   }
 
   getOrganizationById(id: string): Observable<[organization]> {
-    const url = `${this.apiUrl}/organizacion?id=${id}`;
+    const url = `${this.apiUrl}/organizacion/${id}`;
     return this.http.get<[organization]>(url);
   }
 
